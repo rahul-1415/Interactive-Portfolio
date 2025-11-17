@@ -1,0 +1,33 @@
+.contact__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.contact__title {
+  font-size: 3rem;
+  font-family: "Gochi Hand", cursive;
+  margin: 0;
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.contact__link {
+  font-size: 1.5rem;
+  font-family: "Gochi Hand", cursive;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in;
+  display: inline-block;
+}
+
+.contact__link:hover {
+  opacity: 0.8;
+}
+

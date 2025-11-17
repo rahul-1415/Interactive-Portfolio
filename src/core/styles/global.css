@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background:  rgb(23, 22, 22);
+  --glass: cyan;
+  --wood: #BA8C63;
+  --text: rgb(244, 237, 237);
+  --red: #f00;
+  --disabled: #adb5bd;
+  --primary: #00b4d8;
+  --primary-dark: #0077b6;
+  --secondary: #f2eecb;
+  --secondary-dark: #C7A575;
+}
+
+html,
+body,
+#__next {  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  background-color: var(--background);
+  font-family: 'Pirata One', 'Times New Roman', Times, serif;
+}

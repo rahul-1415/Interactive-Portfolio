@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.7rem;
+  list-style-position: inside;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.25rem;
+}
+
+.container + .container {
+  margin-top: 4rem;
+}
+
+.about__title {
+  font-size: 3rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.about__image {
+  align-self: center;
+  border-radius: 1rem;
+  max-width: 80vw;
+}
+
+.container p {
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}

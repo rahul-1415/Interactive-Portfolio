@@ -1,0 +1,11 @@
+Model Information:
+* title:	Thusand Sunny
+* source:	https://sketchfab.com/3d-models/thusand-sunny-be2b9a66969a4dc694c7cc1628d64009
+* author:	Bagus Sujiwa (https://sketchfab.com/hobianimasi)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Thusand Sunny" (https://sketchfab.com/3d-models/thusand-sunny-be2b9a66969a4dc694c7cc1628d64009) by Bagus Sujiwa (https://sketchfab.com/hobianimasi) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

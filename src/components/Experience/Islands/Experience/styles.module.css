@@ -1,0 +1,46 @@
+.experiences__container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__time {
+  font-size: 0.9rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__container {
+  border-left: 1px solid var(--background);
+  padding-left: 1rem;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__position {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__company {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__link {
+  color: var(--primary-dark);
+  text-decoration: none;
+  font-family: "Gochi Hand", cursive;
+}
+
+.experience__container ul {
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.25rem;
+  line-height: 1.7rem;
+}
+
+.experience__container p {
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.25rem;
+}

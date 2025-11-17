@@ -1,0 +1,12 @@
+query GetExperiences {
+  experiences (orderBy: initialDate_DESC) {
+    company
+    position
+    description {
+      raw
+    }
+    tags
+    initialDate
+    finishDate
+  }
+}
