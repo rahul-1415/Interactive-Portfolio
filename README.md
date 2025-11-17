@@ -1,7 +1,15 @@
 # Interactive-Portfolio
 
 ___
-> This is a NextJS template made with linters and patterns.
+> One Piece anime themed Portfolio.
+
+___
+## 🔗 Live Demo
+
+You can view the deployed portfolio here:
+
+👉 **https://rahulbabu.netlify.app**
+
 ___
 ## 💻 Prerequisites
 
