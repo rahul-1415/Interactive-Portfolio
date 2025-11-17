@@ -33,7 +33,7 @@ export const ExperienceModal = ({ experiences }: ExperienceModalProps) => {
           <Tags tags={experience.tags} />
         </article>
       ))}
-      
+
       <article className={styles.experience__container}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
           <h2 className={styles.experience__company}>BlackRock</h2>

@@ -28,7 +28,7 @@ export const Projects = () => {
         objectScale={1.5}
         onClickObject={handleOpenModal}
       />
-  
+
       <GenericModal
         isOpen={isProjectsModalOpen}
         onCloseModal={handleCloseModal}
@@ -36,6 +36,6 @@ export const Projects = () => {
       >
         <ProjectModal projects={data?.projects || []} />
       </GenericModal>
-    </>  
+    </>
   )
 }

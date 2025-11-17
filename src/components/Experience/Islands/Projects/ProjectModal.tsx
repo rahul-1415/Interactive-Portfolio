@@ -120,7 +120,7 @@ export const ProjectModal = ({ projects }: ProjectModalProps) => {
           )}
         </article>
       ))}
-      
+
       {staticProjects.map((project, index) => (
         <article key={`static-${index}`} className={styles.project__container}>
           <div className={styles.project__header}>

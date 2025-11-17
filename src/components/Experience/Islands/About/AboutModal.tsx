@@ -28,7 +28,7 @@ export const AboutModal = ({ sections }: AboutModalProps) => {
           ))}
         </section>
       ))}
-      
+
       <section className={styles.container}>
         <h1 className={styles.about__title}>About Me</h1>
         <p>
@@ -44,9 +44,9 @@ export const AboutModal = ({ sections }: AboutModalProps) => {
           Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
         </p>
         <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <a 
-            href="https://github.com/rahul-1415" 
-            target="_blank" 
+          <a
+            href="https://github.com/rahul-1415"
+            target="_blank"
             rel="noopener noreferrer"
             style={{
               backgroundColor: '#fff',
@@ -63,9 +63,9 @@ export const AboutModal = ({ sections }: AboutModalProps) => {
           >
             GitHub
           </a>
-          <a 
-            href="https://www.linkedin.com/in/rahulb1407/" 
-            target="_blank" 
+          <a
+            href="https://www.linkedin.com/in/rahulb1407/"
+            target="_blank"
             rel="noopener noreferrer"
             style={{
               backgroundColor: '#fff',
