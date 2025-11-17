@@ -1,4 +1,3 @@
-
 import { shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
