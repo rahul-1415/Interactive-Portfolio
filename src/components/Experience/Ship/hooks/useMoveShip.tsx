@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 export const useMoveShip = () => {
   const body = useRef<RigidBodyApi>(null!)
-  const [_, getKeys] = useKeyboardControls()
+  const [, getKeys] = useKeyboardControls()
 
   const move = (delta: number) => {
     const { forward, leftward, rightward } = getKeys()

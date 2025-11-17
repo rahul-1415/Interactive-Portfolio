@@ -1,4 +1,4 @@
-import { Html, OrbitControls, OrthographicCamera } from '@react-three/drei'
+import { Html, OrthographicCamera } from '@react-three/drei'
 import { X } from 'phosphor-react'
 import { ReactNode, useEffect } from 'react'
 import { useModal } from '@App/core/context/ModalContext'
