@@ -21,8 +21,8 @@ export const Contact = () => {
         objectUrl='/assets/islands/king_one_piece/scene.gltf'
         islandNumber={1}
         position={[-20, 0, -90]}
-        rotationY={Math.PI / 2}
-        objectScale={1.5}
+        rotationY={Math.PI / 1}
+        objectScale={3}
         onClickObject={handleOpenModal}
         colliders='trimesh'
       />
@@ -37,3 +37,4 @@ export const Contact = () => {
     </>
   )
 }
+

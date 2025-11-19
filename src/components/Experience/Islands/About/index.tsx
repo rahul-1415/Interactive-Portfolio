@@ -26,7 +26,7 @@ export const About = () => {
         position={[30, 0, -30]}
         onClickObject={handleOpenModal}
         rotationY={Math.PI}
-        objectScale={1.5}
+        objectScale={1}
       />
 
       <GenericModal

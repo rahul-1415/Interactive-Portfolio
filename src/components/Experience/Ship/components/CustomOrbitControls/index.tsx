@@ -6,8 +6,8 @@ export const CustomOrbitControls = () => {
 
   return (
     <OrbitControls
-      minDistance={30}
-      maxDistance={100}
+      minDistance={60}
+      maxDistance={150}
       minPolarAngle={Math.PI / 4}
       maxPolarAngle={Math.PI / 2.5}
       enabled={!isModalOpen}

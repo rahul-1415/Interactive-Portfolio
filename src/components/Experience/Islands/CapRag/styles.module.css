@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: "Gochi Hand", cursive;
+  max-width: 950px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0 0;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.link {
+  background-color: #fff;
+  color: #121212;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.1rem;
+  transition: filter 0.3s ease-in;
+}
+
+.link:hover {
+  filter: brightness(0.9);
+}
+
+.sectionTitle {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.5rem;
+}
+
+.text {
+  margin: 0;
+  line-height: 1.7rem;
+  font-size: 1.15rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.7rem;
+  font-size: 1.15rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}

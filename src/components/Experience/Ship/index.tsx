@@ -33,8 +33,8 @@ export const Ship = () => {
         <group>
           <PerspectiveCamera
             makeDefault
-            position={[0, 25, 40]}
-            args={[45, 1.2, 1, 1000]}
+            position={[0, 45, 110]}
+            args={[45, 1.2, 1, 1500]}
           />
 
           <primitive object={shipModel.scene} />
