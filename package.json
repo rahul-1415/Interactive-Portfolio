@@ -37,7 +37,7 @@
     "@graphql-codegen/cli": "^2.16.2",
     "@graphql-codegen/typescript": "^2.8.6",
     "@graphql-codegen/typescript-operations": "^2.5.11",
-    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "@testing-library/react": "^13.4.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
