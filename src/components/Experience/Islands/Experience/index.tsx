@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { GenericModal } from '@App/components/GenericModal'
 import { useGetExperiencesLazyQuery } from '@core/graphql/queries.generated'
-import { ExperienceModal } from './ExperienceModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { ExperienceModal } from './ExperienceModal'
 
 export const Experience = () => {
   const [getData, { data, loading }] = useGetExperiencesLazyQuery()

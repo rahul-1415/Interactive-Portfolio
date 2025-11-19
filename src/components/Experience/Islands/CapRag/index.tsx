@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { GenericModal } from '@App/components/GenericModal'
-import { CapRagModal } from './CapRagModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { CapRagModal } from './CapRagModal'
 
 export const CapRag = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)

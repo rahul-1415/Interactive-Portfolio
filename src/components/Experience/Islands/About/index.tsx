@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { GenericModal } from '@App/components/GenericModal'
 import { useGetAboutMeLazyQuery } from '@App/core/graphql/queries.generated'
-import { AboutModal } from './AboutModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { AboutModal } from './AboutModal'
 
 export const About = () => {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)

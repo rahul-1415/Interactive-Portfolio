@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { GenericModal } from '@App/components/GenericModal'
-import { ContactModal } from './ContactModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { ContactModal } from './ContactModal'
 
 export const Contact = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
