@@ -38,7 +38,7 @@ export const Experience = () => {
               To move the ship: <br></br>
               W / ↑ to sail forward <br></br>
               A / ← to steer left <br></br>
-              D / → to steer right 
+              D / → to steer right
             </div>
           </Html>
 

@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { Html } from '@react-three/drei'
-import { LinkSimple } from 'phosphor-react'
 import { GenericModal } from '@App/components/GenericModal'
 import { GenericIsland } from '../components/GenericIsland'
 import { CapRagModal } from './CapRagModal'
