@@ -14,7 +14,7 @@ export const AboutModal = ({ sections }: AboutModalProps) => {
         <section key={title} className={styles.container}>
           <h1 className={styles.about__title}>{title}</h1>
 
-          <RichText content={description?.raw}/>
+          <RichText content={description?.raw} />
 
           {images.map(image => (
             <Image
@@ -31,18 +31,17 @@ export const AboutModal = ({ sections }: AboutModalProps) => {
 
       <section className={styles.container}>
         <h1 className={styles.about__title}>About Me</h1>
-            <p>
-                Hello! </p><p>I am Rahul Babu, Software Engineer with experience in building AI agents, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.
-            </p>
-            <p>
-                At Hovian Inc., 
-            </p>
-            <p>
-                Previously at ASU's Decision Theater, Built and deployed LLM + ML systems (RAG, automated eval tooling, and an opioid-risk forecasting dashboard) by automating data pipelines, integrating public datasets, and shipping interactive apps on Jetstream2 and Google Cloud Run.
-            </p>
-            <p>
-                Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
-            </p>
+        <p>Hello!</p>
+        <p>
+          I am Rahul Babu, Software Engineer with experience in building AI agents, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.
+        </p>
+        <p>At Hovian Inc.</p>
+        <p>
+          Previously at ASU&apos;s Decision Theater, Built and deployed LLM + ML systems (RAG, automated eval tooling, and an opioid-risk forecasting dashboard) by automating data pipelines, integrating public datasets, and shipping interactive apps on Jetstream2 and Google Cloud Run.
+        </p>
+        <p>
+          Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
+        </p>
         <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <a
             href="https://github.com/rahul-1415"
