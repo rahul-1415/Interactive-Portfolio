@@ -36,40 +36,39 @@ export const ExperienceModal = ({ experiences }: ExperienceModalProps) => {
 
       <article className={styles.experience__container}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-          <h2 className={styles.experience__company}>BlackRock</h2>
-          <p style={{ margin: 0, fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>USA</p>
+          <h2 className={styles.experience__company}>Hovian Inc.</h2>
+          <p style={{ margin: 0, fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>Cucamanga, California, USA</p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <p style={{ margin: 0, fontWeight: 'bold', fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>Software Engineer</p>
-          <time className={styles.experience__time}>July 2024 - Present</time>
+          <time className={styles.experience__time}>July 2025 - Dec 2025</time>
         </div>
         <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.7rem', fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>
-          <li>Engineered Python RESTful APIs (FastAPI) to deliver real-time portfolio and risk data; processed 5M+ daily records with optimized queries, cutting average response time from 8s to 2s during trading hours.</li>
-          <li>Built an LLM-powered research assistant using LangChain + OpenAI models to summarize earnings transcripts and analyst notes; reduced manual review effort for portfolio managers by ~15 hours each week.</li>
-          <li>Designed a React.js dashboard that integrated live fund inflow/outflow trends, anomaly alerts, and LLM-generated market insights; adoption by 20+ analysts replaced static Excel workflows.</li>
-          <li>Automated ingestion and enrichment of Bloomberg/Refinitiv feeds through AWS Glue, S3, and Lambda triggers; ensured 100% SLA adherence and eliminated manual data preparation steps.</li>
-          <li>Deployed containerized microservices with Docker + AWS ECS, wired CI/CD via GitHub Actions, and introduced monitoring through CloudWatch; achieved less than 10 min release cycles with zero downtime.</li>
-          <li>Implemented an NLP + LangGraph pipeline for entity extraction and context mapping across 100K+ SEC filings; compliance teams accelerated audit prep by 40% while cutting false positives in alerts.</li>
+            <li>Built and maintained an Electron + React single-page desktop application using React, JavaScript/TypeScript, HTML5, and CSS3, supporting multiple interactive UI views for notification and workflow management.</li>
+            <li>Designed and shipped 20+ modular, reusable React components (chat UI, prompt inputs, settings panels, toggles) to support dynamic features such as AI chat, theme switching, and workflow navigation.</li>
+            <li>Managed client-side state and UI transitions (component-level state + shared app state), reducing UI-related bugs and improving interaction responsiveness and UX consistency.</li>
+            <li>Integrated frontend modules with backend services via RESTful APIs, implementing reliable data fetching, loading states, and error handling for daily user workflows.</li>
+            <li>Developed Python-based image processing utilities to power an AI “Animated GIF” feature (sprite sheet slicing, pixelation with PIL, GIF assembly with imageio), delivering animated outputs from text prompts.</li>
+            <li>Implemented dark mode with persisted user preferences and OS theme sync, and integrated native desktop notifications via Electron APIs to ensure alerts triggered reliably even when the app was minimized.</li>
         </ul>
       </article>
 
       <article className={styles.experience__container}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-          <h2 className={styles.experience__company}>Vivma Software Inc.</h2>
-          <p style={{ margin: 0, fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>India</p>
+          <h2 className={styles.experience__company}>ASU Decision Theater</h2>
+          <p style={{ margin: 0, fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>Tempe, Arizona, USA</p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <p style={{ margin: 0, fontWeight: 'bold', fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>Software Engineer</p>
-          <time className={styles.experience__time}>June 2021 - July 2023</time>
+          <time className={styles.experience__time}>May 2024 - May 2025</time>
         </div>
         <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.7rem', fontFamily: '"Gochi Hand", cursive', fontSize: '1.25rem' }}>
-          <li>Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews; reduced schema-change overhead while keeping financial data ACID-compliant.</li>
-          <li>Built Flask APIs for checkout, refunds, and shipment events; wrapped 200+ test cases in pytest, reaching 85% coverage and minimizing regression bugs.</li>
-          <li>Orchestrated ETL pipelines in Python (pandas + SQLAlchemy + PyMongo) to merge order history with review sentiment data; optimized pipeline runtime by 40% on 20M+ rows + 5M+ docs.</li>
-          <li>Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and cutting ops team effort by 12 hours/week.</li>
-          <li>Created a React.js customer portal for browsing catalogs and personalized deals; integrated cache + lazy loading to reduce page load time by 35%.</li>
-          <li>Trained a scikit-learn recommendation engine combining transactional (Postgres) and behavioral (MongoDB) data; boosted upsell conversion rate by 11% in pilot.</li>
-          <li>Containerized services with Docker, deployed on AWS (EC2, RDS, S3, DocumentDB for Mongo), and configured monitoring via CloudWatch for stable performance under seasonal traffic spikes.</li>
+          <li>Designed and implemented a machine learning pipeline using Python and R to analyze 50K+ census and public healthdatasets for regional risk prediction.</li>
+          <li>Trained and evaluated predictive models using XGBoost and ensemble techniques, focusing on accuracy and interpretability.</li>
+          <li>Built a real-time interactive risk dashboard using React and TypeScript, supporting 10+ dynamic visual components and deployed with FastAPI and Docker on Google Cloud Run.</li>
+          <li>Developed backend API services using FastAPI to serve dashboard data, enabling low-latency access for real-time filtering and visualization.</li>
+          <li>Automated large-scale data collection using Python and Selenium, gathering 1,000+ healthcare survey responses and 795 climate policy documents, followed by structured analysis and evaluation to measure LLM resilience on heat and healthcare prompts.</li>
+          <li>Deployed a RAG-based chatbot using Llama 3, LangChain, and Chroma on Jetstream2 HPC to summarize 100+ interview transcripts for the Maricopa Association of Governments and support ASU’s LLM resilience research with climate policy recommendations.</li><
         </ul>
       </article>
     </section>
