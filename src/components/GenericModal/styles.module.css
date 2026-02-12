@@ -3,11 +3,15 @@
   inset: 0;
   width: 100vw;
   height: 100vh;
-  padding: 1.2rem;
-  overflow: hidden;
   display: grid;
   place-items: center;
-  z-index: 5;
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  overflow: hidden;
+  z-index: 30;
 }
 
 .modal__backdrop {
@@ -22,8 +26,8 @@
 
 .modal__content {
   position: relative;
-  width: min(1180px, 100%);
-  max-height: calc(100vh - 2.4rem);
+  width: min(1160px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
   background:
     linear-gradient(160deg, rgba(9, 15, 30, 0.96), rgba(14, 27, 48, 0.92)),
     radial-gradient(circle at 20% 0%, rgba(255, 178, 89, 0.28), transparent 56%);
@@ -34,12 +38,15 @@
   box-shadow:
     0 32px 75px rgba(0, 0, 0, 0.42),
     inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  z-index: 1;
 }
 
 .modal__body {
   height: 100%;
+  max-height: calc(100vh - 2rem);
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
   padding: 2.4rem 2rem 2rem;
 }
 
@@ -65,17 +72,55 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 768px) {
+.modal__close:focus-visible {
+  outline: 2px solid rgba(255, 204, 144, 0.9);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1279px) {
   .container {
-    padding: 0.7rem;
+    padding:
+      max(0.8rem, env(safe-area-inset-top))
+      max(0.8rem, env(safe-area-inset-right))
+      max(0.8rem, env(safe-area-inset-bottom))
+      max(0.8rem, env(safe-area-inset-left));
   }
 
   .modal__content {
-    max-height: calc(100vh - 1.4rem);
-    border-radius: 18px;
+    width: min(92vw, 980px);
+    max-height: calc(100vh - 1.6rem);
   }
 
   .modal__body {
-    padding: 2rem 1rem 1rem;
+    max-height: calc(100vh - 1.6rem);
+    padding: 2.1rem 1.35rem 1.2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding:
+      max(0.5rem, env(safe-area-inset-top))
+      max(0.5rem, env(safe-area-inset-right))
+      max(0.5rem, env(safe-area-inset-bottom))
+      max(0.5rem, env(safe-area-inset-left));
+  }
+
+  .modal__content {
+    width: 100%;
+    max-height: calc(100vh - 1rem);
+    border-radius: 16px;
+  }
+
+  .modal__body {
+    max-height: calc(100vh - 1rem);
+    padding: 2rem 0.95rem 1rem;
+  }
+
+  .modal__close {
+    top: 0.55rem;
+    right: 0.55rem;
+    width: 2.1rem;
+    height: 2.1rem;
   }
 }

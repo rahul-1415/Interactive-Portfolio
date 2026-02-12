@@ -1,17 +1,23 @@
 export default `
 uniform float uTime;
+uniform float uWaveAmp;
+uniform float uWaveFreq;
+uniform float uWaveSpeed;
 
 varying vec2 vUv;
 varying float vElevation;
+varying float vViewDistance;
+varying vec2 vWorldXZ;
 
 void main()
 {
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-    float waveA = sin(modelPosition.x * 0.015 + uTime * 0.62) * 0.35;
-    float waveB = cos(modelPosition.z * 0.012 - uTime * 0.44) * 0.25;
+    float baseSwell = sin(modelPosition.x * (0.0042 * uWaveFreq) + uTime * (0.32 * uWaveSpeed)) * (1.42 * uWaveAmp);
+    float secondaryChop = cos(modelPosition.z * (0.0118 * uWaveFreq) - uTime * (0.64 * uWaveSpeed)) * (0.76 * uWaveAmp);
+    float microJitter = sin((modelPosition.x + modelPosition.z) * (0.043 * uWaveFreq) + uTime * (1.2 * uWaveSpeed)) * (0.18 * uWaveAmp);
 
-    vElevation = waveA + waveB;
+    vElevation = baseSwell + secondaryChop + microJitter;
     modelPosition.y += vElevation;
 
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -20,5 +26,7 @@ void main()
     gl_Position = projectionPosition;
 
     vUv = uv;
+    vViewDistance = length(viewPosition.xyz);
+    vWorldXZ = modelPosition.xz;
 }
 `

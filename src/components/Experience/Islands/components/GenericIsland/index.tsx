@@ -3,6 +3,7 @@ import { Object3DProps, useFrame } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
 import { useEffect, useRef, useState } from 'react'
 import { BufferGeometry, DoubleSide, Material, Mesh, MeshBasicMaterial } from 'three'
+import { normalizeIslandMaterials } from '../../../utils/normalizeIslandMaterials'
 import { IslandMeta } from '../../islandRegistry'
 
 type GenericIslandProps = {
@@ -39,15 +40,27 @@ export const GenericIsland = ({
 }: GenericIslandProps) => {
   const [isHovering, setIsHovering] = useState(false)
   const resolvedObjectScale = objectScale * 1.22
+  const hasNormalizedMaterials = useRef(false)
 
   const object = useGLTF(objectUrl)
-  const { nodes } = useGLTF(`/assets/islands/island-${islandNumber}.glb`)
+  const islandModel = useGLTF(`/assets/islands/island-${islandNumber}.glb`)
+  const { nodes } = islandModel
+  const islandNode = (nodes as { island?: { children: Array<{ id: number } & Geometry> } }).island
   const beaconRef = useRef<Mesh>(null)
   const beaconMaterialRef = useRef<MeshBasicMaterial>(null)
 
   useEffect(() => {
     document.body.style.cursor = isHovering ? 'pointer' : 'auto'
   }, [isHovering])
+
+  useEffect(() => {
+    if (hasNormalizedMaterials.current) return
+
+    normalizeIslandMaterials(object.scene, { category: 'prop' })
+    normalizeIslandMaterials(islandModel.scene, { category: 'land' })
+
+    hasNormalizedMaterials.current = true
+  }, [object.scene, islandModel.scene])
 
   useFrame((state) => {
     if (!beaconRef.current || !beaconMaterialRef.current) return
@@ -106,7 +119,7 @@ export const GenericIsland = ({
       </mesh>
 
       <group scale={1.4}>
-        {nodes.island.children.map(mesh => (
+        {(islandNode?.children || []).map(mesh => (
           <mesh
             key={mesh.id}
             position={[10, 0, 0]}
