@@ -1,35 +1,56 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
-import { DirectionalLight } from 'three'
+import { DirectionalLight, Vector3 } from 'three'
 
 export const Lights = () => {
-  const light = useRef<DirectionalLight>(null!)
+  const sunlight = useRef<DirectionalLight>(null!)
+  const targetPosition = useRef(new Vector3())
+  const lightPosition = useRef(new Vector3())
 
   useFrame((state) => {
-    if (!light.current) return
+    if (!sunlight.current) return
 
-    light.current.position.z = state.camera.position.z + 1 - 4
-    light.current.target.position.z = state.camera.position.z - 4
-    light.current.target.updateMatrixWorld()
+    lightPosition.current.set(
+      state.camera.position.x + 85,
+      165,
+      state.camera.position.z + 70
+    )
+
+    targetPosition.current.set(
+      state.camera.position.x,
+      0,
+      state.camera.position.z - 25
+    )
+
+    sunlight.current.position.lerp(lightPosition.current, 0.1)
+    sunlight.current.target.position.lerp(targetPosition.current, 0.14)
+    sunlight.current.target.updateMatrixWorld()
   })
 
   return (
     <>
-      <directionalLight
-        ref={light}
-        castShadow
-        position={ [4, 10, 1] }
-        intensity={ 1.1 }
-        shadow-mapSize={ [1024, 1024] }
-        shadow-camera-near={ 1 }
-        shadow-camera-far={ 10 }
-        shadow-camera-top={ 10 }
-        shadow-camera-right={ 10 }
-        shadow-camera-bottom={ -10 }
-        shadow-camera-left={ -10 }
+      <hemisphereLight
+        intensity={0.45}
+        color='#ffd8ac'
+        groundColor='#1f3556'
       />
 
-      <ambientLight intensity={ 0.4 } />
+      <ambientLight intensity={0.18} color='#e6ecff' />
+
+      <directionalLight
+        ref={sunlight}
+        castShadow
+        position={[30, 165, 20]}
+        intensity={1.28}
+        color='#ffddb0'
+        shadow-mapSize={[2048, 2048]}
+        shadow-camera-near={0.5}
+        shadow-camera-far={520}
+        shadow-camera-top={170}
+        shadow-camera-right={170}
+        shadow-camera-bottom={-170}
+        shadow-camera-left={-170}
+      />
     </>
   )
 }

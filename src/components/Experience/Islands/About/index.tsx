@@ -1,41 +1,23 @@
-import { useState } from 'react'
-import { GenericModal } from '@App/components/GenericModal'
-import { useGetAboutMeLazyQuery } from '@App/core/graphql/queries.generated'
-import { AboutModal } from './AboutModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { IslandMeta, islandById } from '../islandRegistry'
 
-export const About = () => {
-  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
-  const [getAboutMe, { data, loading }] = useGetAboutMeLazyQuery()
+type AboutProps = {
+  onIslandHover?: (island: IslandMeta) => void
+  onIslandBlur?: () => void
+  onIslandClick: () => void
+}
 
-  const handleOpenModal = () => {
-    setIsAboutModalOpen(true)
-    getAboutMe()
-  }
-
-  const handleCloseModal = () => {
-    setIsAboutModalOpen(false)
-  }
-
+export const About = ({ onIslandHover, onIslandBlur, onIslandClick }: AboutProps) => {
   return (
-    <>
-      <GenericIsland
-        title='About'
-        objectUrl='/assets/straw-hat.glb'
-        islandNumber={2}
-        position={[30, 0, -30]}
-        onClickObject={handleOpenModal}
-        rotationY={Math.PI}
-        objectScale={1}
-      />
-
-      <GenericModal
-        isOpen={isAboutModalOpen}
-        onCloseModal={handleCloseModal}
-        isLoading={loading}
-      >
-        <AboutModal sections={data?.abouts || []} />
-      </GenericModal>
-    </>
+    <GenericIsland
+      island={islandById.about}
+      objectUrl='/assets/straw-hat.glb'
+      islandNumber={2}
+      onClickObject={onIslandClick}
+      rotationY={Math.PI}
+      objectScale={1}
+      onHoverIsland={onIslandHover}
+      onBlurIsland={onIslandBlur}
+    />
   )
 }

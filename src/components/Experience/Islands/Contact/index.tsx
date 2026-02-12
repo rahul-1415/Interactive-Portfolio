@@ -1,39 +1,24 @@
-import { useState } from 'react'
-import { GenericModal } from '@App/components/GenericModal'
-import { ContactModal } from './ContactModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { IslandMeta, islandById } from '../islandRegistry'
 
-export const Contact = () => {
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+type ContactProps = {
+  onIslandHover?: (island: IslandMeta) => void
+  onIslandBlur?: () => void
+  onIslandClick: () => void
+}
 
-  const handleOpenModal = () => {
-    setIsContactModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsContactModalOpen(false)
-  }
-
+export const Contact = ({ onIslandHover, onIslandBlur, onIslandClick }: ContactProps) => {
   return (
-    <>
-      <GenericIsland
-        title='Contact'
-        objectUrl='/assets/islands/king_one_piece/scene.gltf'
-        islandNumber={1}
-        position={[-20, 0, -90]}
-        rotationY={Math.PI / 1}
-        objectScale={3}
-        onClickObject={handleOpenModal}
-        colliders='trimesh'
-      />
-
-      <GenericModal
-        isOpen={isContactModalOpen}
-        onCloseModal={handleCloseModal}
-        isLoading={false}
-      >
-        <ContactModal />
-      </GenericModal>
-    </>
+    <GenericIsland
+      island={islandById.contact}
+      objectUrl='/assets/islands/king_one_piece/scene.gltf'
+      islandNumber={1}
+      rotationY={Math.PI}
+      objectScale={3}
+      onClickObject={onIslandClick}
+      colliders='trimesh'
+      onHoverIsland={onIslandHover}
+      onBlurIsland={onIslandBlur}
+    />
   )
 }

@@ -2,20 +2,47 @@ import { About } from './About'
 import { CapRag } from './CapRag'
 import { Contact } from './Contact'
 import { Experience } from './Experience'
+import { IslandId, IslandMeta } from './islandRegistry'
 import { Projects } from './Projects'
 
-export const Islands = () => {
+type IslandsProps = {
+  onIslandHover?: (island: IslandMeta) => void
+  onIslandBlur?: () => void
+  onIslandClick: (islandId: IslandId) => void
+}
+
+export const Islands = ({ onIslandHover, onIslandBlur, onIslandClick }: IslandsProps) => {
   return (
     <>
-      <Projects />
+      <Projects
+        onIslandHover={onIslandHover}
+        onIslandBlur={onIslandBlur}
+        onIslandClick={() => onIslandClick('projects')}
+      />
 
-      <CapRag />
+      <CapRag
+        onIslandHover={onIslandHover}
+        onIslandBlur={onIslandBlur}
+        onIslandClick={() => onIslandClick('caprag')}
+      />
 
-      <About />
+      <About
+        onIslandHover={onIslandHover}
+        onIslandBlur={onIslandBlur}
+        onIslandClick={() => onIslandClick('about')}
+      />
 
-      <Experience />
+      <Experience
+        onIslandHover={onIslandHover}
+        onIslandBlur={onIslandBlur}
+        onIslandClick={() => onIslandClick('experience')}
+      />
 
-      <Contact />
+      <Contact
+        onIslandHover={onIslandHover}
+        onIslandBlur={onIslandBlur}
+        onIslandClick={() => onIslandClick('contact')}
+      />
     </>
   )
 }

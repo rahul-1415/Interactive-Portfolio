@@ -6,12 +6,12 @@ import * as THREE from 'three'
 import oceanFragmentShader from './shaders/fragment'
 import oceanVertexShader from './shaders/vertex'
 
-const WORLD_SIZE = 10000
+const WORLD_SIZE = 3200
 
 const OceanMaterial = shaderMaterial({
   uTime: 0,
-  uColorStart: new THREE.Color('#0096c7'),
-  uColorEnd: new THREE.Color('#023e8a')
+  uColorStart: new THREE.Color('#0b3554'),
+  uColorEnd: new THREE.Color('#1f5f89')
 }, oceanVertexShader, oceanFragmentShader)
 
 extend({ OceanMaterial })
@@ -26,7 +26,9 @@ export const Ocean = () => {
   const oceanMaterial = useRef<{ uTime: number }>(null)
 
   useFrame((_, delta) => {
-    oceanMaterial.current!.uTime += delta
+    if (!oceanMaterial.current) return
+
+    oceanMaterial.current.uTime += delta
   })
 
   return (
@@ -37,7 +39,7 @@ export const Ocean = () => {
         rotation-x={-Math.PI * 0.5}
         position-y={0}
       >
-        <planeGeometry />
+        <planeGeometry args={[1, 1, 320, 320]} />
 
         <oceanMaterial ref={oceanMaterial} />
       </mesh>

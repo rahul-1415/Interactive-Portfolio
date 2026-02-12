@@ -1,0 +1,231 @@
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.brandPanel,
+.missionPanel,
+.routePanel,
+.controlsPanel {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background:
+    linear-gradient(145deg, rgba(16, 25, 47, 0.66), rgba(23, 46, 72, 0.5)),
+    radial-gradient(circle at 20% 0%, rgba(255, 182, 101, 0.2), transparent 60%);
+  box-shadow: 0 14px 28px rgba(5, 11, 23, 0.32);
+  backdrop-filter: blur(7px);
+  border-radius: 14px;
+  padding: 0.75rem;
+  color: #f6f2e8;
+  max-width: 240px;
+}
+
+.brandPanel {
+  top: 0.55rem;
+  left: 0.55rem;
+  width: min(220px, 36vw);
+}
+
+.routePanel {
+  bottom: 0.55rem;
+  right: 0.55rem;
+  width: min(230px, 34vw);
+}
+
+.missionPanel {
+  top: 0.55rem;
+  right: 0.55rem;
+  width: min(255px, 38vw);
+}
+
+.controlsPanel {
+  bottom: 0.55rem;
+  left: 0.55rem;
+  width: min(210px, 31vw);
+}
+
+.panelLabel {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14rem;
+  font-size: 0.62rem;
+  color: rgba(246, 242, 232, 0.7);
+  font-family: var(--font-body);
+}
+
+.brandEyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.13rem;
+  font-size: 0.62rem;
+  color: #ffd6a0;
+  font-family: var(--font-body);
+}
+
+.brandTitle {
+  margin: 0.2rem 0 0 0;
+  font-family: var(--font-display);
+  letter-spacing: 0.06rem;
+  font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+  line-height: 0.95;
+}
+
+.brandSubtitle {
+  margin: 0.4rem 0 0 0;
+  font-family: var(--font-body);
+  line-height: 1.25;
+  font-size: 0.67rem;
+  color: rgba(246, 242, 232, 0.86);
+}
+
+.missionTitle {
+  margin: 0.28rem 0 0 0;
+  font-family: var(--font-accent);
+  font-size: 0.95rem;
+  letter-spacing: 0.02rem;
+}
+
+.missionSubtitle {
+  margin: 0.3rem 0 0 0;
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  line-height: 1.2;
+  color: rgba(246, 242, 232, 0.84);
+}
+
+.progressTrack {
+  width: 100%;
+  height: 0.35rem;
+  border-radius: 999px;
+  margin-top: 0.55rem;
+  background: rgba(246, 242, 232, 0.2);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.25s ease-out;
+}
+
+.missionFooter {
+  margin: 0.45rem 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  color: rgba(246, 242, 232, 0.9);
+}
+
+.routeGrid {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(78px, 1fr));
+  gap: 0.35rem;
+}
+
+.routeCard {
+  border: 1px solid rgba(246, 242, 232, 0.2);
+  border-radius: 8px;
+  padding: 0.45rem;
+  background: rgba(10, 20, 39, 0.48);
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.routeNearest {
+  box-shadow: inset 0 0 0 1px rgba(255, 220, 173, 0.45);
+}
+
+.routeActive {
+  background: linear-gradient(160deg, rgba(14, 30, 55, 0.88), rgba(18, 38, 62, 0.6));
+}
+
+.routeName {
+  margin: 0;
+  font-family: var(--font-accent);
+  letter-spacing: 0.01rem;
+  font-size: 0.66rem;
+  line-height: 1.05;
+}
+
+.routeDistance {
+  margin: 0.3rem 0 0 0;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: rgba(246, 242, 232, 0.8);
+}
+
+.keyGroup {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 0.3rem 0.45rem;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+}
+
+.keyGroup:last-child {
+  grid-template-columns: auto 1fr;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7rem;
+  height: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(246, 242, 232, 0.32);
+  background: rgba(5, 10, 20, 0.5);
+  font-family: var(--font-accent);
+  font-size: 0.6rem;
+  letter-spacing: 0.05rem;
+}
+
+@media (max-width: 980px) {
+  .brandPanel,
+  .missionPanel,
+  .routePanel,
+  .controlsPanel {
+    max-width: min(44vw, 220px);
+    width: auto;
+    padding: 0.55rem;
+  }
+
+  .brandPanel {
+    top: 0.45rem;
+    left: 0.45rem;
+  }
+
+  .routePanel {
+    bottom: 0.45rem;
+    right: 0.45rem;
+  }
+
+  .missionPanel {
+    top: 0.45rem;
+    right: 0.45rem;
+  }
+
+  .controlsPanel {
+    bottom: 0.45rem;
+    left: 0.45rem;
+  }
+
+  .routeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .brandSubtitle,
+  .missionSubtitle {
+    display: none;
+  }
+}

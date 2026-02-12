@@ -1,83 +1,119 @@
 .projects__container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  font-family: "Gochi Hand", cursive;
+  gap: 1.1rem;
+}
+
+.projects__header {
+  padding: 1.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(145deg, rgba(19, 35, 58, 0.82), rgba(9, 15, 28, 0.92));
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  font-size: 0.72rem;
+  color: rgba(255, 215, 171, 0.78);
+  font-family: var(--font-body);
+}
+
+.title {
+  margin: 0.35rem 0 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  line-height: 0.95;
+}
+
+.subtitle {
+  margin: 0.65rem 0 0 0;
+  font-family: var(--font-body);
+  color: rgba(245, 239, 226, 0.86);
+  line-height: 1.45;
+  max-width: 70ch;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 0.95rem;
 }
 
 .project__container {
-  border-left: 1px solid var(--background);
-  padding-left: 1rem;
-  font-family: "Gochi Hand", cursive;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+  padding: 1rem;
+  background: rgba(7, 14, 26, 0.58);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.project__header {
+.project__headerRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.project__index {
+  margin: 0;
+  font-size: 0.72rem;
+  font-family: var(--font-body);
+  color: rgba(255, 215, 171, 0.72);
+  letter-spacing: 0.08rem;
 }
 
 .project__title {
-  font-size: 2rem;
-  font-family: "Gochi Hand", cursive;
-  margin: 0;
+  margin: 0.2rem 0 0 0;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  font-family: var(--font-accent);
+}
+
+.project__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  align-items: flex-end;
 }
 
 .project__date {
-  font-size: 1.1rem;
-  font-family: "Gochi Hand", cursive;
   margin: 0;
-  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  font-family: var(--font-body);
+  color: rgba(230, 236, 251, 0.86);
 }
 
 .project__description {
-  line-height: 1.7rem;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  margin: 0;
+  line-height: 1.52;
+  color: rgba(245, 239, 226, 0.9);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
 }
 
 .project__points {
-  padding-left: 1.5rem;
-  line-height: 1.7rem;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.project__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.project__tag {
-  background-color: #fff;
-  color: #121212;
-  border: none;
-  padding: 0.25rem 1rem;
-  border-radius: 15px;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1rem;
-  display: inline-block;
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(245, 239, 226, 0.86);
 }
 
 .project__link {
-  background-color: #fff;
-  color: #121212;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 15px;
-  cursor: pointer;
   text-decoration: none;
-  display: inline-block;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
-  transition: filter 0.3s ease-in;
-}
-
-.project__link:hover {
-  filter: brightness(0.9);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 215, 171, 0.35);
+  color: #ffe9cc;
+  background: rgba(255, 174, 92, 0.16);
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.04rem;
 }

@@ -1,46 +1,118 @@
 .experiences__container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  font-family: "Gochi Hand", cursive;
+  gap: 0.95rem;
 }
 
-.experience__time {
-  font-size: 0.9rem;
-  font-family: "Gochi Hand", cursive;
+.header {
+  padding: 1.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(145deg, rgba(19, 35, 58, 0.82), rgba(9, 15, 28, 0.92));
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  font-size: 0.72rem;
+  color: rgba(255, 215, 171, 0.78);
+  font-family: var(--font-body);
+}
+
+.title {
+  margin: 0.35rem 0 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 0.95;
 }
 
 .experience__container {
-  border-left: 1px solid var(--background);
-  padding-left: 1rem;
-  font-family: "Gochi Hand", cursive;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 13px;
+  padding: 1rem;
+  background: rgba(7, 14, 26, 0.58);
+  display: flex;
+  flex-direction: column;
+  gap: 0.72rem;
 }
 
-.experience__position {
-  font-size: 2rem;
-  text-transform: uppercase;
-  font-family: "Gochi Hand", cursive;
+.experience__topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.9rem;
 }
 
 .experience__company {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-  font-family: "Gochi Hand", cursive;
+  margin: 0;
+  font-size: 1.3rem;
+  font-family: var(--font-accent);
+  color: #ffe0be;
+}
+
+.experience__position {
+  margin: 0.3rem 0 0 0;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: rgba(243, 236, 224, 0.9);
+}
+
+.experience__time {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  font-family: var(--font-body);
+  color: rgba(233, 237, 248, 0.84);
+}
+
+.experience__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.experience__location {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(243, 236, 224, 0.84);
+}
+
+.experience__description {
+  font-family: var(--font-body);
+  line-height: 1.52;
+  color: rgba(243, 236, 224, 0.92);
+}
+
+.experience__description p,
+.experience__description ul,
+.experience__description ol {
+  margin-bottom: 0.65rem;
 }
 
 .experience__link {
-  color: var(--primary-dark);
+  color: #9fd0ff;
   text-decoration: none;
-  font-family: "Gochi Hand", cursive;
 }
 
-.experience__container ul {
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
-  line-height: 1.7rem;
+.experience__points {
+  margin: 0;
+  padding-left: 1.05rem;
+  line-height: 1.48;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(243, 236, 224, 0.88);
 }
 
-.experience__container p {
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
+@media (max-width: 768px) {
+  .experience__topRow {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .experience__meta {
+    align-items: flex-start;
+  }
 }

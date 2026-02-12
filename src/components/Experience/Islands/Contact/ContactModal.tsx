@@ -20,17 +20,22 @@ export const ContactModal = () => {
 
   return (
     <section className={styles.contact__container}>
-      <h1 className={styles.contact__title}>Contact</h1>
-      <p className={styles.contact__subtitle}>Send me a note and I&apos;ll get back to you.</p>
+      <header className={styles.contact__header}>
+        <p className={styles.contact__eyebrow}>Contact Dock</p>
+        <h1 className={styles.contact__title}>Let us build something useful.</h1>
+        <p className={styles.contact__subtitle}>
+          Share context, constraints, and goals. I will reply with a practical next-step path.
+        </p>
+      </header>
 
       <form className={styles.contact__form} onSubmit={handleSubmit}>
         <label className={styles.contact__label}>
           <span>Name</span>
           <input
-            type="text"
+            type='text'
             value={name}
             onChange={event => setName(event.target.value)}
-            placeholder="Your name"
+            placeholder='Your name'
             className={styles.contact__input}
           />
         </label>
@@ -38,10 +43,10 @@ export const ContactModal = () => {
         <label className={styles.contact__label}>
           <span>Email</span>
           <input
-            type="email"
+            type='email'
             value={email}
             onChange={event => setEmail(event.target.value)}
-            placeholder="you@example.com"
+            placeholder='you@example.com'
             className={styles.contact__input}
             required
           />
@@ -52,31 +57,34 @@ export const ContactModal = () => {
           <textarea
             value={message}
             onChange={event => setMessage(event.target.value)}
-            placeholder="How can I help?"
+            placeholder='Project brief, timeline, and desired outcomes'
             className={styles.contact__textarea}
             rows={5}
             required
           />
         </label>
 
-        <button type="submit" className={styles.contact__button}>
+        <button type='submit' className={styles.contact__button}>
           Send Message
         </button>
       </form>
 
       <div className={styles.contact__info}>
-        <a
-          href="mailto:rahulb1407@gmail.com"
-          className={styles.contact__link}
-        >
+        <a href='mailto:rahulb1407@gmail.com' className={styles.contact__link}>
           rahulb1407@gmail.com
         </a>
 
+        <a href='tel:+16025171962' className={styles.contact__link}>
+          +1 (602) 517-1962
+        </a>
+
         <a
-          href="tel:+16025171962"
+          href='https://www.linkedin.com/in/rahulb1407/'
+          target='_blank'
+          rel='noopener noreferrer'
           className={styles.contact__link}
         >
-          +16025171962
+          LinkedIn
         </a>
       </div>
     </section>

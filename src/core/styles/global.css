@@ -5,28 +5,43 @@
 }
 
 :root {
-  --background:  rgb(23, 22, 22);
-  --glass: cyan;
-  --wood: #BA8C63;
-  --text: rgb(244, 237, 237);
-  --red: #f00;
-  --disabled: #adb5bd;
-  --primary: #00b4d8;
-  --primary-dark: #0077b6;
-  --secondary: #f2eecb;
-  --secondary-dark: #C7A575;
+  --background: #090f1b;
+  --text: #f5efe3;
+  --muted: rgba(245, 239, 227, 0.68);
+  --primary: #ffb266;
+  --primary-dark: #f07849;
+  --secondary: #8cc4ff;
+  --secondary-dark: #4077b5;
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-accent: 'Syne', 'Segoe UI', sans-serif;
+  --font-body: 'Space Grotesk', 'Segoe UI', sans-serif;
 }
 
 html,
 body,
-#__next {  
+#__next {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
 
-  background-color: var(--background);
-  font-family: 'Pirata One', 'Times New Roman', Times, serif;
+body {
+  background: radial-gradient(circle at 20% 10%, #1c3557, #090f1b 55%);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+canvas {
+  touch-action: none;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(255, 178, 102, 0.35);
 }

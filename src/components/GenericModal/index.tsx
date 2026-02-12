@@ -1,7 +1,5 @@
-import { Html, OrthographicCamera } from '@react-three/drei'
 import { X } from 'phosphor-react'
-import { ReactNode, useEffect } from 'react'
-import { useModal } from '@App/core/context/ModalContext'
+import { ReactNode } from 'react'
 import { Spinner } from '../Loading'
 import styles from './styles.module.css'
 
@@ -18,23 +16,26 @@ export const GenericModal = ({
   children,
   isLoading
 }: GenericModalProps) => {
-  const { setIsModalOpen } = useModal()
-
-  useEffect(() => {
-    setIsModalOpen(isOpen)
-  }, [isOpen, setIsModalOpen])
-
   if (!isOpen) return null
 
   return (
-    <OrthographicCamera position={[0, 0, 0]} makeDefault>
-      <Html center className={styles.container}>
-        <main className={styles.modal__content}>
-          <X onClick={onCloseModal} size={32} className={styles.modal__close} />
+    <div className={styles.container}>
+      <div className={styles.modal__backdrop} onClick={onCloseModal} />
 
+      <main className={styles.modal__content} role='dialog' aria-modal='true'>
+        <button
+          type='button'
+          onClick={onCloseModal}
+          className={styles.modal__close}
+          aria-label='Close section'
+        >
+          <X size={28} weight='bold' />
+        </button>
+
+        <section className={styles.modal__body}>
           {isLoading ? <Spinner /> : children}
-        </main>
-      </Html>
-    </OrthographicCamera>
+        </section>
+      </main>
+    </div>
   )
 }

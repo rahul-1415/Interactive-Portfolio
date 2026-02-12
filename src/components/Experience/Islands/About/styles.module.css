@@ -1,31 +1,118 @@
-.container {
+.layout {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 1rem;
-  line-height: 1.7rem;
-  list-style-position: inside;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
+  gap: 1.2rem;
 }
 
-.container + .container {
-  margin-top: 4rem;
+.hero {
+  padding: 1.3rem;
+  border: 1px solid rgba(255, 224, 188, 0.24);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(23, 38, 62, 0.78), rgba(8, 15, 28, 0.9));
 }
 
-.about__title {
-  font-size: 3rem;
-  font-family: "Gochi Hand", cursive;
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.13rem;
+  font-size: 0.72rem;
+  color: rgba(255, 214, 171, 0.82);
+  font-family: var(--font-body);
 }
 
-.about__image {
-  align-self: center;
-  border-radius: 1rem;
-  max-width: 80vw;
+.title {
+  margin: 0.35rem 0 0 0;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: 0.05rem;
+  font-family: var(--font-display);
 }
 
-.container p {
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+.intro {
+  margin: 0.8rem 0 0 0;
+  font-family: var(--font-body);
+  line-height: 1.55;
+  max-width: 70ch;
+  color: rgba(250, 244, 233, 0.94);
+}
+
+.highlights {
+  margin: 1rem 0 0 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--font-body);
+  line-height: 1.45;
+  color: rgba(250, 244, 233, 0.94);
+}
+
+.links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.link {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 224, 188, 0.36);
+  color: #fff1de;
+  background: rgba(255, 179, 99, 0.16);
+  font-family: var(--font-accent);
+  letter-spacing: 0.04rem;
+  transition: transform 0.12s ease, background-color 0.2s ease;
+}
+
+.link:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 179, 99, 0.26);
+}
+
+.sectionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.15rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 14, 25, 0.55);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--font-accent);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.02rem;
+  color: #ffdeba;
+}
+
+.sectionText {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: rgba(245, 239, 227, 0.93);
+}
+
+.sectionText p,
+.sectionText ul,
+.sectionText ol {
+  margin-bottom: 0.65rem;
+}
+
+.sectionText a {
+  color: #a3d0ff;
+}
+
+.imageGrid {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.sectionImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }

@@ -38,6 +38,7 @@
     "@graphql-codegen/typescript": "^2.8.6",
     "@graphql-codegen/typescript-operations": "^2.5.11",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@next/swc-darwin-arm64": "^13.1.1",
     "@testing-library/react": "^13.4.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
@@ -69,6 +70,6 @@
     "typescript": "latest",
     "vite": "^4.0.0",
     "vite-tsconfig-paths": "^4.0.3",
-    "vitest": "latest"
+    "vitest": "4.0.9"
   }
 }

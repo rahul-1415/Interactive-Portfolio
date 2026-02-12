@@ -4,26 +4,25 @@ export const CapRagModal = () => {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Climate Action Policy - RAG Application</h1>
-          <p className={styles.subtitle}>
-            Retrieval-augmented insights for climate policy questions with a Streamlit front-end.
-          </p>
-        </div>
+        <p className={styles.eyebrow}>Featured Build</p>
+        <h1 className={styles.title}>Climate Action Policy RAG</h1>
+        <p className={styles.subtitle}>
+          Retrieval-augmented policy assistant for climate-action exploration, summarization, and decision support.
+        </p>
 
         <div className={styles.links}>
           <a
-            href="https://cap-rag.streamlit.app/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href='https://cap-rag.streamlit.app/'
+            target='_blank'
+            rel='noopener noreferrer'
             className={styles.link}
           >
             Live Demo
           </a>
           <a
-            href="https://github.com/rahul-1415/CAP-RAG"
-            target="_blank"
-            rel="noopener noreferrer"
+            href='https://github.com/rahul-1415/CAP-RAG'
+            target='_blank'
+            rel='noopener noreferrer'
             className={styles.link}
           >
             GitHub
@@ -31,72 +30,57 @@ export const CapRagModal = () => {
         </div>
       </header>
 
-      <section>
-        <h2 className={styles.sectionTitle}>Overview</h2>
+      <article className={styles.card}>
+        <h2 className={styles.sectionTitle}>System Overview</h2>
         <p className={styles.text}>
-          ClimateActionPolicy-RAG-Application supports climate action recommendations using a Retrieval-Augmented
-          Generation pipeline. A retriever surfaces the most relevant policy documents while the Ollama LLaMA 3 model
-          crafts responses enriched with that context. The Streamlit UI keeps the interaction focused, letting you
-          explore insights, iterate on prompts, and manage conversations without leaving the browser.
+          CAP-RAG combines retrieval and generation to answer policy-oriented climate questions with grounded references.
+          A Chroma-backed retriever fetches context, and LLaMA-family models synthesize concise responses through a
+          Streamlit interface tuned for iterative exploration.
         </p>
-      </section>
+      </article>
 
-      <section>
-        <h2 className={styles.sectionTitle}>Features</h2>
+      <article className={styles.card}>
+        <h2 className={styles.sectionTitle}>Core Capabilities</h2>
         <ul className={styles.list}>
-          <li>Streamlit interface for querying and visualizing responses in real time.</li>
-          <li>Document retrieval with ChromaDB + HuggingFace embeddings for targeted context.</li>
-          <li>Contextual response generation via Ollama LLaMA 3 models with RAG grounding.</li>
-          <li>Multi-session chat history management to compare policy explorations.</li>
+          <li>Low-friction Streamlit interface for query + response loops.</li>
+          <li>ChromaDB vector retrieval with HuggingFace embeddings.</li>
+          <li>Context-grounded generation via LLaMA-class models.</li>
+          <li>Multi-session workflows for comparing policy threads.</li>
         </ul>
-      </section>
+      </article>
 
       <section className={styles.grid}>
-        <div>
-          <h3 className={styles.sectionTitle}>Files</h3>
+        <article className={styles.card}>
+          <h3 className={styles.sectionTitle}>Structure</h3>
           <ul className={styles.list}>
-            <li><strong>app.py</strong>: Streamlit app + UI wiring.</li>
-            <li><strong>requirements.txt</strong>: Python dependencies.</li>
-            <li><strong>generator.py</strong>: Response generation with Ollama LLaMA 3.</li>
-            <li><strong>retriever.py</strong>: Document retrieval using Chroma + embeddings.</li>
+            <li><strong>app.py:</strong> Streamlit user interface.</li>
+            <li><strong>generator.py:</strong> Response assembly pipeline.</li>
+            <li><strong>retriever.py:</strong> Vector search and context fetch.</li>
+            <li><strong>Chroma/:</strong> Persisted vector data store.</li>
           </ul>
-        </div>
-        <div>
-          <h3 className={styles.sectionTitle}>Folders</h3>
-          <ul className={styles.list}>
-            <li><strong>Chroma</strong>: Vector database for retrieval.</li>
-            <li><strong>components</strong>: Retrieval and generation modules.</li>
-          </ul>
-        </div>
+        </article>
+
+        <article className={styles.card}>
+          <h3 className={styles.sectionTitle}>Local Run</h3>
+          <ol className={styles.list}>
+            <li><code>git clone https://github.com/rahul-1415/CAP-RAG.git</code></li>
+            <li><code>cd CAP-RAG</code></li>
+            <li><code>python3 -m venv venv</code> and activate.</li>
+            <li><code>pip install -r requirements.txt</code></li>
+            <li><code>streamlit run app.py</code></li>
+          </ol>
+        </article>
       </section>
 
-      <section>
-        <h2 className={styles.sectionTitle}>Running the Application</h2>
-        <ol className={styles.list}>
-          <li>Clone: <code>git clone https://github.com/rahul-1415/CAP-RAG.git</code></li>
-          <li><code>cd CAP-RAG</code></li>
-          <li>Create a virtual env: <code>python3 -m venv venv</code> &amp; activate it.</li>
-          <li>Install deps: <code>pip install -r requirements.txt</code></li>
-          <li>Start: <code>streamlit run app.py</code> then open <code>http://localhost:8501</code>.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2 className={styles.sectionTitle}>Groq API Setup</h2>
+      <article className={styles.card}>
+        <h2 className={styles.sectionTitle}>Environment Notes</h2>
         <ul className={styles.list}>
-          <li>Set <code>GROQ_API_KEY</code> (required) and optionally <code>GROQ_API_BASE_URL</code>.</li>
-          <li>Control context size with <code>MAX_CONTEXT_CHARS</code> (default 15000).</li>
-          <li>Pick between <code>llama-3.3-70b-versatile</code> (default) or <code>llama-3.1-8b-instant</code>.</li>
+          <li><code>GROQ_API_KEY</code> is required for hosted inference access.</li>
+          <li><code>GROQ_API_BASE_URL</code> can be set for custom endpoint routing.</li>
+          <li><code>MAX_CONTEXT_CHARS</code> defaults to 15000 for prompt context size.</li>
+          <li>Supported model profiles include 70B and 8B LLaMA variants.</li>
         </ul>
-      </section>
-
-      <section>
-        <h2 className={styles.sectionTitle}>Dependencies</h2>
-        <p className={styles.text}>
-          streamlit, langchain, langchain_community, chromadb, transformers, torch, pandas, langchain_chroma,
-          sentence_transformers
-        </p>
-      </section>
+      </article>
     </section>
   )
 }

@@ -7,82 +7,70 @@ type AboutModalProps = {
   sections: GetAboutMeQuery['abouts']
 }
 
+const profileHighlights = [
+  'Software Engineer focused on AI systems, backend architecture, and scalable product delivery.',
+  'Built and deployed RAG + ML pipelines that process large public-health and climate datasets.',
+  'Hands-on with Python, FastAPI, React, cloud-native deployment, and production observability.'
+]
+
 export const AboutModal = ({ sections }: AboutModalProps) => {
   return (
-    <>
-      {sections.length > 0 && sections.map(({ title, description, images }) => (
-        <section key={title} className={styles.container}>
-          <h1 className={styles.about__title}>{title}</h1>
+    <section className={styles.layout}>
+      <header className={styles.hero}>
+        <p className={styles.eyebrow}>About Section</p>
+        <h1 className={styles.title}>Rahul Babu</h1>
+        <p className={styles.intro}>
+          I build practical software systems where product velocity and engineering quality both matter.
+        </p>
 
-          <RichText content={description?.raw} />
-
-          {images.map(image => (
-            <Image
-              className={styles.about__image}
-              key={image.id}
-              src={image.url}
-              alt={image.fileName}
-              width={734}
-              height={400}
-            />
+        <ul className={styles.highlights}>
+          {profileHighlights.map(point => (
+            <li key={point}>{point}</li>
           ))}
-        </section>
-      ))}
+        </ul>
 
-      <section className={styles.container}>
-        <h1 className={styles.about__title}>About Me</h1>
-        <p>Hello!</p>
-        <p>
-          I am Rahul Babu, Software Engineer with experience in building AI agents, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.
-        </p>
-        <p>At Hovian Inc.</p>
-        <p>
-          Previously at ASU&apos;s Decision Theater, Built and deployed LLM + ML systems (RAG, automated eval tooling, and an opioid-risk forecasting dashboard) by automating data pipelines, integrating public datasets, and shipping interactive apps on Jetstream2 and Google Cloud Run.
-        </p>
-        <p>
-          Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
-        </p>
-        <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div className={styles.links}>
           <a
-            href="https://github.com/rahul-1415"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              backgroundColor: '#fff',
-              color: '#121212',
-              border: 'none',
-              padding: '0.5rem 1.5rem',
-              borderRadius: '15px',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontFamily: '"Gochi Hand", cursive',
-              fontSize: '1.25rem'
-            }}
+            href='https://github.com/rahul-1415'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.link}
           >
             GitHub
           </a>
           <a
-            href="https://www.linkedin.com/in/rahulb1407/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              backgroundColor: '#fff',
-              color: '#121212',
-              border: 'none',
-              padding: '0.5rem 1.5rem',
-              borderRadius: '15px',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontFamily: '"Gochi Hand", cursive',
-              fontSize: '1.25rem'
-            }}
+            href='https://www.linkedin.com/in/rahulb1407/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.link}
           >
             LinkedIn
           </a>
         </div>
-      </section>
-    </>
+      </header>
+
+      {sections.length > 0 && sections.map(({ title, description, images }) => (
+        <article key={title} className={styles.sectionCard}>
+          <h2 className={styles.sectionTitle}>{title}</h2>
+
+          <div className={styles.sectionText}>
+            <RichText content={description?.raw} />
+          </div>
+
+          <div className={styles.imageGrid}>
+            {images.map(image => (
+              <Image
+                className={styles.sectionImage}
+                key={image.id}
+                src={image.url}
+                alt={image.fileName}
+                width={734}
+                height={400}
+              />
+            ))}
+          </div>
+        </article>
+      ))}
+    </section>
   )
 }

@@ -6,140 +6,153 @@ type ProjectModalProps = {
   projects: GetProjectsQuery['projects']
 }
 
-type StaticProject = {
+type ShowcaseProject = {
   title: string
   date: string
   description: string
   points: string[]
   tags: string[]
+  githubUrl?: string
 }
 
-const staticProjects: StaticProject[] = [
+const curatedProjects: ShowcaseProject[] = [
   {
     title: 'Forest Monitoring using Hyperspectral Imaging',
     date: 'Nov 2022 - May 2023',
-    description: 'This project focuses on utilizing hyperspectral imaging for forest terrain monitoring, aiming to provide detailed insights into forest contents and potential risks. It utilizes the Indian Pines dataset, which captures hyperspectral data from a forested area, and employs a hybrid classification method, including Support Vector Machines (SVM), 2D Convolutional Neural Networks (CNN), 3D CNN, M3D-CNN, SSRN, and a Hybrid model for precise forest analysis.',
+    description: 'Applied hyperspectral imaging with hybrid ML architectures to identify vegetation coverage, man-made structures, and terrain-level risk signatures.',
     points: [
-      'Utilized Indian Pines dataset for hyperspectral imaging.',
-      'Employed hybrid classification methods combining SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.',
-      'Provided comprehensive insights including vegetation cover percentage, building presence, and hazard detection.'
+      'Compared SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and hybrid variants.',
+      'Used Indian Pines dataset to benchmark class-level prediction quality.',
+      'Produced interpretable outputs to support hazard identification workflows.'
     ],
-    tags: ['Scikit-Learn', 'Machine Learning', 'TensorFlow', 'Exploratory Data Analysis', 'NumPy', 'Data Science', 'Data Analysis', 'Python', 'Pandas']
+    tags: ['Python', 'Scikit-Learn', 'TensorFlow', 'Data Science']
   },
   {
     title: 'IoT Device Manager using Blockchain',
     date: 'Jan 2023 - May 2023',
-    description: 'This project focuses on establishing a robust and secure framework for the management of IoT devices, underpinned by the principles of data immutability and transparency, all facilitated by the innovative use of blockchain technology.',
+    description: 'Designed a blockchain-backed system for immutable IoT registration, ownership transfer, and lifecycle updates.',
     points: [
-      'Implemented a blockchain-based solution for IoT device management.',
-      'Recorded critical transactions including device registration, management, and ownership transfers.',
-      'Developed a user-friendly web application using ReactJS.'
+      'Built smart-contract driven transaction recording for device events.',
+      'Implemented a React frontend for management and audit workflows.',
+      'Focused on transparent and tamper-resistant ownership history.'
     ],
-    tags: ['MetaMask', 'Truffle Framework', 'Ganache', 'Solidity', 'React.js']
+    tags: ['React.js', 'Solidity', 'Truffle', 'MetaMask']
   },
   {
     title: 'Web Phishing Detection',
     date: 'Aug 2022 - Nov 2022',
-    description: 'The Web Phishing Detection project is a Python-based solution deployed on the IBM Cloud platform, focused on the detection of phishing websites. It incorporates machine learning techniques to enhance accuracy.',
+    description: 'Built and deployed phishing-classification models to IBM Cloud with a usable frontend interface for rapid URL checks.',
     points: [
-      'Trained 10 machine learning models for phishing detection.',
-      'Deployed the highest accuracy model on IBM Cloud.',
-      'Developed a website interface for user interaction with the phishing detection system.'
+      'Trained and compared 10 candidate machine learning models.',
+      'Deployed the top-performing model to production.',
+      'Implemented user-facing workflows for quick threat validation.'
     ],
-    tags: ['Machine Learning', 'Exploratory Data Analysis', 'Data Science', 'Data Analysis', 'Python']
+    tags: ['Python', 'Machine Learning', 'IBM Cloud']
   },
   {
     title: 'Path Navigation using Deep Q Learning',
     date: 'Jan 2022 - Sep 2022',
-    description: 'An application developed using Kivy and PyTorch Framework. The application simulates an autonomous vehicle navigating a map I designed, complete with manually placed obstacles.',
+    description: 'Developed a DQN-based autonomous navigation simulator using custom reward design and obstacle planning.',
     points: [
-      'Used Deep Q Networks (DQNs) with relu activation functions for navigation.',
-      'Designed a reward system to improve obstacle avoidance capabilities.',
-      'Received approval for publication in ADCOM Volume 133.'
+      'Implemented agent training loops with relu-driven network stacks.',
+      'Designed map environments and reward gradients for safer routing.',
+      'Project accepted for publication in ADCOM Volume 133.'
     ],
-    tags: ['Machine Learning', 'NumPy', 'Python']
+    tags: ['PyTorch', 'Reinforcement Learning', 'Python']
   },
   {
     title: 'Tournament Manager',
     date: 'Jul 2021 - Nov 2021',
-    description: 'The Tournament Manager is a Java-based application designed to facilitate the efficient organization of sports tournaments.',
+    description: 'Created a Java + MySQL application to streamline tournament setup, team registration, and participant tracking.',
     points: [
-      'Designed and configured tournaments for different divisions and sports.',
-      'Streamlined team enrollment and player information updates.',
-      'Developed using Java and MySQL.'
+      'Supported multi-division configuration and event scheduling.',
+      'Simplified enrollment and roster management processes.',
+      'Improved operational consistency for recurring competitions.'
     ],
-    tags: ['Java']
+    tags: ['Java', 'MySQL']
   },
   {
     title: 'Harmful Comments Classifier',
     date: 'Jan 2021 - Apr 2021',
-    description: 'The "Harmful Comments Classifier" is a Python-based Natural Language Processing (NLP) project, executed within the Google Colab environment.',
+    description: 'Built an NLP classifier for toxic comment detection with sequence modeling and embedding pipelines.',
     points: [
-      'Developed a deep learning model for classifying comments based on toxicity.',
-      'Utilized embedding techniques, bi-directional LSTM, and dense models.',
-      'Executed within the Google Colab environment.'
+      'Implemented Bi-LSTM and dense layers for comment classification.',
+      'Executed experimentation workflows in Google Colab.',
+      'Focused on robust inference for moderation use cases.'
     ],
-    tags: ['Machine Learning', 'Exploratory Data Analysis', 'Data Science', 'Data Analysis', 'Python']
+    tags: ['Python', 'NLP', 'Deep Learning']
   },
   {
     title: 'EATERIO',
     date: 'Jan 2020 - May 2020',
-    description: '"EATERIO" is a web application built using HTML, CSS, JavaScript, and MongoDB, designed to facilitate food ordering and management within organizations.',
+    description: 'Developed an internal food-ordering platform for organizations with clear ordering, management, and status flows.',
     points: [
-      'Streamlined the food ordering process within organizations.',
-      'Developed using HTML, CSS, JavaScript, and MongoDB.',
-      'Provided a user-friendly interface for placing and managing food orders.'
+      'Built an end-to-end ordering workflow with simple UX.',
+      'Connected frontend components with MongoDB-backed storage.',
+      'Delivered a lightweight dashboard for order operations.'
     ],
     tags: ['HTML', 'CSS', 'JavaScript', 'MongoDB']
   }
 ]
 
 export const ProjectModal = ({ projects }: ProjectModalProps) => {
+  const liveProjects: ShowcaseProject[] = projects.map(project => ({
+    title: project.title,
+    date: 'Featured Build',
+    description: project.description || 'Detailed project context is available in the linked repository.',
+    points: ['Click GitHub to inspect architecture, implementation details, and usage notes.'],
+    tags: project.stack || [],
+    githubUrl: project.githubUrl || undefined
+  }))
+
+  const combinedProjects = [...liveProjects, ...curatedProjects]
+
   return (
     <section className={styles.projects__container}>
-      {projects.length > 0 && projects.map((project, index) => (
-        <article key={project.slug || index} className={styles.project__container}>
-          <div className={styles.project__header}>
-            <h2 className={styles.project__title}>{project.title}</h2>
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.project__link}
-              >
-                GitHub
-              </a>
-            )}
-          </div>
-          {project.description && (
-            <p className={styles.project__description}>{project.description}</p>
-          )}
-          {project.stack && project.stack.length > 0 && (
-            <Tags tags={project.stack} />
-          )}
-        </article>
-      ))}
+      <header className={styles.projects__header}>
+        <p className={styles.eyebrow}>Project Archive</p>
+        <h1 className={styles.title}>Builds and Experiments</h1>
+        <p className={styles.subtitle}>
+          A mix of production-oriented engineering work and research-heavy prototypes.
+        </p>
+      </header>
 
-      {staticProjects.map((project, index) => (
-        <article key={`static-${index}`} className={styles.project__container}>
-          <div className={styles.project__header}>
-            <h2 className={styles.project__title}>{project.title}</h2>
-            <p className={styles.project__date}>{project.date}</p>
-          </div>
-          <p className={styles.project__description}>{project.description}</p>
-          <ul className={styles.project__points}>
-            {project.points.map((point, pointIndex) => (
-              <li key={pointIndex}>{point}</li>
-            ))}
-          </ul>
-          <div className={styles.project__tags}>
-            {project.tags.map((tag, tagIndex) => (
-              <span key={tagIndex} className={styles.project__tag}>{tag}</span>
-            ))}
-          </div>
-        </article>
-      ))}
+      <div className={styles.projects__grid}>
+        {combinedProjects.map((project, index) => (
+          <article key={`${project.title}-${index}`} className={styles.project__container}>
+            <div className={styles.project__headerRow}>
+              <div>
+                <p className={styles.project__index}>#{String(index + 1).padStart(2, '0')}</p>
+                <h2 className={styles.project__title}>{project.title}</h2>
+              </div>
+
+              <div className={styles.project__meta}>
+                <p className={styles.project__date}>{project.date}</p>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={styles.project__link}
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <p className={styles.project__description}>{project.description}</p>
+
+            <ul className={styles.project__points}>
+              {project.points.map(point => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+
+            {project.tags.length > 0 && <Tags tags={project.tags} />}
+          </article>
+        ))}
+      </div>
     </section>
   )
 }

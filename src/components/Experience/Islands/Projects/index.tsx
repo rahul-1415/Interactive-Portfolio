@@ -1,40 +1,23 @@
-import { useState } from 'react'
-import { GenericModal } from '@App/components/GenericModal'
-import { useGetProjectsLazyQuery } from '@App/core/graphql/queries.generated'
-import { ProjectModal } from './ProjectModal'
 import { GenericIsland } from '../components/GenericIsland'
+import { IslandMeta, islandById } from '../islandRegistry'
 
-export const Projects = () => {
-  const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false)
-  const [getProjects, { data, loading }] = useGetProjectsLazyQuery()
+type ProjectsProps = {
+  onIslandHover?: (island: IslandMeta) => void
+  onIslandBlur?: () => void
+  onIslandClick: () => void
+}
 
-  const handleOpenModal = () => {
-    setIsProjectsModalOpen(true)
-    getProjects()
-  }
-
-  const handleCloseModal = () => {
-    setIsProjectsModalOpen(false)
-  }
-
+export const Projects = ({ onIslandHover, onIslandBlur, onIslandClick }: ProjectsProps) => {
   return (
-    <>
-      <GenericIsland
-        title='Projects'
-        objectUrl='/assets/goingMerry/scene.gltf'
-        islandNumber={2}
-        position={[-30, 0, -40]}
-        rotationY={Math.PI / 4}
-        objectScale={1.5}
-        onClickObject={handleOpenModal}
-      />
-      <GenericModal
-        isOpen={isProjectsModalOpen}
-        onCloseModal={handleCloseModal}
-        isLoading={loading}
-      >
-        <ProjectModal projects={data?.projects || []} />
-      </GenericModal>
-    </>
+    <GenericIsland
+      island={islandById.projects}
+      objectUrl='/assets/goingMerry/scene.gltf'
+      islandNumber={2}
+      rotationY={Math.PI / 4}
+      objectScale={1.5}
+      onClickObject={onIslandClick}
+      onHoverIsland={onIslandHover}
+      onBlurIsland={onIslandBlur}
+    />
   )
 }

@@ -7,15 +7,17 @@ const SplashScreen = () => {
 
   return (
     <Html center className={styles.loading__container}>
-
       <Spinner />
 
-      <h1>Loading supplies...</h1>
+      <div className={styles.loading__textBlock}>
+        <h1 className={styles.loading__title}>Charting the waters...</h1>
+        <p className={styles.loading__subtitle}>Loading world assets and interaction systems</p>
+      </div>
 
       <span className={styles.percentage}>
         {Math.floor(progress)}%
       </span>
-     </Html>
+    </Html>
   )
 }
 
