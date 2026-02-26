@@ -1,22 +1,25 @@
 import { GenericIsland } from '../components/GenericIsland'
 import { IslandMeta, islandById } from '../islandRegistry'
 
-type ContactProps = {
+type CertificationProps = {
   onIslandHover?: (island: IslandMeta) => void
   onIslandBlur?: () => void
   onIslandClick: () => void
 }
 
-export const Contact = ({ onIslandHover, onIslandBlur, onIslandClick }: ContactProps) => {
+export const Certification = ({
+  onIslandHover,
+  onIslandBlur,
+  onIslandClick
+}: CertificationProps) => {
   return (
     <GenericIsland
-      island={islandById.contact}
-      objectUrl='/assets/moby_dick_shirohige_one_piece/scene.gltf'
-      islandNumber={1}
-      rotationY={Math.PI}
-      objectScale={2.85}
+      island={islandById.certification}
+      objectUrl='/assets/one_piece_straw_hat_2_years/scene.gltf'
+      islandNumber={2}
+      rotationY={-Math.PI / 8}
+      objectScale={1}
       onClickObject={onIslandClick}
-      colliders='trimesh'
       onHoverIsland={onIslandHover}
       onBlurIsland={onIslandBlur}
     />

@@ -1,7 +1,7 @@
 .contact__container {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
 }
 
 .contact__header {
@@ -21,19 +21,31 @@
 }
 
 .contact__title {
-  margin: 0.35rem 0 0 0;
+  margin: 0.35rem 0 0;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 0.95;
   font-family: var(--font-display);
 }
 
 .contact__subtitle {
-  margin: 0.65rem 0 0 0;
+  margin: 0.65rem 0 0;
   font-size: 0.95rem;
   line-height: 1.45;
   color: rgba(245, 239, 226, 0.88);
   font-family: var(--font-body);
   max-width: 70ch;
+}
+
+.contact__warning {
+  margin: 0;
+  border: 1px solid rgba(255, 191, 107, 0.42);
+  border-radius: 10px;
+  background: rgba(255, 176, 84, 0.14);
+  color: #ffe6c8;
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .contact__form {
@@ -85,23 +97,50 @@
   resize: vertical;
 }
 
-.contact__button {
-  align-self: flex-start;
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.contact__button,
+.contact__fallbackButton {
+  text-decoration: none;
   padding: 0.6rem 1rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 215, 171, 0.4);
-  background: rgba(255, 178, 92, 0.2);
   color: #ffe9ce;
-  cursor: pointer;
   font-family: var(--font-accent);
   letter-spacing: 0.04rem;
-  font-size: 0.92rem;
-  transition: transform 0.12s ease, background-color 0.2s ease;
+  font-size: 0.9rem;
+  transition: transform 0.12s ease, background-color 0.2s ease, opacity 0.2s ease;
 }
 
-.contact__button:hover {
+.contact__button {
+  background: rgba(255, 178, 92, 0.2);
+  cursor: pointer;
+}
+
+.contact__fallbackButton {
+  background: rgba(137, 178, 255, 0.18);
+}
+
+.contact__button:hover,
+.contact__fallbackButton:hover {
   transform: translateY(-1px);
-  background: rgba(255, 178, 92, 0.3);
+}
+
+.contact__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.contact__status {
+  margin: 0;
+  min-height: 1.2em;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(245, 239, 226, 0.86);
 }
 
 .contact__info {

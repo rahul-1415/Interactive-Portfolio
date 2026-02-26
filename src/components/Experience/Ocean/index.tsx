@@ -19,6 +19,8 @@ type OceanUniforms = {
   uColorStart: THREE.Color
   uColorMid: THREE.Color
   uColorEnd: THREE.Color
+  uSunDirection: THREE.Vector3
+  uSunColor: THREE.Color
 }
 
 type OceanQualityProfile = {
@@ -57,7 +59,9 @@ const oceanMaterialDefaults: OceanUniforms = {
   uHighlightStrength: defaultQuality.highlightStrength,
   uColorStart: new THREE.Color(experienceStyleConfig.water.colorStart),
   uColorMid: new THREE.Color(experienceStyleConfig.water.colorMid),
-  uColorEnd: new THREE.Color(experienceStyleConfig.water.colorEnd)
+  uColorEnd: new THREE.Color(experienceStyleConfig.water.colorEnd),
+  uSunDirection: new THREE.Vector3(130, 40, -110).normalize(),
+  uSunColor: new THREE.Color('#ffd6a6')
 }
 
 const OceanMaterial = shaderMaterial(

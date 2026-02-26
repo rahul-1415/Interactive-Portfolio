@@ -1,11 +1,11 @@
 .layout {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .hero {
-  padding: 1.3rem;
+  padding: 1.2rem;
   border: 1px solid rgba(255, 224, 188, 0.24);
   border-radius: 16px;
   background: linear-gradient(145deg, rgba(23, 38, 62, 0.78), rgba(8, 15, 28, 0.9));
@@ -21,37 +21,25 @@
 }
 
 .title {
-  margin: 0.35rem 0 0 0;
+  margin: 0.35rem 0 0;
   font-size: clamp(2.2rem, 6vw, 3.8rem);
   line-height: 0.95;
   letter-spacing: 0.05rem;
   font-family: var(--font-display);
 }
 
-.intro {
-  margin: 0.8rem 0 0 0;
-  font-family: var(--font-body);
-  line-height: 1.55;
-  max-width: 70ch;
-  color: rgba(250, 244, 233, 0.94);
-}
-
-.highlights {
-  margin: 1rem 0 0 0;
-  padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  font-family: var(--font-body);
-  line-height: 1.45;
-  color: rgba(250, 244, 233, 0.94);
+.role {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-accent);
+  color: rgba(255, 226, 190, 0.92);
+  letter-spacing: 0.04rem;
 }
 
 .links {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: 0.6rem;
 }
 
 .link {
@@ -71,48 +59,90 @@
   background: rgba(255, 179, 99, 0.26);
 }
 
-.sectionCard {
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 1fr);
+  gap: 0.95rem;
+}
+
+.textColumn {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  padding: 1.15rem;
-  border-radius: 14px;
+  gap: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 1rem;
   background: rgba(8, 14, 25, 0.55);
 }
 
-.sectionTitle {
+.intro {
   margin: 0;
-  font-family: var(--font-accent);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  letter-spacing: 0.02rem;
-  color: #ffdeba;
-}
-
-.sectionText {
   font-family: var(--font-body);
-  line-height: 1.6;
-  color: rgba(245, 239, 227, 0.93);
+  line-height: 1.55;
+  color: rgba(250, 244, 233, 0.94);
 }
 
-.sectionText p,
-.sectionText ul,
-.sectionText ol {
-  margin-bottom: 0.65rem;
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.sectionText a {
-  color: #a3d0ff;
-}
-
-.imageGrid {
+.statsGrid {
   display: grid;
-  gap: 0.7rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
 }
 
-.sectionImage {
+.stat {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(8, 14, 25, 0.55);
+  padding: 0.7rem;
+}
+
+.statLabel {
+  margin: 0;
+  font-size: 0.72rem;
+  color: rgba(223, 228, 239, 0.72);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+.statValue {
+  margin: 0.3rem 0 0;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  color: #ffcd91;
+  font-family: var(--font-accent);
+  font-weight: 600;
+}
+
+.profileCard {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(8, 14, 25, 0.55);
+  padding: 0.5rem;
+}
+
+.profileShell {
   width: 100%;
-  height: auto;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 184, 107, 0.12);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+@media (max-width: 960px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
 }

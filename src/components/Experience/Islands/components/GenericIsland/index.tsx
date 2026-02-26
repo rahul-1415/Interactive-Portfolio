@@ -1,7 +1,7 @@
 import { Float, Text, useGLTF } from '@react-three/drei'
 import { Object3DProps, useFrame } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { BufferGeometry, DoubleSide, Material, Mesh, MeshBasicMaterial } from 'three'
 import { normalizeIslandMaterials } from '../../../utils/normalizeIslandMaterials'
 import { IslandMeta } from '../../islandRegistry'
@@ -43,6 +43,7 @@ export const GenericIsland = ({
   const hasNormalizedMaterials = useRef(false)
 
   const object = useGLTF(objectUrl)
+  const objectScene = useMemo(() => object.scene.clone(true), [object.scene])
   const islandModel = useGLTF(`/assets/islands/island-${islandNumber}.glb`)
   const { nodes } = islandModel
   const islandNode = (nodes as { island?: { children: Array<{ id: number } & Geometry> } }).island
@@ -56,11 +57,11 @@ export const GenericIsland = ({
   useEffect(() => {
     if (hasNormalizedMaterials.current) return
 
-    normalizeIslandMaterials(object.scene, { category: 'prop' })
+    normalizeIslandMaterials(objectScene, { category: 'prop' })
     normalizeIslandMaterials(islandModel.scene, { category: 'land' })
 
     hasNormalizedMaterials.current = true
-  }, [object.scene, islandModel.scene])
+  }, [objectScene, islandModel.scene])
 
   useFrame((state) => {
     if (!beaconRef.current || !beaconMaterialRef.current) return
@@ -135,7 +136,7 @@ export const GenericIsland = ({
         <primitive
           rotation-y={rotationY}
           scale={resolvedObjectScale}
-          object={object.scene}
+          object={objectScene}
           onPointerEnter={handlePointerEnter}
           onPointerLeave={handlePointerLeave}
           onClick={onClickObject}
