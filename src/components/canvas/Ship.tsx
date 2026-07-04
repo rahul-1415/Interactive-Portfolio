@@ -14,7 +14,7 @@ const MAX_SPEED = 14
 const REVERSE_SPEED = -4
 const ACCEL_DAMP = 0.8
 const TURN_RATE = 0.9
-const WATERLINE = -1.2
+const WATERLINE = -1.0
 
 export function Ship() {
   const groupRef = useRef<THREE.Group>(null)

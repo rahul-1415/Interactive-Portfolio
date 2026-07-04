@@ -4,8 +4,8 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useShipStore } from '@/stores/ship'
 
-const BACK = 16
-const HEIGHT = 7.5
+const BACK = 17
+const HEIGHT = 9
 const LOOK_AHEAD = 6
 const LAMBDA = 3
 
