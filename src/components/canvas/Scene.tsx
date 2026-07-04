@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { PerformanceMonitor } from '@react-three/drei'
+import { useWorldStore } from '@/stores/world'
 import { Ocean } from './Ocean'
 import { Ship } from './Ship'
 import { Islands } from './Islands'
@@ -14,15 +15,21 @@ const isMobile = typeof window !== 'undefined' && window.matchMedia?.('(max-widt
 
 export default function Scene() {
   // Adaptive resolution: start modest, let PerformanceMonitor raise/lower the
-  // pixel ratio with built-in hysteresis. frameloop stays 'always' so the
-  // simulation never freezes (reduced-motion users are served the /log page).
+  // pixel ratio with built-in hysteresis.
   const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
+
+  // The render loop stays idle behind the "Set Sail" gate — no point burning the
+  // main thread animating a scene the loading overlay is covering. It flips to
+  // 'always' once the voyage begins. This keeps the pre-sail page cheap (big
+  // Lighthouse/TTI win) without affecting the live experience.
+  const voyageStarted = useWorldStore((s) => s.voyageStarted)
 
   return (
     <div className="scene-root">
       <Canvas
         camera={{ position: [0, 8, -18], fov: 50, near: 0.1, far: 700 }}
         dpr={dpr}
+        frameloop={voyageStarted ? 'always' : 'demand'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}
       >
         <PerformanceMonitor
