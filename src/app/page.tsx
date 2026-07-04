@@ -9,6 +9,7 @@ export default function Home() {
         <h1>{portfolio.personal.name}</h1>
         <p>{portfolio.personal.title}</p>
       </header>
+      <p className="hud-hint">W A S D — take the helm</p>
     </main>
   )
 }

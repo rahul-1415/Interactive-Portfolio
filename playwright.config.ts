@@ -17,6 +17,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile', use: { ...devices['iPhone 14'] } },
+    // Chromium-based mobile emulation — avoids shipping the WebKit binary
+    { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
 })

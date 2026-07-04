@@ -30,16 +30,24 @@
 
 **Phase 0 complete (2026-07-04).**
 
-### Phase 1 — The Ocean & The Ship
+### Phase 1 — The Ocean & The Ship ⏳ core complete
 
-- [ ] GPU Gerstner-wave stylized ocean shader (anime water, not realistic) — replaces placeholder
-- [ ] Sky/lighting pass: HDRI or drei Sky tuned for saturated One Piece daylight
-- [ ] Postprocessing stack: tone mapping, selective bloom, vignette
-- [ ] Ship: optimized Going Merry (gltf-transform compress 21MB → target <2MB) riding the waves
-      (kinematic — samples the same wave function as the shader; bob/pitch/roll)
-- [ ] Helm controls: WASD/arrows + touch joystick; inertia + turn easing
-- [ ] Camera rig: follow-cam with easing, framing tuned per viewport
-- [ ] Perf gate: 60fps desktop / 30fps+ mobile-sim, no console errors
+- [x] GPU Gerstner toon ocean: world-space waves generated from one TS config
+      (`src/lib/waves.ts`), posterized 5-band ramp, noise-broken crest foam, banded sun
+      glint, manual fog — GLSL is _generated from_ the same constants the CPU samples
+- [x] Anime gradient SkyDome (custom shader — drei physical Sky was hazy white, rejected)
+- [x] Postprocessing: Bloom (threshold 1.1, mipmap), Vignette, SMAA; antialias/stencil off
+- [x] Going Merry compressed 22.3MB → 546KB (meshopt + webp 1024); deterministic
+      normalization from measured bbox (length axis = X, origin at keel)
+- [x] Kinematic sailing: throttle inertia, speed-scaled rudder authority, bob/pitch/roll
+      from 4-point wave sampling; blob shadow grounds the hull
+- [x] Damped follow camera (never parented), look-ahead framing
+- [x] Perf gate: **60.3fps** desktop, zero console errors
+- [ ] Wake/hull foam + sail wind shader (polish pass, later)
+- [ ] Touch controls (Phase 3, mobile is tap-to-sail per DESIGN.md)
+
+Fleet compressed & staged in `public/models/`: thousand-sunny 729KB, moby-dick 537KB,
+islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 
 ### Phase 2 — Islands & Content
 

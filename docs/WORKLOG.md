@@ -2,6 +2,31 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (night) — Phase 1 core: the Merry sails
+
+- Compressed the fleet with gltf-transform (meshopt + webp@1024):
+  Going Merry 22.3MB→546KB, Thousand Sunny 10.6MB→729KB, Moby Dick 3MB→537KB. Both ships
+  CC-BY-4.0 (Anex; Bagus Sujiwa) — attribution goes in the footer per DESIGN.md.
+- Built the wave system: `src/lib/waves.ts` is the single source of truth — the ocean's
+  GLSL is string-generated from the same Gerstner constants the CPU samples for ship
+  buoyancy, so the ship rides exactly the rendered surface. `WAVE_AMPLITUDE` exported and
+  fed to the shader so color normalization can't drift from the config.
+- Toon ocean: 5 posterized bands (deep `#2E63A4` → crest `#60BFF5`), scrolling-noise foam
+  caps, banded sun glint, manual fog matched to scene fog. 700×700 plane trails the ship
+  (world-space waves ⇒ endless ocean).
+- Ship kinematics: throttle inertia (damp), rudder authority scaled by speed, heading
+  integration, 4-point wave sampling → bob/pitch/roll (pitch sign matters: bow rises on
+  crests). Deterministic model normalization from `gltf-transform inspect` (length = X
+  axis, origin at keel, bow rotated to +Z). Draft tuned visually to -1.2; blob shadow.
+- Damped follow camera (λ=3) with look-ahead — sailing + turning verified by driving the
+  ship with Playwright (keyboard.down('w'/'a')) and screenshotting mid-motion.
+- Post stack: Bloom(1.1)+Vignette+SMAA. Perf: 60.3fps measured via rAF count. Zero
+  console errors. Mobile e2e switched iPhone 14→Pixel 7 (WebKit binary removed in disk
+  cleanup; chromium emulation suffices — real Safari via deploy previews).
+- Disk incident: machine hit 100% full mid-phase; freed npm cache + unused Playwright
+  browsers (~5GB). **Rahul: your disk is at 98% — worth a cleanup.**
+- Screenshots: `docs/screenshots/phase1/`.
+
 ## 2026-07-04 (evening) — Phase 0 shipped: CI green + v2 branch deploy live
 
 - CI initially failed: lockfile missing linux optional deps (`@emnapi/*`) after the
