@@ -10,13 +10,12 @@ import { FollowCamera } from './FollowCamera'
 import { SkyDome } from './SkyDome'
 import { Effects } from './Effects'
 
-const prefersReducedMotion =
-  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-
 const isMobile = typeof window !== 'undefined' && window.matchMedia?.('(max-width: 820px)').matches
 
 export default function Scene() {
-  // Adaptive DPR: start modest, let PerformanceMonitor raise/lower with hysteresis.
+  // Adaptive resolution: start modest, let PerformanceMonitor raise/lower the
+  // pixel ratio with built-in hysteresis. frameloop stays 'always' so the
+  // simulation never freezes (reduced-motion users are served the /log page).
   const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
 
   return (
@@ -24,7 +23,6 @@ export default function Scene() {
       <Canvas
         camera={{ position: [0, 8, -18], fov: 50, near: 0.1, far: 700 }}
         dpr={dpr}
-        frameloop={prefersReducedMotion ? 'demand' : 'always'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}
       >
         <PerformanceMonitor
@@ -41,7 +39,7 @@ export default function Scene() {
           <Islands />
         </Suspense>
         <FollowCamera />
-        {!isMobile && <Effects />}
+        <Effects mobile={isMobile} />
       </Canvas>
     </div>
   )

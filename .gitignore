@@ -45,3 +45,6 @@ yarn-error.log*
 **/*.tgz
 **/*.bun
 .playwright-mcp/
+
+# Claude local settings
+.claude/settings.local.json

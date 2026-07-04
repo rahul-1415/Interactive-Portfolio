@@ -22,6 +22,20 @@ export const metadata: Metadata = {
     url: 'https://rahulbabu.netlify.app',
     siteName: 'Rahul Babu — Interactive Portfolio',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'The Grand Log — Rahul Babu, Software Engineer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rahul Babu — Software Engineer',
+    description: 'An interactive One Piece-inspired 3D portfolio. Sail the Grand Line.',
+    images: ['/og-image.png'],
   },
 }
 

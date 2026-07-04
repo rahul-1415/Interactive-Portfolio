@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__threejs-devtools-mcp__run_js",
+      "mcp__threejs-devtools-mcp__take_screenshot",
+      "mcp__threejs-devtools-mcp__raycast"
+    ]
+  }
+}

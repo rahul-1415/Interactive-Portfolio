@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { getShipAttitude } from '@/lib/waves'
+import { normalizeModel } from '@/lib/normalizeModel'
 import { useShipStore } from '@/stores/ship'
 import { useWorldStore } from '@/stores/world'
 import { useTouchInput } from '@/stores/input'
@@ -18,26 +19,19 @@ const REVERSE_SPEED = -4
 const ACCEL_DAMP = 0.8
 const TURN_RATE = 0.9
 const WATERLINE = -1.0
+const WORLD_RADIUS = 250
 
 export function Ship() {
   const groupRef = useRef<THREE.Group>(null)
   const shadowRef = useRef<THREE.Mesh>(null)
   const { scene } = useGLTF(MODEL_URL)
 
-  // Normalize the source model deterministically: hull length runs along the
-  // model's X axis and its origin sits at the keel (measured via gltf-transform
-  // inspect). Rotate so the bow faces +Z, center horizontally, keel at y=0.
+  // Normalize hull length along the model's X axis, then rotate so the bow
+  // faces +Z. Shared normalizer keeps this identical to the island models.
   const model = useMemo(() => {
-    const clone = scene.clone(true)
-    const box = new THREE.Box3().setFromObject(clone)
-    const size = box.getSize(new THREE.Vector3())
-    const center = box.getCenter(new THREE.Vector3())
-    const inner = new THREE.Group()
-    inner.add(clone)
-    clone.position.set(-center.x, -box.min.y, -center.z)
-    inner.scale.setScalar(TARGET_LENGTH / size.x)
-    inner.rotation.y = Math.PI / 2
-    return inner
+    const group = normalizeModel(scene, TARGET_LENGTH, { axis: 'x' })
+    group.rotation.y = Math.PI / 2
+    return group
   }, [scene])
 
   useEffect(() => bindKeys(), [])
@@ -50,13 +44,14 @@ export function Ship() {
     const delta = Math.min(rawDelta, 1 / 30)
     const time = clock.getElapsedTime()
     const store = useShipStore.getState()
+    const world = useWorldStore.getState()
 
-    // Helm is locked while docked; the ship coasts to a stop
-    const docked = useWorldStore.getState().docked !== null
+    // The helm is dead until the voyage begins and while docked; the ship coasts.
+    const locked = !world.voyageStarted || world.docked !== null
     const touch = useTouchInput.getState()
 
     // Throttle with inertia — keyboard or on-screen throttle
-    const throttleTarget = docked
+    const throttleTarget = locked
       ? 0
       : isDown('KeyW', 'ArrowUp')
         ? MAX_SPEED
@@ -65,10 +60,10 @@ export function Ship() {
           : touch.throttle * MAX_SPEED
     const speed = THREE.MathUtils.damp(store.speed, throttleTarget, ACCEL_DAMP, delta)
 
-    // Rudder authority scales with speed so the ship can't spin in place
+    // Rudder authority scales with speed (0 at rest) so the ship never spins in place.
     const keyRudder = (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
-    const rudder = docked ? 0 : keyRudder !== 0 ? keyRudder : -touch.steer
-    const authority = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0.15, 1)
+    const rudder = locked ? 0 : keyRudder !== 0 ? keyRudder : -touch.steer
+    const authority = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 1)
     state.current.angularVelocity = THREE.MathUtils.damp(
       state.current.angularVelocity,
       rudder * TURN_RATE * authority * Math.sign(speed || 1),
@@ -81,8 +76,10 @@ export function Ship() {
     let px = store.position.x + Math.sin(heading) * speed * delta
     let pz = store.position.z + Math.cos(heading) * speed * delta
 
-    // Soft collision: islands push the hull back out along the contact normal
+    // Soft collision: solid islands push the hull back out along the contact
+    // normal. Floating landmarks (landRadius 0) have no waterline mass to hit.
     for (const island of ISLANDS) {
+      if (island.landRadius <= 0) continue
       const dx = px - island.position[0]
       const dz = pz - island.position[1]
       const dist = Math.hypot(dx, dz)
@@ -91,6 +88,13 @@ export function Ship() {
         px = island.position[0] + (dx / dist) * minDist
         pz = island.position[1] + (dz / dist) * minDist
       }
+    }
+
+    // Keep the ship within the charted world
+    const fromCenter = Math.hypot(px, pz)
+    if (fromCenter > WORLD_RADIUS) {
+      px = (px / fromCenter) * WORLD_RADIUS
+      pz = (pz / fromCenter) * WORLD_RADIUS
     }
 
     // Ride the same waves the shader renders

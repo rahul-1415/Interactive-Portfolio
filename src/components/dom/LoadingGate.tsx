@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useProgress } from '@react-three/drei'
+import { useWorldStore } from '@/stores/world'
 
 /**
  * Chart-loader gate (DESIGN.md §3): real asset progress, then an explicit
@@ -51,6 +52,7 @@ export function LoadingGate() {
         <button
           className="set-sail-btn"
           onClick={() => {
+            useWorldStore.getState().startVoyage()
             setFading(true)
             setTimeout(() => setGone(true), 700)
           }}

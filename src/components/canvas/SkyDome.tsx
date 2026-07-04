@@ -1,13 +1,15 @@
 'use client'
 
 import * as THREE from 'three'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { useShipStore } from '@/stores/ship'
 
 const vertexShader = /* glsl */ `
   varying vec3 vWorldDirection;
   void main() {
     vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-    vWorldDirection = normalize(worldPosition.xyz);
+    vWorldDirection = normalize(worldPosition.xyz - cameraPosition);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `
@@ -25,8 +27,13 @@ const fragmentShader = /* glsl */ `
   }
 `
 
-/** Flat, saturated anime sky gradient — One Piece blue, not physical haze. */
+/**
+ * Flat, saturated anime sky gradient — One Piece blue, not physical haze.
+ * Recenters on the ship each frame so the dome is effectively infinite; the
+ * player can never sail out of it.
+ */
 export function SkyDome() {
+  const ref = useRef<THREE.Mesh>(null)
   const uniforms = useMemo(
     () => ({
       uZenith: { value: new THREE.Color('#3D9BE9') },
@@ -35,8 +42,13 @@ export function SkyDome() {
     []
   )
 
+  useFrame(() => {
+    const ship = useShipStore.getState().position
+    ref.current?.position.set(ship.x, 0, ship.z)
+  })
+
   return (
-    <mesh>
+    <mesh ref={ref} frustumCulled={false}>
       <sphereGeometry args={[320, 32, 16]} />
       <shaderMaterial
         side={THREE.BackSide}

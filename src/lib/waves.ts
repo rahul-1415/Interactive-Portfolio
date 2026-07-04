@@ -3,7 +3,10 @@ import * as THREE from 'three'
 /**
  * Single source of truth for the ocean's Gerstner waves.
  * The GPU vertex shader (Ocean) and CPU sampling (Ship buoyancy) both derive
- * from WAVES, so the ship rides exactly the surface the player sees.
+ * from WAVES and evaluate each wave's phase at the same original position, so
+ * the vertical wave field matches. (The GPU additionally pinches crests
+ * horizontally; the CPU sampler omits that sub-unit lateral shift, which is
+ * imperceptible for buoyancy.)
  */
 export interface GerstnerWave {
   /** Normalized horizontal direction the wave travels. */
@@ -89,7 +92,9 @@ export function wavesGLSL(): string {
     return `
   {
     vec2 d = vec2(${(dx / len).toFixed(6)}, ${(dz / len).toFixed(6)});
-    float f = ${k.toFixed(6)} * (dot(d, p.xz) - ${c.toFixed(6)} * uTime);
+    // Phase from the ORIGINAL position p0, matching the CPU sampler so the
+    // vertical wave field is identical on GPU and CPU.
+    float f = ${k.toFixed(6)} * (dot(d, p0.xz) - ${c.toFixed(6)} * uTime);
     float cf = cos(f);
     float sf = sin(f);
     p.x += d.x * ${a.toFixed(6)} * cf;
@@ -102,6 +107,7 @@ export function wavesGLSL(): string {
 
   return /* glsl */ `
 vec3 gerstner(vec3 p, out vec3 normal) {
+  vec3 p0 = p;
   vec3 tangent = vec3(1.0, 0.0, 0.0);
   vec3 binormal = vec3(0.0, 0.0, 1.0);
   ${body}

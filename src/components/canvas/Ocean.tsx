@@ -66,10 +66,11 @@ void main() {
   float tq = floor(t * bands) / (bands - 1.0);
   vec3 color = mix(uDeep, uCrest, tq * 0.72);
 
-  // Banded sun glint
+  // Banded sun glint (re-normalize the interpolated normal)
+  vec3 nrm = normalize(vNormal);
   vec3 viewDir = normalize(vWorldPos - cameraPosition);
   vec3 sunDir = normalize(vec3(0.45, 0.7, -0.35));
-  float spec = pow(max(dot(reflect(viewDir, vNormal), sunDir), 0.0), 90.0);
+  float spec = pow(max(dot(reflect(viewDir, nrm), sunDir), 0.0), 90.0);
   color += vec3(1.0, 0.96, 0.82) * step(0.55, spec) * 0.28;
 
   // Crest foam, broken up by scrolling noise

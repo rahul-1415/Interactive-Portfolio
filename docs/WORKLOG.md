@@ -2,6 +2,38 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (Phase 4) — code review, camera fix, OG image, polish
+
+- Ran a high-effort multi-agent code review (26 agents, ~804k tokens, 6 finder angles →
+  verify → sweep) → 15 confirmed findings. Fixed all material ones:
+  - **Camera framing** (the big one): at rest the follow-cam stared straight into the
+    Going Merry's square mainsail, rendering a dark, enclosed frame that looked (falsely)
+    like a color/tone-mapping bug. Diagnosed via three.js devtools MCP (renderer state,
+    raycast, bbox) + sailing screenshot proving the scene was actually bright. Root cause:
+    dead-astern chase cam on a square-rigger. Fix: 3/4 offset (behind + to the side +
+    above) so the sail goes edge-on and the ocean fills the frame. Now a gorgeous hero shot.
+  - Reduced-motion `frameloop='demand'` froze the whole sim → removed (kept 'always';
+    motion-averse users get /log).
+  - TouchHelm `aria-hidden` hid the only touch controls from screen readers → removed,
+    added aria-labels; dropped dead `held` ref.
+  - Gerstner GPU shader evaluated successive waves at the already-displaced position while
+    the CPU used the original → GPU now evaluates every wave at the original position, so
+    CPU/GPU vertical fields match; softened the "rides exactly" comment.
+  - Ocean specular used a denormalized interpolated normal → `normalize(vNormal)`.
+  - SkyDome fixed at origin (ship could sail out of it) → recenters on the ship; added a
+    250-unit world boundary in Ship.
+  - Rudder authority floor 0.15 let the ship spin in place at rest → floor 0.
+  - Press Balloon (floating) had an invisible waterline collision wall → landRadius 0,
+    collision skips floating islands.
+  - Input ran before "Set Sail" → world store `voyageStarted` gates the helm.
+  - Duplicated GLTF normalize (Ship/Islands/landmarks) → shared `src/lib/normalizeModel.ts`.
+  - Deleted unused straw-hat.glb from the deploy bundle.
+- OG/Twitter card: authored a branded 1200×630 "The Grand Log" image (public/og-image.png),
+  wired into layout metadata.
+- Committed `.claude/settings.json` (shared tool allowlist); gitignored settings.local.json.
+- Verified: full sail→dock→modal→escape, input gating, 60fps, zero console errors,
+  typecheck/lint/6 unit/6 e2e all green.
+
 ## 2026-07-04 (later still) — Phase 3: loading gate, fallback, 404, contact, touch, adaptive
 
 - **Loading gate** ("The Grand Log"): drei useProgress with interval-polled readiness +

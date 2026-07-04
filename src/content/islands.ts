@@ -60,7 +60,8 @@ export const ISLANDS: IslandDef[] = [
     tagline: 'Hot off the wing',
     position: [94, 108],
     dockRadius: 32,
-    landRadius: 12,
+    // Floats in the air — no landmass at the waterline, so no hull collision.
+    landRadius: 0,
     accent: '#C63D2F',
   },
   {

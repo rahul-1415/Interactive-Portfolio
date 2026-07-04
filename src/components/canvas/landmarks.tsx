@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
+import { normalizeModel } from '@/lib/normalizeModel'
 import type { SectionId } from '@/content/islands'
 
 /*
@@ -14,17 +14,7 @@ import type { SectionId } from '@/content/islands'
 
 function useNormalizedGLTF(url: string, targetLength: number) {
   const { scene } = useGLTF(url)
-  return useMemo(() => {
-    const clone = scene.clone(true)
-    const box = new THREE.Box3().setFromObject(clone)
-    const size = box.getSize(new THREE.Vector3())
-    const center = box.getCenter(new THREE.Vector3())
-    const inner = new THREE.Group()
-    inner.add(clone)
-    clone.position.set(-center.x, -box.min.y, -center.z)
-    inner.scale.setScalar(targetLength / Math.max(size.x, size.z))
-    return inner
-  }, [scene, targetLength])
+  return useMemo(() => normalizeModel(scene, targetLength), [scene, targetLength])
 }
 
 function FloatingGalley() {
