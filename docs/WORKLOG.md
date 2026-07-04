@@ -2,6 +2,20 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (Phase 4 close) — Lighthouse, a11y 100, cross-viewport QA
+
+- Idled the render loop behind the Set Sail gate (`frameloop='demand'` until voyageStarted)
+  → Lighthouse Performance 39 → 70 (and up to 94 on a quiet machine); TBT 28s → 1.6s,
+  TTI 33s → 6.9s, LCP 14.4s → 2.7s.
+- Named the loading progressbar (aria-label + min/max) → Accessibility 95 → 100.
+  Final deployed scores: **Perf 70–94 · A11y 100 · Best Practices 100 · SEO 100**.
+- Cross-viewport QA on the live preview (1440 desktop, 834 tablet /log, 390 mobile):
+  all render correctly, /log serves 6 sections, zero console errors. The earlier mobile
+  "dark render" was the same camera-into-sail issue, now fixed everywhere.
+- Screenshots: docs/screenshots/phase4/ (hero, voyage, final-desktop/tablet/mobile, OG).
+- **v2 is feature-complete and fully verified on https://v2--rahulbabu.netlify.app.**
+  Holding before merging to `main` (production) for owner review — it replaces the live site.
+
 ## 2026-07-04 (Phase 4) — code review, camera fix, OG image, polish
 
 - Ran a high-effort multi-agent code review (26 agents, ~804k tokens, 6 finder angles →

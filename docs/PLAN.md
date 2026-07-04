@@ -84,13 +84,17 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 - [ ] Audio (optional ocean ambience + mute) — deferred to Phase 4 polish
 - [ ] Wake foam / sail wind shader — deferred polish
 
-### Phase 4 — Ship It
+### Phase 4 — Ship It ⏳ complete pending production merge
 
-- [ ] Lighthouse budget in CI (perf ≥ 85 desktop, accessibility ≥ 95)
-- [ ] Cross-viewport visual QA sweep (Playwright screenshots reviewed)
-- [ ] OG image + meta polish
-- [ ] Full code review pass
-- [ ] Merge `v2` → `main` → production at rahulbabu.netlify.app
+- [x] Full high-effort code review (15 findings) — all material ones fixed & verified
+- [x] Camera framing fix (3/4 hero view; the "dark scene" was the resting cam staring
+      into the mainsail, not a color bug)
+- [x] Lighthouse on deployed preview: **Perf 70–94 · A11y 100 · Best Practices 100 · SEO 100**
+      (see DECISIONS for the realistic WebGL perf budget)
+- [x] Cross-viewport visual QA sweep (desktop / tablet / mobile + /log), zero console errors
+- [x] OG image + Twitter card + meta polish
+- [ ] **Merge `v2` → `main` → production at rahulbabu.netlify.app** (awaiting owner OK —
+      this replaces the current live personal site)
 
 ## Content sources (canonical)
 
