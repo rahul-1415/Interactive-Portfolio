@@ -1,0 +1,77 @@
+:root {
+  /* Placeholder ocean tokens — final One Piece palette lands with docs/DESIGN.md */
+  --ocean-deep: #0a2540;
+  --ocean: #1a6db5;
+  --sky: #7ec8e3;
+  --parchment: #f4e4c1;
+  --straw: #f5c542;
+  --ink: #1b1b1f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--sky);
+  color: var(--ink);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  position: fixed;
+  inset: 0;
+}
+
+.scene-root {
+  position: absolute;
+  inset: 0;
+}
+
+canvas {
+  display: block;
+}
+
+.hud-identity {
+  position: absolute;
+  top: 2rem;
+  left: 2.4rem;
+  z-index: 10;
+  pointer-events: none;
+  color: var(--ocean-deep);
+}
+
+.hud-identity h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hud-identity p {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  opacity: 0.75;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scene-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--sky) 0%, var(--ocean) 100%);
+  color: var(--parchment);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}

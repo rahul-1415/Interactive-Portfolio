@@ -1,0 +1,230 @@
+{
+  "motifs": [
+    {
+      "motif": "WANTED poster",
+      "description": "The series' most iconic graphic artifact: aged cream parchment with torn/burnt edges, top line 'WANTED' in huge wood-type caps, a rectangular portrait window with a thin inner keyline, 'DEAD OR ALIVE' in a Caslon/Century-style serif, the outlaw's name in extra-bold Times-like caps, the bounty in giant numerals prefixed by the Belly symbol (rendered like \u0e3f with a double-crossed B), and a tiny 'MARINE' credit line at the bottom. Weathered paper texture, fold creases, staple/nail shadows.",
+      "ui_application": "Project cards rendered as original-artwork WANTED posters: project screenshot/emoji-illustration in the portrait window, project name as the outlaw name line, 'DEAD OR ALIVE' swapped for 'LIVE OR REPO' linking demo vs GitHub, and bounty = GitHub stars or a made-up impact number (e.g. \u0e3f30,000,000 for the flagship project). Hover lifts the paper with a subtle rotation and drop shadow; click 'pins' it full-screen with a nail-through-paper animation. Same template reused for the About/hero card: the visitor 'discovers' the developer's own bounty poster."
+    },
+    {
+      "motif": "Jolly Roger flags",
+      "description": "Every crew flies a personalized skull-and-crossbones: the base skull is customized with the captain's signature trait (straw hat, three swords, heart, whiskers). It reads as a logo system \u2014 one silhouette grammar, infinite variants \u2014 always white-on-black flag cloth.",
+      "ui_application": "Design an original Jolly Roger per portfolio island as its section logo: skull + graduation cap (education), skull + crossed wrenches (projects), skull + quill pens (publications), skull + wax-seal ribbon (certifications), skull + telephone handset (contact), skull + necktie (experience). Render each as a cloth flag waving on the island's mast in the 3D scene (simple vertex-shader wave), and reuse the flat SVG as the section's nav icon, page favicon variant, and modal header crest. The visitor's ship flies the developer's personal Jolly Roger."
+    },
+    {
+      "motif": "Log Pose",
+      "description": "The Grand Line's only working compass: a glass orb on a leather wristband with a needle suspended from a wire inside, pointing to the next island's magnetic field (needle tip red/white). New World version has three orbs. Ordinary compasses fail on the Grand Line \u2014 the Log Pose IS navigation.",
+      "ui_application": "The site's primary navigation HUD: a Log Pose fixed to the bottom-left corner (leather strap arcs off-screen as if on the visitor's wrist), glass orb with CSS refraction highlight, needle always rotating to point at the nearest unvisited island in the 3D ocean. Clicking the orb opens a radial menu where each of six needles points to one section. 'Log set!' toast when a section is completed/visited."
+    },
+    {
+      "motif": "Den Den Mushi (Transponder Snail)",
+      "description": "Snail-shaped telephones with expressive faces that mimic the caller's expressions; shell holds the dial/speaker, a handset rests on top. Ring sound is 'puru puru puru'; answering is 'gatcha'. Variants: baby (portable), black (wiretap), visual (projector).",
+      "ui_application": "The contact form is a Den Den Mushi call: an original cartoon snail (CSS/SVG, no official art) sits beside the form, sleeping; focusing the form wakes it ('puru puru puru...' typed out as a subtle animation), and submit plays 'gatcha!' with the snail speaking a confirmation speech bubble. Form validation errors = the snail looks confused. Site-wide toast notifications delivered by a tiny baby Den Den Mushi sliding in from the corner."
+    },
+    {
+      "motif": "Grand Line sea chart / nautical map",
+      "description": "Hand-inked nautical charts on parchment: compass roses, rhumb lines, coastline hatching, sea-monster doodles in the margins, island names in antique serif caps, the Red Line and Reverse Mountain as structural landmarks, dotted sailing routes between islands.",
+      "ui_application": "The 'zoom out' overview / sitemap: pressing M (or a rolled-map HUD button) transitions the 3D ocean to a flat hand-drawn parchment chart showing all six islands, with the visitor's actual sailed route drawn as a dotted ink line (progress tracking), unvisited islands hidden behind '?' and cloud sketches, and an original sea-monster doodle marking the 404 zone. Also used as the loading screen while 3D assets stream in."
+    },
+    {
+      "motif": "Bounty gamification (Belly \u0e3f)",
+      "description": "In-world, a rising bounty is the scoreboard of notoriety: every milestone raises the number, announced dramatically. Bounty reveals are a recurring hype beat, always typeset as \u0e3f + huge grouped numerals.",
+      "ui_application": "Visitor bounty meter in the HUD: starts at \u0e3f0, ticks up with an odometer-roll animation for every island visited, poster opened, or easter egg found; at max exploration a 'YOUR BOUNTY' wanted poster is generated with their final score (shareable). Also: skills list typeset as a bounty board, with years-of-experience converted to Belly amounts."
+    },
+    {
+      "motif": "News Coo / World Economy News Paper",
+      "description": "News is delivered worldwide by seagulls wearing postman caps carrying rolled newspapers; the paper itself is a broadsheet with halftone photos, bold headlines, and bounty-poster inserts falling out of it.",
+      "ui_application": "Publications section delivery mechanic: a News Coo gull (original low-poly model) flies across the 3D ocean and drops a rolled newspaper on the deck; opening it unrolls a broadsheet-styled page where each paper/article is a newspaper column with headline, byline, halftone-filtered figure, and a 'read full edition' link to the DOI/PDF. New-content badge = an 'EXTRA!' red stamp."
+    },
+    {
+      "motif": "Devil Fruit swirls",
+      "description": "Devil Fruits are unnatural-colored fruits covered in curling S-shaped swirl patterns (e.g. the Gomu Gomu no Mi: violet sphere, S-type swirls, curly stem). Each fruit's color + swirl combination is unique \u2014 a taxonomy rendered as pattern.",
+      "ui_application": "Tech-stack/skills grid as an original 'Devil Fruit encyclopedia': each core skill is a distinct CSS/SVG fruit (unique hue + swirl pattern, e.g. teal swirl fruit = React, amber = Python), with a hover card describing the 'power granted'. The swirl motif alone also becomes the loading spinner and section-divider ornament, giving the site a signature repeating pattern that is original artwork."
+    },
+    {
+      "motif": "Vivre Card",
+      "description": "A small square of paper made from a person's fingernail clippings that always tugs toward that person and burns away if they are dying \u2014 a paper that points to someone, anywhere in the world.",
+      "ui_application": "The 'Download Resume' affordance: a small paper scrap pinned in the HUD that gently drifts/tugs toward the Contact island as you sail (a persistent, diegetic call-to-action). Clicking it downloads the PDF with a paper-flutter animation. Email/social links are 'vivre cards' that tug toward their icons on hover."
+    },
+    {
+      "motif": "Eternal Pose",
+      "description": "A permanently-set Log Pose sealed in an hourglass-shaped bottle, labeled with a single island's name \u2014 it forever points to one destination regardless of logs.",
+      "ui_application": "Deep-linking/quick-nav: a shelf of six labeled Eternal Pose bottles in the menu drawer, one per section; clicking one auto-sails the ship directly to that island (skip navigation for visitors who don't want the full voyage). URLs like /#water-7 are the shareable 'Eternal Poses'."
+    },
+    {
+      "motif": "Manga impact lettering and speed lines (DON!!)",
+      "description": "Oda's pages punctuate arrivals and reveals with huge hand-drawn sound-effect lettering ('DON!!'), radial speed lines, and dramatic spot blacks; the anime adds saturated color flashes.",
+      "ui_application": "Scene transitions and achievements: docking at an island triggers a one-beat 'DON!!' title card with radial speed lines (CSS conic-gradient) and the island's name in display type; hero section headline animates in with a manga-panel wipe. Kept to short 400ms beats so it energizes rather than annoys."
+    },
+    {
+      "motif": "Treasure chests, barrels, and the ship's helm",
+      "description": "Recurring adventure furniture: iron-banded chests bursting with gold, floating supply barrels (Luffy debuts inside one), and a large spoked wooden ship's wheel.",
+      "ui_application": "Barrels floating in the 3D ocean are clickable easter eggs (fun facts, hidden mini-bounties that raise the visitor's score); a treasure chest on each island holds that section's 'key artifact' (e.g. best paper, flagship repo) and opens with a gold-glow burst; the settings/quality toggle (graphics low/high, sound on/off) is a ship's-wheel icon on the deck HUD."
+    }
+  ],
+  "palette": [
+    {
+      "name": "Grand Line Sky",
+      "hex": "#60BFF5",
+      "source": "The saturated tropical ocean-surface/sky blue of the anime's open-sea scenes (SchemeColor's One Piece palette 'Waterfall')",
+      "role": "sky gradient top, shallow-water shader tint, light-mode background wash"
+    },
+    {
+      "name": "Deep Current Blue",
+      "hex": "#2E63A4",
+      "source": "Deep ocean water and Luffy's later-arc blue shorts tone (SchemeColor 'Azure Blue')",
+      "role": "primary brand blue: deep-water shader, dark-mode background base, link color on parchment"
+    },
+    {
+      "name": "Luffy Vest Red",
+      "hex": "#D70000",
+      "source": "Luffy's sleeveless red vest and the logo's red fill (SchemeColor 'Glossy Red')",
+      "role": "primary accent: CTAs, active nav state, 'EXTRA!' stamps, error states"
+    },
+    {
+      "name": "Straw Hat Yellow",
+      "hex": "#FFCE00",
+      "source": "The straw hat's sun-bleached yellow and treasure gold (SchemeColor 'Dark Yellow')",
+      "role": "secondary accent: bounty numerals, hover highlights, treasure glow, focus rings"
+    },
+    {
+      "name": "Wanted Parchment",
+      "hex": "#EFE0B9",
+      "source": "The aged cream paper of wanted posters and sea charts",
+      "role": "card/surface background for posters, charts, newspaper panels"
+    },
+    {
+      "name": "Bounty Ink Sepia",
+      "hex": "#4B3621",
+      "source": "The faded brown-black ink of poster text and chart linework",
+      "role": "body text and borders on parchment surfaces"
+    },
+    {
+      "name": "Manga Ink Black",
+      "hex": "#1A1A1A",
+      "source": "Oda's heavy manga lineart and Jolly Roger flag cloth",
+      "role": "outlines (cel-shading edge color in 3D), headings on light surfaces, flag background"
+    },
+    {
+      "name": "Deck Plank Bronze",
+      "hex": "#AF6528",
+      "source": "The Going Merry / ship-deck timber browns (SchemeColor 'Dark Bronze')",
+      "role": "wood UI chrome: HUD frames, modal borders, dock/pier materials in 3D"
+    },
+    {
+      "name": "Alabasta Gold",
+      "hex": "#D9A441",
+      "source": "Alabasta arc's desert sands and Alubarna palace stone",
+      "role": "zone accent for one island's terrain + its section's highlight color (e.g. experience timeline markers)"
+    },
+    {
+      "name": "Water 7 Teal",
+      "hex": "#3E9E9E",
+      "source": "Water 7's canal water and Aqua Laguna sea-green (Venice-inspired arc palette)",
+      "role": "zone accent for the projects island: canal water material, project-card ribbon color"
+    },
+    {
+      "name": "Skypiea Cloud White",
+      "hex": "#F2F9FF",
+      "source": "Skypiea's sea-of-clouds whites and pale sky",
+      "role": "light-mode elevated surfaces, cloud particles, tooltip backgrounds"
+    },
+    {
+      "name": "Wano Vermillion",
+      "hex": "#C63D2F",
+      "source": "Wano arc's torii-gate and washi-print vermillion (ukiyo-e inspired grading)",
+      "role": "zone accent for a Japanese-textured island section; also visited-state marker on the sea chart"
+    }
+  ],
+  "typography": [
+    {
+      "font": "Pirata One",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "Hero/site title and island name cards",
+      "why": "A gothic textura simplified for screens \u2014 reads instantly as 'pirate lettering' and echoes the blackletter energy of the One Piece logo's spiky silhouette without copying it; the fan-made 'One Piece font' by Phantom King Graphics exists but its license provenance is murky, so this OFL face is the safe evocative display choice."
+    },
+    {
+      "font": "Rye",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "The 'WANTED' header line on poster cards and other broadside-style headers",
+      "why": "A wood-type western poster face inspired by 19th-century printed broadsides \u2014 exactly the print tradition One Piece's wanted posters pastiche; its inline detailing reads as letterpress at large sizes."
+    },
+    {
+      "font": "Alfa Slab One",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "Bounty numerals, big stats, and section headings",
+      "why": "An ultra-heavy Egyptian slab (based on Thorne's Six-lines Pica) that matches the crushing boldness of the poster's name line and makes \u0e3f-prefixed numbers feel like a bounty reveal."
+    },
+    {
+      "font": "Libre Caslon Text (Bold)",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "'DEAD OR ALIVE' line, outlaw names in caps, and formal in-world documents (certificates, Marine notices)",
+      "why": "Font analyses identify the actual poster text as Century Old Style / Times New Roman Extra Bold with Adobe Caslon Pro Bold as the closest match \u2014 Libre Caslon is the best free Caslon on Google Fonts, giving authentic poster typography at zero license risk."
+    },
+    {
+      "font": "IM Fell English",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "Sea-chart labels, newspaper body text, antique flavor copy",
+      "why": "Igino Marini's digitizations of 17th-century Fell types come with authentic ink-spread irregularity \u2014 perfect for the hand-inked Grand Line chart and the News Coo broadsheet without needing texture overlays."
+    },
+    {
+      "font": "Bangers",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "Manga SFX beats ('DON!!'), achievement pops, playful badges",
+      "why": "Vernon Adams' comic-shout display face captures shonen sound-effect lettering; used sparingly it carries the anime's kinetic energy into transitions."
+    },
+    {
+      "font": "Inter (or Source Sans 3)",
+      "license": "SIL Open Font License 1.1 (Google Fonts)",
+      "role": "Long-form UI/body text inside modals (project descriptions, job bullets)",
+      "why": "The themed faces above are display-only; a neutral, highly legible workhorse keeps real content readable and makes the display faces feel intentional rather than costume-y."
+    }
+  ],
+  "locations": [
+    {
+      "location": "Shells Town (East Blue)",
+      "visual_identity": "Small Marine-base town: modest wooden houses, a tan Marine fort with blue trim, execution courtyard, the humble first stop of the journey.",
+      "section_mapping": "Landing/hero island (spawn point). It's canonically where the crew's journey effectively begins (Zoro joins here), so the visitor's ship spawns just offshore with a tutorial signpost \u2014 'set sail to begin'. Keeps the hero section small and pushes exploration."
+    },
+    {
+      "location": "Baratie (East Blue, Sambas Region)",
+      "visual_identity": "An oval ocean-going restaurant ship with a giant carved fish figurehead, round hull, side cannons, warm lantern-lit dining decks; inspired by floating markets \u2014 a workplace at sea.",
+      "section_mapping": "Experience. The Baratie is the series' defining 'day job' location (Sanji's years of service under Zeff). Each employer/role is a deck or a 'course' on a hand-written menu card: position as dish name, tenure as 'served 20XX\u201320XX', achievements as ingredients. Career progression = climbing from galley to head chef."
+    },
+    {
+      "location": "Water 7 \u2014 Galley-La Dock 1",
+      "visual_identity": "Venice-meets-fountain city: tiered island of canals, arched bridges, teal Aqua Laguna water, and the monumental numbered gates of Galley-La's seven shipyards where celebrity shipwrights build vessels in open drydocks.",
+      "section_mapping": "Projects. The shipyard is where things get BUILT \u2014 each project is a ship under construction in a numbered dock (Dock 1 = flagship project), with its WANTED-poster spec sheet nailed to the dock gate, scaffolding for in-progress work, and launched ships floating in the harbor for shipped/production projects."
+    },
+    {
+      "location": "Ohara \u2014 Tree of Knowledge",
+      "visual_identity": "A 5,000-year-old colossal hollow tree housing the world's greatest library: spiral shelves of ancient tomes rising through the trunk, warm lamplight, scholars' reading tables, a lake beside it; an elegiac, reverent atmosphere.",
+      "section_mapping": "Education. The archaeologists' library tree is the canon symbol of scholarship \u2014 each degree is a giant leather tome on a shelf inside the trunk (open it for institution, years, coursework); GPA/honors as gold-leaf bookmarks. The climb upward through shelves mirrors advancing through school levels."
+    },
+    {
+      "location": "World Economy News Paper (Morgans' floating press) / News Coo skyway",
+      "visual_identity": "Not a fixed island but a hot-air-balloon press ship trailed by flocks of cap-wearing News Coo gulls; visual language of rolled broadsheets, halftone print, rubber-stamped 'BIG NEWS'.",
+      "section_mapping": "Publications. Papers/articles are literally the news the world reads \u2014 the 'island' is a moored press balloon; a News Coo drops the broadsheet on your deck and each publication is a front-page story with headline, venue as the masthead, citation count as circulation figures."
+    },
+    {
+      "location": "Marineford \u2014 Marine Headquarters",
+      "visual_identity": "Crescent-shaped fortress island of brick and steel, monumental western-style HQ tower, MARINE lettering and seagull crest everywhere, banks of cannons, flags, and rigid official iconography.",
+      "section_mapping": "Certifications. The World Government/Marine aesthetic of ranks, seals, and official documents is a natural frame: each certification is a Marine-style commendation on parchment with a wax seal, issuing org as the 'branch', date as 'commissioned', verification link as the official stamp. Rank insignia chevrons show cert level."
+    },
+    {
+      "location": "Twin Cape Lighthouse (Reverse Mountain exit)",
+      "visual_identity": "A lonely red-and-white lighthouse on twin capes at the Grand Line's entrance, keeper's cottage, the whale Laboon's silhouette offshore, mail and messages left for crews who pass once and sail on.",
+      "section_mapping": "Contact. The lighthouse is where the Grand Line journey starts and where promises/messages are left (Laboon waits for a returning crew) \u2014 lighting the beacon opens the Den Den Mushi contact form, social links hang as signal flags, and the 'message left' confirmation paints a small mark on the lighthouse like the Rumbar Pirates' promise."
+    },
+    {
+      "location": "Skypiea (sky island)",
+      "visual_identity": "Blinding white sea of clouds, golden bell of Shandora, dial shells, vine-and-cloud architecture, pure blue-and-white palette pierced by gold.",
+      "section_mapping": "Easter egg / achievements zone rather than a core section: a Knock-Up Stream launches fully-explored visitors to a sky island where their final bounty poster and 'ring the golden bell' share action live \u2014 rewards completionists the way reaching Skypiea rewards believers."
+    },
+    {
+      "location": "Wano Country",
+      "visual_identity": "Feudal-Japan island behind a waterfall wall: washi-paper texture, ukiyo-e wave and cloud patterns, vermillion torii, lantern-lit Flower Capital, brushstroke effects and bold flat color grading (the anime's most stylized arc).",
+      "section_mapping": "Optional skin for a gallery/blog or the 'about me' interests section \u2014 its washi texture + brushstroke visual system is distinct enough to make one section feel like a special chapter, exactly as the Wano arc restyled the whole anime."
+    }
+  ],
+  "notes": "Verified research summary and design guardrails. (1) POSTER TYPOGRAPHY GROUND TRUTH: fan font-forensics (dafont forum) identify the wanted poster's 'DEAD OR ALIVE' as Century Old Style, names as Times New Roman Extra Bold, with Adobe Caslon Pro Bold called 'almost exact' \u2014 all commercial, hence the free stand-ins above (Libre Caslon Text for authenticity, Rye/Alfa Slab One for the display weight). The 'One Piece font' floating around (Phantom King Graphics) is a fan recreation of the logo lettering; avoid it and evoke instead with Pirata One. All recommended faces confirmed on Google Fonts under OFL 1.1. (2) BERRY SYMBOL: the in-world currency mark resembles a B with double stroke; safest implementation is a tiny original SVG glyph (or the Thai baht character \u0e3f as fallback) rather than tracing the official mark. (3) COPYRIGHT STRATEGY: everything above evokes genre artifacts One Piece itself pastiches \u2014 wanted posters, Jolly Rogers, nautical charts, blackletter/wood type are public-domain visual traditions. Ship only original CSS/SVG/low-poly art; never use character likenesses, official logo lettering, screenshots, or names like 'Straw Hat Luffy' in UI copy. Refer to sections by original island names in final copy if extra caution is wanted (e.g. 'Dock Seven' instead of 'Water 7'); an 'inspired by' disclaimer in the footer is good practice. This is a portfolio (non-commercial fan-inspired work), which lowers but does not eliminate risk. (4) 3D ART DIRECTION: cel-shaded low-poly with #1A1A1A outline pass matches Oda's heavy lineart; saturated two-stop water gradient (#60BFF5 \u2192 #2E63A4) with stylized foam caps reads as the anime ocean; per-island zone accents (Alabasta gold, Water 7 teal, Wano vermillion, Skypiea white) recreate the show's arc-by-arc palette shifts, which research confirms is a real feature of the anime's grading (Wano = washi/brushstroke/bold grading; Egghead = cool sci-fi tones). (5) ACCESSIBILITY: #4B3621 on #EFE0B9 \u2248 8.8:1 contrast (passes AAA); #D70000 on parchment passes AA for large text only \u2014 keep red for display sizes and use sepia for body. Sources: dafont.com/forum/read/511025 (poster fonts), onepiece.fandom.com wiki pages for Log Pose, Den Den Mushi, Ohara/Tree of Knowledge, Baratie, Galley-La/Dock 1, Marineford, Sabaody; fonts.google.com specimens for Pirata One, Rye, Smokum, Alfa Slab One (OFL confirmed); schemecolor.com/one-piece-series.php (hex palette #60BFF5 #2E63A4 #AF6528 #FFCE00 #D70000); animotionsstudio.com arc-style analysis (Wano/Egghead grading); collider.com production-designer pieces on Baratie. Runner-up fonts if more variety is needed: Smokum (western slab, OFL) and Fredericka the Great (hand-drawn poster texture, OFL)."
+}

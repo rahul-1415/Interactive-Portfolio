@@ -1,48 +1,28 @@
-# Interactive-Portfolio
+# Interactive Portfolio — v2
 
-___
-> One Piece anime themed Portfolio.
+> An original One Piece-inspired interactive 3D portfolio. Sail the Grand Line between
+> islands to explore my experience, projects, publications, and more.
 
-___
-## 🔗 Live Demo
+**Live:** https://rahulbabu.netlify.app
 
-You can view the deployed portfolio here:
+## Stack
 
-👉 **https://rahulbabu.netlify.app**
+Next.js 16 · React 19 · TypeScript (strict) · three.js · React Three Fiber 9 · drei ·
+postprocessing · zustand — deployed on Netlify.
 
-___
-## 💻 Prerequisites
-
-- Install an LTS Node.js version (Node 18+ recommended).
-- Fill `.env.local` with Hygraph variables.
-- Optional EmailJS support for contact modal:
-  - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
-  - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
-  - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
-
-___
-## 🛠 Tools used
-
-- Three.js
-- React Three Fiber
-- React Three Drei
-- React Three Rapier
-- Typescript
-- <b>Nextjs</b>
-- Graphql
-- Hygraph (Graph CMS)
-- Apollo Client
-
-___
-## 🚀 Installing Interactive-Portfolio
-
-To use, follow the steps:
+## Develop
 
 ```bash
-git clone https://github.com/rahul
-```
-
-```bash
+nvm use
 npm install
 npm run dev
 ```
+
+See [docs/SETUP.md](docs/SETUP.md) for tooling, [docs/PLAN.md](docs/PLAN.md) for the roadmap,
+[docs/DESIGN.md](docs/DESIGN.md) for the design bible, and
+[docs/WORKLOG.md](docs/WORKLOG.md) for progress history.
+
+## Content
+
+All portfolio data lives in [`rahul-babu-data.json`](rahul-babu-data.json) — edit it and the
+site updates on the next build. The downloadable resume is `public/resume/Rahul-Babu-Resume.pdf`.

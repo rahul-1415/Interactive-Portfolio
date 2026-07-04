@@ -1,0 +1,181 @@
+{
+  "versions": [
+    {
+      "package": "next",
+      "stable_version": "16.2.10",
+      "notes": "Latest stable (dist-tag latest). The Next 15 line is maintained as a backport at 15.5.20. Next 16 ships Turbopack-by-default builds, requires Node >= 20.9 and React 19.2, and is supported zero-config on Netlify since Oct 2025. For a new July-2026 project prefer 16.2.x; use 15.5.20 only if a dependency blocks 16."
+    },
+    {
+      "package": "react / react-dom",
+      "stable_version": "19.2.7",
+      "notes": "R3F v9 peer range is 'react >=19 <19.3', so 19.2.7 is squarely in range. Next 15 and 16 both use React 19 in App Router."
+    },
+    {
+      "package": "three",
+      "stable_version": "0.185.1",
+      "notes": "fiber 9 requires three >= 0.156, drei 10 requires >= 0.159 \u2014 0.185.1 satisfies both. Install @types/three at the matching 0.185.x. WebGPURenderer/TSL exist but R3F's default Canvas is still WebGL2."
+    },
+    {
+      "package": "@react-three/fiber",
+      "stable_version": "9.6.1",
+      "notes": "v9 is the React-19-compatible line (v8 does NOT work with React 19 / Next 15+). Peer deps: react >=19 <19.3, three >= 0.156."
+    },
+    {
+      "package": "@react-three/drei",
+      "stable_version": "10.7.7",
+      "notes": "drei v10 is the pairing for fiber v9 (peer: @react-three/fiber ^9, react ^19, three >= 0.159). Do not mix drei 9.x (fiber-8 era) with fiber 9."
+    },
+    {
+      "package": "@react-three/postprocessing",
+      "stable_version": "3.0.4",
+      "notes": "v3 pairs with fiber ^9 / react ^19. It wraps pmndrs 'postprocessing' 6.39.2 (pulled in as a dependency), which merges effects into fewer fullscreen passes than three's EffectComposer."
+    },
+    {
+      "package": "zustand",
+      "stable_version": "5.0.14",
+      "notes": "v5 requires React 18+; the default shallow-equality behavior of v4 selectors is gone \u2014 use useShallow from 'zustand/react/shallow'. Fine as a plain module-level store when the whole 3D tree is client-only."
+    },
+    {
+      "package": "leva",
+      "stable_version": "0.10.1",
+      "notes": "Works with React 18/19 (peer '^18 || ^19') but is slowly maintained pre-1.0. Treat as dev-only tweak panel; gate behind NODE_ENV or a ?debug flag so it stays out of the production bundle."
+    },
+    {
+      "package": "maath",
+      "stable_version": "0.10.8",
+      "notes": "pmndrs math helpers (easing.damp/damp3, random distributions, buffer utils). Framework-agnostic, no peer-dep constraints; ideal for camera damping and wave param easing."
+    },
+    {
+      "package": "r3f-perf",
+      "stable_version": "7.2.3",
+      "notes": "Peer: fiber >=8, so compatible with fiber 9. Dev-only perf HUD (draw calls, triangles, GPU/CPU ms); strip from production builds."
+    },
+    {
+      "package": "tunnel-rat",
+      "stable_version": "0.1.2",
+      "notes": "pmndrs tunnel for rendering DOM content 'into' the Canvas tree (or 3D content out to the DOM) across React roots. Tiny and API-stable despite 0.x; used by the official react-three-next starter."
+    },
+    {
+      "package": "typescript",
+      "stable_version": "6.0.3",
+      "notes": "TS 6 is current stable; TypeScript 7 (native Go compiler) is at 7.0.1-rc \u2014 stay on 6.x for Next/eslint toolchain compatibility for now."
+    },
+    {
+      "package": "eslint",
+      "stable_version": "10.6.0",
+      "notes": "Flat config (eslint.config.mjs) only \u2014 eslintrc is gone. Pair with eslint-config-next@16.2.10 (versioned in lockstep with next)."
+    },
+    {
+      "package": "vitest",
+      "stable_version": "4.1.9",
+      "notes": "v4 line. For R3F component tests add @react-three/test-renderer (match fiber major = 9)."
+    },
+    {
+      "package": "@playwright/test",
+      "stable_version": "1.61.1",
+      "notes": "Use for E2E + WebGL smoke tests; run Chromium with --use-angle/GPU flags or accept SwiftShader in CI and assert canvas snapshots at low DPR."
+    },
+    {
+      "package": "@netlify/plugin-nextjs",
+      "stable_version": "5.15.12",
+      "notes": "The OpenNext-based Netlify Next.js adapter (repo: opennextjs/opennextjs-netlify). Auto-injected for Next.js sites; Netlify explicitly recommends NOT pinning it so you receive security patches (e.g. 5.15.11 fixed middleware CVEs)."
+    }
+  ],
+  "nextjs_netlify_gotchas": [
+    "Runtime status (July 2026): @netlify/plugin-nextjs v5 (currently 5.15.12) is the OpenNext-based adapter, auto-installed for any Next.js site \u2014 you do NOT add it to package.json or netlify.toml. Netlify recommends leaving it unpinned so security patches land automatically. Sources: https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/ , https://www.netlify.com/changelog/tag/next-js/",
+    "Version support: adapter supports Next >= 13.5; Next 15 and 16 are actively supported (Next 16 declared zero-config deployable Oct 21 2025). Next 13/14 are EOL \u2014 no security patches planned, upgrade to 15.x/16.x.",
+    "App Router is fully supported (Server Components, streaming, ISR). ISR maps onto Netlify's cache-tag/CDN primitives; experimental features like PPR/'use cache' are the usual source of adapter lag \u2014 verify on a deploy preview before adopting them.",
+    "Node version: Netlify's default build Node has been 22 since Feb 2025, and the site gets pinned to whatever default existed at first build \u2014 old sites may silently sit on Node 18/20. Pin explicitly with NODE_VERSION = \"22\" in [build.environment] of netlify.toml or a .nvmrc/.node-version file (Next 16 requires Node >= 20.9). Source: https://answers.netlify.com/t/builds-functions-plugins-default-node-js-version-upgrade-to-22/135981",
+    "Known Next 16 failure mode: builds can pass 'next build' then fail at Netlify's Edge Functions bundling step (middleware). Fixes: update to latest adapter, keep middleware minimal/Node-compatible, or move logic out of edge middleware. Source: https://answers.netlify.com/t/next-js-16-project-build-fails-on-netlify/157791",
+    "Platform-specific SWC binaries: never let a darwin-only @next/swc-* package land as a real dependency \u2014 Netlify builds on Linux x64 and the install fails (this repo already hit this: commit 081f5a0 'remove darwin-only swc dependency for netlify linux builds'). Keep lockfile regenerated with npm >= 10 so optionalDependencies resolve per-platform.",
+    "Do not set output: 'standalone' or output: 'export' when using the adapter \u2014 leave output unset and set publish = \".next\"; the adapter transforms the build itself. output:'export' silently downgrades you to static-only (no ISR/middleware/image optimization).",
+    "next/image runs through Netlify Image CDN automatically \u2014 configure images.remotePatterns for any external hosts or production images 404/502 while local dev works.",
+    "Turbopack is the default bundler for 'next build' in Next 16; the adapter supports it, but if you hit opaque bundling failures, `next build --webpack` is the escape hatch while triaging.",
+    "Serverless function size: SSR pages deploy as functions with a 250MB unzipped limit \u2014 keep multi-MB GLB/KTX2/HDR assets in public/ (served from the CDN) and never import them through the JS graph.",
+    "Monorepos: set the package directory / base in Netlify UI or netlify.toml; the adapter must find the .next output relative to the package, not the repo root \u2014 the classic 'publish directory not found' failure.",
+    "Security cadence: multiple Next.js CVEs shipped in Aug and Dec 2025 (middleware bypass class); Netlify deploys network-level mitigations but still expects you to bump next promptly. Keep next on a patch-current version."
+  ],
+  "r3f_v9_app_router_patterns": [
+    "Compatibility baseline: fiber 9 + drei 10 + React 19 is the only valid combo on Next 15/16 (fiber 8 / drei 9 break on React 19). Peer-dep verified: drei@10.7.7 -> fiber ^9, react ^19; fiber@9.6.1 -> react >=19 <19.3.",
+    "The 'use client' boundary: <Canvas> and everything under it must live in a client component. Canonical layering \u2014 app/page.tsx stays a Server Component; it imports components/canvas/SceneShell.tsx which starts with 'use client'.",
+    "ssr:false status in Next 15/16: dynamic(() => import(...), { ssr: false }) is a BUILD ERROR inside Server Components (worked in Next 14). The canonical workaround is a client wrapper: SceneShell.tsx ('use client') does `const Scene = dynamic(() => import('./Scene'), { ssr: false, loading: () => <Poster/> })` and the server page renders <SceneShell/>. Sources: https://nextjs.org/docs/app/guides/lazy-loading , https://github.com/vercel/next.js/discussions/72236",
+    "Why ssr:false at all: three.js touches window/WebGL at module scope in places, and hydrating a Canvas server-side buys nothing \u2014 client-only mount avoids hydration mismatches and keeps three out of the server bundle. Always provide a `loading:` poster (screenshot/gradient of the scene) so LCP is a real element, not a blank canvas.",
+    "Persistent-canvas pattern (react-three-next style): mount one <Canvas> in a client component rendered from app/layout.tsx so it survives route changes, then bridge per-page 3D content with tunnel-rat@0.1.2 \u2014 module-scope `export const r3f = tunnel()`, put `<r3f.Out />` inside the Canvas, and any page (client component) renders `<r3f.In><MyIslands/></r3f.In>`. HTML->3D and 3D->HTML both work because tunnels cross React-root boundaries that context cannot.",
+    "Alternative to tunnel-rat for mixed DOM/3D layouts: drei's <View> component \u2014 one shared Canvas, multiple viewport 'windows' tracked to DOM elements; better when the portfolio has scrolling HTML sections each with its own 3D vignette. For HUD/modal overlays inside the scene, drei <Html> is the simpler tool.",
+    "Zustand store placement: define stores in plain modules (e.g. src/stores/scene-store.ts, no 'use client' needed \u2014 it gets it transitively) and import from both DOM UI and Canvas components; since the whole interactive tree is client-only, a module-level `create()` store is safe. The per-request store-in-context ceremony Next docs recommend only matters for SSR'd client components \u2014 your canvas tree never SSRs. Never read the store with useFrame via hooks-per-frame; use `useSceneStore.getState()` / `subscribe` inside useFrame for transient 60fps data (pointer, wave time) to avoid re-renders.",
+    "next.config: add `transpilePackages: ['three']` if you import three/examples/jsm paths that ship untranspiled; with Turbopack (Next 16 default) this is usually unnecessary but harmless. Keep leva/r3f-perf behind `process.env.NODE_ENV !== 'production'` so tree-shaking drops them.",
+    "fiber v9 migration notes that bite App Router users: the Canvas `frameloop` prop plus `invalidate()` API is unchanged, but v9 aligned with React 19 semantics (no more act warnings, StrictMode double-invokes effects in dev \u2014 dispose logic must be idempotent), and colors are sRGB-correct by default (ColorManagement on). Migration guide: https://r3f.docs.pmnd.rs/tutorials/v9-migration-guide",
+    "Router interop: next/navigation hooks (useRouter etc.) must be called in DOM-side components, not inside Canvas children \u2014 the Canvas is a separate reconciler root and context does not cross it automatically (fiber forwards some contexts, but do not rely on Next's). Pass navigation callbacks down as props or via zustand. Ref: https://github.com/vercel/next.js/issues/61684"
+  ],
+  "ocean_shader_references": [
+    {
+      "title": "Codrops \u2014 Creating Stylized Water Effects with React Three Fiber (2025)",
+      "url": "https://tympanus.net/codrops/2025/03/04/creating-stylized-water-effects-with-react-three-fiber/",
+      "technique": "Cartoon-style water built directly in R3F: vertex-displaced plane, banded/toon color ramp, animated noise foam; performance-minded and the closest end-to-end match for a stylized R3F portfolio ocean."
+    },
+    {
+      "title": "Faraz Shaikh \u2014 Generating a stylized ocean (gl-noise)",
+      "url": "https://blog.farazshaikh.com/stories/generating-a-stylized-ocean/",
+      "technique": "Gerstner-wave vertex displacement via the gl-noise library's wave function, normals recomputed in the fragment shader for crisp stylized shading; author is a pmndrs contributor so it maps cleanly onto R3F shaderMaterial."
+    },
+    {
+      "title": "Nathan Gordon \u2014 The Ocean: Wind Waker Graphics Analysis",
+      "url": "https://medium.com/@gordonnl/the-ocean-170fdfd659f1",
+      "technique": "Definitive anime-water breakdown: compound sine curves for swell plus an offset line-texture mask for the iconic Wind Waker white wave contours; WebGL implementation walkthrough."
+    },
+    {
+      "title": "Robin Payot \u2014 Wind Waker JS (live three.js demo)",
+      "url": "https://wind-waker-threejs.com/",
+      "technique": "Full Wind Waker ocean remake in three.js, upgraded in March 2026 to WebGPU via TSL; the reference for how far toon ocean + boat + islands can go in the browser \u2014 same concept as an island-hopping portfolio."
+    },
+    {
+      "title": "sbcode \u2014 Gerstner Water Shader tutorial",
+      "url": "https://sbcode.net/threejs/gerstnerwater/",
+      "technique": "Injects Gerstner/trochoidal displacement into three.js's stock Water object with working code and getWaveInfo() for floating objects (buoyancy for a boat/islands) \u2014 copy-paste-able math."
+    },
+    {
+      "title": "three.js forum \u2014 Toon water shader with depth-based fog and intersection foam",
+      "url": "https://discourse.threejs.org/t/toon-water-shader-with-depth-based-fog-and-intersection-foam/35978",
+      "technique": "Three.js port of the Roystan toon-water approach: depth-texture comparison drives shoreline foam and depth-tinted color \u2014 exactly the trick for foam rings around portfolio islands."
+    },
+    {
+      "title": "Roystan \u2014 Toon Water (canonical stylized-water tutorial)",
+      "url": "https://roystan.net/articles/toon-water/",
+      "technique": "The most-cited stylized water recipe (Unity, but pure shader math): depth-based color gradient, intersection foam, distorted normal-map surface noise; port the fragment logic into a three.js ShaderMaterial."
+    },
+    {
+      "title": "gameidea \u2014 Creating a Stylized 3D Water Shader (2026)",
+      "url": "https://gameidea.org/2026/02/01/creating-a-stylized-3d-water-shader/",
+      "technique": "Recent walkthrough: Gerstner-like wave displacement in the vertex shader with detail normals computed in the fragment shader \u2014 a good modern middle ground between toon and painterly."
+    },
+    {
+      "title": "three.js official example \u2014 webgl_shaders_ocean",
+      "url": "https://threejs.org/examples/webgl_shaders_ocean.html",
+      "technique": "The stock Water/Sky mirror-reflection ocean (realistic, not stylized) \u2014 useful as the displacement/reflection baseline the sbcode Gerstner tutorial builds on, and for stealing the Sky + sun-position setup."
+    },
+    {
+      "title": "Three.js Journey \u2014 Raging Sea lesson",
+      "url": "https://threejs-journey.com/lessons/raging-sea",
+      "technique": "Bruno Simon's stylized sea: layered sine waves in the vertex shader plus elevation-driven two-color mixing and perlin-noise chop \u2014 the simplest credible stylized ocean, ideal starting skeleton (paid course)."
+    },
+    {
+      "title": "Shadertoy \u2014 Seascape by TDM",
+      "url": "https://www.shadertoy.com/view/Ms2SD1",
+      "technique": "Classic raymarched procedural ocean; too realistic and too expensive to use directly, but its fractal wave-height function is a goldmine for octave-summed wave shaping you can lift into a vertex shader."
+    }
+  ],
+  "performance_budget": [
+    "Frame rate targets: 60fps on a mid-tier laptop (frame < 16.6ms, JS < 8ms), 30fps floor on mid-tier mobile. Verify with r3f-perf in dev and drei <PerformanceMonitor> in prod for adaptive response.",
+    "Draw calls: < 100 total on mobile, < 200 desktop \u2014 draw-call count matters more than triangle count (per R3F scaling docs, most devices hold 60fps under ~100 calls). Ocean = 1 call; islands via drei <Instances>/<Merged> or merged static geometry; texture-atlas repeated props.",
+    "Triangles: ~200k mobile / ~500k desktop ceiling. Ocean plane subdivided ~256x256 max (65k verts) \u2014 do wave detail in the fragment shader (normals), not more geometry.",
+    "First-load JS: < ~450KB gzipped for the landing route. three (~160KB gz) + fiber + drei subset is ~250-300KB, so: import drei per-module, ssr:false-dynamic-import the whole scene, keep leva/r3f-perf dev-only, and let the HTML shell + poster paint before the bundle (LCP < 2.5s on 4G).",
+    "3D asset payload: < 2MB compressed for the initial scene, < 5MB total. Pipeline via gltf-transform CLI: Draco (or Meshopt/gltfpack) geometry compression \u2014 routinely 5-10x smaller; load decoders from local /public, not a CDN (Netlify CSP/self-contained-friendly).",
+    "Texture memory: < 150MB GPU on mobile. Use KTX2/Basis Universal (drei useKTX2 / KTX2Loader) \u2014 stays compressed on the GPU, ~4-8x VRAM savings vs PNG/JPG; 1024^2 default, 2048^2 only for hero assets, power-of-two everything, mipmaps on.",
+    "Adaptive DPR: <Canvas dpr={[1, 2]}> and drei <AdaptiveDpr pixelated> or a PerformanceMonitor onDecline handler stepping DPR 2 -> 1.5 -> 1; DPR is the single biggest fill-rate lever for a full-screen ocean shader.",
+    "frameloop='demand' when idle: the ocean needs continuous animation while visible, but switch to demand + invalidate() when a modal/HUD covers the scene, when the tab is hidden (document.visibilitychange), or after N seconds without input \u2014 battery and thermals on laptops/phones.",
+    "Postprocessing budget: use @react-three/postprocessing (merges effects into minimal passes); Bloom + Vignette + (optional) ToneMapping is the safe stylized stack; skip SSAO/SSR/DepthOfField on mobile via a quality tier from PerformanceMonitor.",
+    "Lights and shadows: <= 3 lights; one directional shadow caster max at 1024 shadow map; freeze static shadows with drei <BakeShadows>; bake AO into textures for islands. Toon water needs no expensive lighting at all \u2014 its look is in the ramp.",
+    "Materials: one custom ShaderMaterial for the ocean (drei shaderMaterial + extend); MeshToonMaterial or a shared gradient-ramp material for islands/props \u2014 shared materials keep program count and state changes low.",
+    "Monitoring in CI/dev: r3f-perf (7.2.3) overlay for gl.info (calls, triangles, textures, programs); Playwright smoke test asserting the canvas renders (readPixels non-black) and Lighthouse budget assertions (script < 500KB, LCP < 2.5s) in the Netlify deploy-preview workflow."
+  ]
+}

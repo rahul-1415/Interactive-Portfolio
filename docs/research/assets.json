@@ -1,0 +1,113 @@
+{
+  "models": [
+    {
+      "name": "One Piece - Going Merry by Anex (Sketchfab)",
+      "url": "https://sketchfab.com/3d-models/one-piece-going-merry-0e1f16189e8b4b4d9d9c3c60893d692b",
+      "license": "CC BY 4.0 (author-tagged; underlying ship design is Toei/Shueisha IP a fan modeler cannot actually license)",
+      "directly_downloadable": false,
+      "quality_notes": "83.3k tris / 43.9k verts, Blender-made, 13k+ downloads, published 2015. Very likely the source of the existing 21MB goingMerry folder. Download requires free Sketchfab login (no anonymous curl/API).",
+      "use_for": "Reference/baseline \u2014 if this is your current model, re-downloading gains nothing; compress what you have instead."
+    },
+    {
+      "name": "The Going Merry (One Piece) - Game Ready by Oliver Edwards (Sketchfab)",
+      "url": "https://sketchfab.com/3d-models/the-going-merry-one-piece-game-ready-4b2cb678bf984c018dfa1936bd156c8d",
+      "license": "CC BY 4.0 (author-tagged fan art; same IP caveat)",
+      "directly_downloadable": false,
+      "quality_notes": "Highest-quality free Going Merry found: 176.6k tris / 93.1k verts with 4 full PBR texture sets at 4096x4096 (diffuse/metallic/roughness/normal). Raw download will be far heavier than your current 21MB \u2014 only worth it if you gltf-transform it down (1K textures, meshopt) to ~3-5MB. Requires Sketchfab login.",
+      "use_for": "Hero Going Merry upgrade IF you want better visuals and are willing to compress aggressively; otherwise skip."
+    },
+    {
+      "name": "Thousand Sunny Ship by Tigerar1 (Sketchfab)",
+      "url": "https://sketchfab.com/3d-models/thousand-sunny-ship-59b59a3fb0c04113af5520bce3534a20",
+      "license": "CC BY-SA 4.0 (ShareAlike clause \u2014 derivative scene assets arguably must stay BY-SA; same fan-art IP caveat)",
+      "directly_downloadable": false,
+      "quality_notes": "28.1k tris / 19.9k verts \u2014 much lighter than your 10MB Sunny, published Nov 2023, modern topology. Requires Sketchfab login.",
+      "use_for": "Lightweight Thousand Sunny replacement if the current 10MB model compresses poorly."
+    },
+    {
+      "name": "THOUSAND SUNNY - ONE PIECE by ShacLaw (Sketchfab)",
+      "url": "https://sketchfab.com/3d-models/thousand-sunny-one-piece-59e09814b4a14ecfb27471c4abe78be4",
+      "license": "CC BY 4.0 (author-tagged fan art; same IP caveat)",
+      "directly_downloadable": false,
+      "quality_notes": "62.6k tris / 36.2k verts, from 2015, no texture documentation. Middle option; probably the source of your existing thusand_sunny folder. Requires Sketchfab login.",
+      "use_for": "Baseline comparison only \u2014 nothing clearly better than what you have."
+    },
+    {
+      "name": "Kenney Pirate Kit",
+      "url": "https://kenney.nl/assets/pirate-kit",
+      "license": "CC0 (public domain, no attribution required)",
+      "directly_downloadable": true,
+      "quality_notes": "70+ optimized low-poly assets: modular pirate ships (hulls, sails, cannons), palm trees, rocks, treasure, docks. Ships in separate FBX/OBJ/GLTF \u2014 GLTF works in three.js with zero conversion. Download button on kenney.nl needs no login; also on itch.io.",
+      "use_for": "Island dressing (palms, rocks, docks, treasure chests) around your One Piece ships, plus background/NPC boats."
+    },
+    {
+      "name": "Quaternius Ships Pack",
+      "url": "https://quaternius.com/packs/ships.html",
+      "license": "CC0",
+      "directly_downloadable": true,
+      "quality_notes": "6 simple low-poly ships (pirate/sail style) in FBX/OBJ/Blend; no login, direct download button. Also browsable per-model on poly.pizza (e.g. https://poly.pizza/m/cIzO4MBPqI Sail Ship).",
+      "use_for": "Distant background ships on the horizon to make the ocean feel alive without extra MB."
+    },
+    {
+      "name": "Quaternius Ultimate Stylized Nature Pack",
+      "url": "https://quaternius.com/packs/ultimatestylizednature.html",
+      "license": "CC0",
+      "directly_downloadable": true,
+      "quality_notes": "Stylized palm trees, pines, bushes, grass, flowers \u2014 textured, some animated; the toon look matches an anime ocean better than realistic assets. Bundle mirror: https://poly.pizza/bundle/Ultimate-Stylized-Nature-Pack-zyIyYd9yGr",
+      "use_for": "Upgrading the 3MB low-poly islands with anime-styled vegetation."
+    },
+    {
+      "name": "Flying Seagull (Poly by Google, via Poly Pizza)",
+      "url": "https://poly.pizza/m/6Tpj_vcWP3f",
+      "license": "CC-BY 3.0 (Google Poly archive standard)",
+      "directly_downloadable": true,
+      "quality_notes": "Low-poly flying seagull; Poly Pizza serves downloads without registration. Second option: https://poly.pizza/m/0WRzrtCIIRp. Tiny file, easy to instance and animate on a circular path.",
+      "use_for": "Ambient seagulls circling the ships/islands \u2014 cheap atmosphere win."
+    }
+  ],
+  "hdris_textures": [
+    {
+      "name": "Kloofendal 48d Partly Cloudy (Pure Sky) \u2014 Poly Haven HDRI",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/kloofendal_48d_partly_cloudy_puresky_2k.hdr",
+      "license": "CC0",
+      "use_for": "Primary daytime sky: bright midday, high-contrast, puffy clouds \u2014 closest match to the One Piece anime look. 4k variant verified at .../hdr/4k/kloofendal_48d_partly_cloudy_puresky_4k.hdr (20.7MB; use 2k for web). Page: https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky"
+    },
+    {
+      "name": "Aristea Wreck (Pure Sky) \u2014 Poly Haven HDRI",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/aristea_wreck_puresky_2k.hdr",
+      "license": "CC0",
+      "use_for": "Alternate day sky \u2014 captured over an ocean shipwreck, midday partly-cloudy, so the horizon lighting genuinely matches open sea. URL verified HTTP 200."
+    },
+    {
+      "name": "Qwantani Sunset (Pure Sky) \u2014 Poly Haven HDRI",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/qwantani_sunset_puresky_2k.hdr",
+      "license": "CC0",
+      "use_for": "Sunset mode / scene-transition sky: warm clear sunset, medium contrast. URL verified."
+    },
+    {
+      "name": "Belfast Sunset (Pure Sky) \u2014 Poly Haven HDRI",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/belfast_sunset_puresky_2k.hdr",
+      "license": "CC0",
+      "use_for": "Alternative sunset \u2014 golden horizon shot over calm water, soft violet-blue upper sky; very anime-sunset. URL verified. Full catalog queryable at https://api.polyhaven.com/assets?t=hdris&c=skies"
+    },
+    {
+      "name": "three.js waternormals.jpg (official ocean example texture)",
+      "url": "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/waternormals.jpg",
+      "license": "MIT (part of the three.js repo)",
+      "use_for": "Drop-in normal map for THREE.Water / custom ocean shader \u2014 the exact texture the three.js ocean demo uses. Direct curl verified HTTP 200."
+    },
+    {
+      "name": "ambientCG Foam001 (1K JPG set)",
+      "url": "https://ambientcg.com/get?file=Foam001_1K-JPG.zip",
+      "license": "CC0",
+      "use_for": "Sea-foam detail around ship hulls and island shorelines. Direct download verified (302 to 8.7MB zip, no login). Browse page: https://ambientcg.com/view?id=Foam001"
+    },
+    {
+      "name": "OpenGameArt Caustic Textures (seamless set)",
+      "url": "https://opengameart.org/content/caustic-textures",
+      "license": "CC0",
+      "use_for": "Animated caustics on shallow water near islands (also: 16-frame animated set at https://opengameart.org/content/water-caustics-effect-small, both CC0, files download without login)."
+    }
+  ],
+  "recommendation": "Keep and optimize the existing One Piece models \u2014 do not replace them with generic pirate ships. The Going Merry, Thousand Sunny, Moby Dick, and straw hat ARE the theme; swapping in Kenney/Quaternius ships would make it just another pirate portfolio, and nothing meaningfully better exists anyway: the best free Sketchfab alternatives are the same generation of fan models (Anex's 83k-tri Merry is almost certainly what you already have; Oliver Edwards' 176k-tri version is prettier but heavier and still needs the same compression pass). Licensing reality: all fan models carry author-tagged CC-BY, but a fan cannot license Toei/Shueisha's ship designs \u2014 acceptable risk for a personal non-commercial portfolio with visible Sketchfab attribution, not something a 'better model' fixes. The mandatory work is compression, and the numbers are worse than stated: goingMerry is 21MB, thusand_sunny 10MB, AND one_piece_straw_hat_2_years is 20MB (while an unused 144KB straw-hat.glb already sits in public/assets \u2014 use that instead). Run `npx @gltf-transform/cli optimize scene.gltf out.glb --compress meshopt --texture-compress webp --texture-size 1024` on each folder-based scene.gltf; expect 21MB -> ~2-4MB and 10MB -> ~1-2MB, single-file .glb, faster parse. If the Sunny compresses poorly, Tigerar1's 28k-tri CC BY-SA model is the one worthwhile swap (note the ShareAlike clause). Then SUPPLEMENT with CC0 assets where authenticity doesn't matter: Kenney Pirate Kit + Quaternius Ultimate Stylized Nature for island palms/rocks/docks, Quaternius Ships as distant background sails, a Poly Pizza seagull instanced overhead, kloofendal_48d puresky (day) + qwantani/belfast sunset HDRIs (2k .hdr, ~3-6MB each) for the anime sky, three.js waternormals + ambientCG Foam001 + OpenGameArt caustics for the water. That combination keeps the One Piece identity, gets total 3D payload from ~57MB to well under 15MB, and everything supplemental is CC0/MIT and curl-able in CI."
+}
