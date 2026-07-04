@@ -1,0 +1,613 @@
+{
+  "personal": {
+    "name": "Rahul Babu",
+    "title": "Software Engineer",
+    "location": "United States",
+    "email": "rahulbabu1407@gmail.com",
+    "phone": "+1 (602) 517-1962",
+    "resume_url": "https://rahul-1415.github.io/assets/Resume.pdf"
+  },
+  "social_links": {
+    "github": "https://github.com/rahul-1415",
+    "linkedin": "https://www.linkedin.com/in/rahulb1407/",
+    "instagram": "https://www.instagram.com/rahul__b/",
+    "twitter_x": "https://x.com/rahul___b",
+    "medium": "https://medium.com/@rahul-b"
+  },
+  "summary": "Software engineer with 3 years of experience building AI-driven full-stack applications, backend APIs, and data systems using Python, JavaScript, TypeScript, React, FastAPI, Django, Flask, and Java. Focused on practical engineering work that turns research ideas, business workflows, and data-heavy problems into production-facing software. Interested in shipping useful products at the intersection of AI systems, backend engineering, and applied analytics.",
+  "stats": {
+    "years_experience": 3,
+    "projects": 16,
+    "publications": 2,
+    "certifications": 10
+  },
+  "interests": [
+    "Problem Solving",
+    "Data Engineering",
+    "Cloud",
+    "Full-Stack Development",
+    "Software Development",
+    "AI Systems"
+  ],
+  "education": [
+    {
+      "institution": "Arizona State University",
+      "location": "Tempe, AZ, USA",
+      "degree": "Master of Science in Computer Science",
+      "start": "Aug 2023",
+      "end": "May 2025",
+      "gpa": "3.83/4"
+    },
+    {
+      "institution": "Madras Institute of Technology, Anna University",
+      "location": "Chennai, TN, India",
+      "degree": "Bachelor of Engineering in Computer Science",
+      "start": "July 2019",
+      "end": "June 2023",
+      "gpa": "8.69/10"
+    },
+    {
+      "institution": "Don Bosco Matriculation Higher Secondary School",
+      "location": "Egmore, Chennai, India",
+      "degree": "High School"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Friedman Vartolo",
+      "location": "United States",
+      "role": "Software Engineer",
+      "start": "June 2026",
+      "end": "Present",
+      "bullets": [
+        "Engineered and maintained a suite of internal productivity applications for a legal services team, streamlining workflows across case management, content creation, and legal research operations.",
+        "Built and iterated on a Calendar Application using React and TypeScript to manage attorney assignments, case appearances, docket numbers, and client data — including automated email generation and dynamic data formatting for legal teams.",
+        "Developed a Graphic Design Automation App enabling the marketing team to create and schedule LinkedIn posts programmatically, reducing manual content production time through templated, automated output.",
+        "Architected a Law Tracker Application that aggregates real-time news and data from multiple external APIs and sources to monitor policy changes, new legislation, and legal developments relevant to the firm.",
+        "Leveraged a modern JavaScript/TypeScript stack with React, Bun, and Python to build performant, maintainable full-stack applications across multiple internal tooling projects.",
+        "Deployed and managed production applications on Microsoft Azure, handling cloud infrastructure, environment configuration, and continuous delivery for multiple internal tools used across the organization.",
+        "Collaborated directly with attorneys, operations staff, and stakeholders to translate business requirements into technical solutions, managing feature backlogs and iterative releases via GitHub."
+      ]
+    },
+    {
+      "company": "Hovian Inc.",
+      "location": "Cucamonga, California, USA",
+      "role": "Software Engineer",
+      "start": "July 2025",
+      "end": "Dec 2025",
+      "bullets": [
+        "Built and maintained an Electron + React single-page desktop application using React, JavaScript/TypeScript, HTML5, and CSS3, supporting multiple interactive UI views for notification and workflow management.",
+        "Designed and shipped 20+ modular, reusable React components (chat UI, prompt inputs, settings panels, toggles) to support dynamic features such as AI chat, theme switching, and workflow navigation.",
+        "Managed client-side state and UI transitions (component-level state + shared app state), reducing UI-related bugs and improving interaction responsiveness and UX consistency.",
+        "Integrated frontend modules with backend services via RESTful APIs, implementing reliable data fetching, loading states, and error handling for daily user workflows.",
+        "Developed Python-based image processing utilities to power an AI 'Animated GIF' feature (sprite sheet slicing, pixelation with PIL, GIF assembly with imageio), delivering animated outputs from text prompts.",
+        "Implemented dark mode with persisted user preferences and OS theme sync, and integrated native desktop notifications via Electron APIs to ensure alerts triggered reliably even when the app was minimized.",
+        "Implemented a hybrid backend communication layer using Node.js with REST (HTTP) APIs and WebSockets to stream real-time Outlook notifications and support AI-generated responses.",
+        "Built and maintained an Electron + Node.js desktop app with tabbed and multi-view navigation using JavaScript, HTML5, and CSS3 to support notification and workflow management."
+      ]
+    },
+    {
+      "company": "ASU Decision Theater",
+      "location": "Tempe, Arizona, USA",
+      "role": "Software Engineer",
+      "start": "May 2024",
+      "end": "May 2025",
+      "bullets": [
+        "Designed and implemented a machine learning pipeline using Python and R to analyze 50K+ census and public health datasets for regional risk prediction.",
+        "Trained and evaluated predictive models using XGBoost and ensemble techniques, focusing on accuracy and interpretability.",
+        "Built a real-time interactive risk dashboard using React and TypeScript, supporting 10+ dynamic visual components and deployed with FastAPI and Docker on Google Cloud Run.",
+        "Developed backend API services using FastAPI to serve dashboard data, enabling low-latency access for real-time filtering and visualization.",
+        "Automated large-scale data collection using Python and Selenium, gathering 1,000+ healthcare survey responses and 795 climate policy documents, followed by structured analysis and evaluation to measure LLM resilience on heat and healthcare prompts.",
+        "Deployed a RAG-based chatbot using Llama 3, LangChain, and Chroma on Jetstream2 HPC to summarize 100+ interview transcripts for the Maricopa Association of Governments and support ASU's LLM resilience research with climate policy recommendations.",
+        "Performed geospatial opioid risk analysis using PostGIS by writing spatial SQL queries (proximity and region joins, hotspot-style aggregations) to map overdose patterns and generate region-level insights for the dashboard."
+      ]
+    },
+    {
+      "company": "InnoHat Systems",
+      "location": "Chennai, TN, India",
+      "role": "Software Developer",
+      "start": "Jan 2022",
+      "end": "July 2023",
+      "bullets": [
+        "Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews, reducing schema-change overhead while keeping financial data ACID-compliant.",
+        "Built Flask REST APIs for checkout, refunds, and shipment events, with 200+ test cases in pytest to reach 85% coverage and reduce regression bugs.",
+        "Orchestrated ETL pipelines in Python (pandas, SQLAlchemy, and PyMongo) to merge order history with review sentiment data, optimizing runtime by 40% on 20M+ rows and 5M+ documents.",
+        "Containerized services with Docker and deployed on AWS (EC2, RDS, S3, DocumentDB) with CloudWatch monitoring to maintain stability during seasonal traffic spikes.",
+        "Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and reducing operations effort by 12 hours per week.",
+        "Created a React.js customer portal for browsing catalogs and personalized deals, integrating cache and lazy loading to reduce page load time by 35%.",
+        "Trained a scikit-learn recommendation engine using transactional PostgreSQL and behavioral MongoDB data, improving upsell conversion by 11% in pilot rollout."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Interactive Portfolio",
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Three.js",
+        "R3F",
+        "GraphQL",
+        "Hygraph"
+      ],
+      "start": "Dec 2025",
+      "end": "Current",
+      "live_url": "https://rahulbabu.netlify.app/",
+      "code_url": "https://github.com/rahul-1415/Interactive-Portfolio",
+      "bullets": [
+        "Built and deployed an interactive 3D portfolio experience using Next.js and TypeScript with Three.js and React Three Fiber (Drei, Rapier) for immersive UI and animations.",
+        "Integrated Hygraph (GraphCMS) using GraphQL and Apollo Client to manage portfolio content through a CMS-driven workflow."
+      ]
+    },
+    {
+      "name": "ClimateActionPolicy RAG Application",
+      "tech": [
+        "Streamlit",
+        "LangChain",
+        "ChromaDB",
+        "LLaMA 3",
+        "Transformers"
+      ],
+      "start": "July 2024",
+      "end": "Sept 2024",
+      "live_url": "https://cap-rag.streamlit.app/",
+      "code_url": "https://github.com/rahul-1415/CAP-RAG",
+      "bullets": [
+        "Deployed a Retrieval-Augmented Generation application that retrieves relevant policy documents and generates context-enriched responses for climate action recommendations.",
+        "Built an interactive Streamlit chat interface with multi-session history so users can manage and review conversations."
+      ]
+    },
+    {
+      "name": "Opioid Overdose Forecasting Data Visualizer",
+      "tech": [
+        "React",
+        "TypeScript",
+        "FastAPI",
+        "Docker"
+      ],
+      "start": "April 2025",
+      "end": "May 2025",
+      "live_url": "https://opioid-overdose-forecasting.netlify.app/",
+      "code_url": "https://github.com/rahul-1415/Opioid-Overdose-Forecasting",
+      "bullets": [
+        "Developed an interactive web application to visualize Arizona opioid-risk data at the Census Block Group level using a FastAPI backend and React + TypeScript frontend.",
+        "Designed backend filtering and API serving and packaged the system with a unified Dockerfile for streamlined deployment."
+      ]
+    },
+    {
+      "name": "Fake Job Detection",
+      "tech": [
+        "Python",
+        "Machine Learning",
+        "NLP",
+        "Fraud Detection"
+      ],
+      "start": "Feb 2025",
+      "end": "May 2025",
+      "code_url": "https://github.com/rahul-1415/Fake-Job-Detection",
+      "description": "Developed a fake job posting predictor to identify fraudulent listings that mimic legitimate roles and help improve trust and safety for job seekers and hiring platforms.",
+      "bullets": [
+        "Built a machine learning workflow to classify job posts as real or fraudulent using textual and structured listing signals.",
+        "Framed the system for real-world safety use cases, such as flagging suspicious listings before applicants share personal information or make payments."
+      ]
+    },
+    {
+      "name": "Distributed NoSQL Database System for an E-Commerce Platform",
+      "tech": [
+        "Kafka",
+        "Redis",
+        "MongoDB",
+        "FastAPI"
+      ],
+      "start": "Sep 2024",
+      "end": "Dec 2024",
+      "code_url": "https://github.com/rahul-1415/Distributed-NoSQL-Database-System-for-an-E-Commerce-Platform",
+      "bullets": [
+        "Designed a distributed NoSQL database system using Kafka, Redis, and MongoDB, achieving 100% consistency post-recovery and under 500 ms average response time for e-commerce data operations in fault-tolerant scenarios.",
+        "Optimized cross-region replication with FastAPI middleware, ensuring zero data loss during node failures and 248 ms response times during outages through Kafka-backed asynchronous recovery."
+      ]
+    },
+    {
+      "name": "User Identification, Authentication, and Interactions for Social Media Data Analytics using AI",
+      "tech": [
+        "AI Research",
+        "Social Media Analytics",
+        "Team Leadership"
+      ],
+      "start": "Sep 2024",
+      "end": "Dec 2024",
+      "code_url": "https://github.com/rahul-1415/User-Identification-Authentication-and-Interactions-for-Social-Media-Data-Analytics-using-AI",
+      "description": "Led a research project as team lead for an 8-member group and documented a 60-page research paper on user identification, authentication, and interaction analysis for social media data analytics using AI.",
+      "bullets": [
+        "Directed project planning, research coordination, and technical execution across an 8-member team.",
+        "Compiled and authored a comprehensive 60-page technical research report covering system design, experimentation, and findings."
+      ]
+    },
+    {
+      "name": "Movie Review WebApp",
+      "tech": [
+        "React Search UI",
+        "Elastic App Search",
+        "Node.js",
+        "npm"
+      ],
+      "start": "Aug 2024",
+      "end": "Sep 2024",
+      "code_url": "https://github.com/rahul-1415/Movie-Review-WebApp",
+      "description": "Built a configurable movie-review search experience using Elastic Search UI with App Search engine integration, designed for quick setup, customization, and static deployment.",
+      "bullets": [
+        "Implemented engine-driven search configuration via JSON (engine.json) for fields, facets, sorting, and query suggestions without regenerating the app.",
+        "Set up reproducible local development with Node 16.13.0 and npm, and enabled static asset build-and-embed workflow for production hosting."
+      ]
+    },
+    {
+      "name": "LLM Response Aggregation Tool",
+      "tech": [
+        "Selenium IDE",
+        "Python",
+        "LLM Evaluation",
+        "Data Automation"
+      ],
+      "start": "May 2024",
+      "end": "Jul 2024",
+      "code_url": "https://github.com/rahul-1415/LLM-AggregationTool",
+      "description": "Built a web automation and evaluation pipeline to run prompts through multiple LLMs, aggregate responses in structured sheets, and benchmark output quality with NLP metrics.",
+      "bullets": [
+        "Automated prompt execution with Selenium IDE across ChatGPT, Gemini, Claude, Perplexity, Meta AI, and HuggingChat using a localhost prompt-reader workflow.",
+        "Captured model responses in Google Forms and exported to Excel/CSV for downstream analysis and reporting.",
+        "Implemented Python-based evaluation workflows using BLEU, ROUGE, cosine similarity, Distinct-1/2, sentiment, response-length analysis, and word clouds.",
+        "Included data-scraping support for 790 climate policy articles from c40knowledgehub.org to build evaluation and comparison datasets."
+      ]
+    },
+    {
+      "name": "Sentiment Analysis on Twitter Datasets (NLP)",
+      "tech": [
+        "Python",
+        "Amazon SageMaker"
+      ],
+      "start": "Jan 2024",
+      "end": "May 2024",
+      "code_url": "https://github.com/rahul-1415/Sentiment-Analysis-on-Twitter-Datasets",
+      "bullets": [
+        "Implemented SVM, Logistic Regression, Naive Bayes, XGBoost, BiLSTM, and CNN models on 416K tweets, achieving 97% accuracy with CNN using TF-IDF/word-embedding preprocessing and stratified sampling.",
+        "Identified SVM as the most robust model (94.15% accuracy) through comparative ROC and confusion matrix analysis."
+      ]
+    },
+    {
+      "name": "IoT Device Manager using Blockchain",
+      "tech": [
+        "MetaMask",
+        "Truffle Framework",
+        "Ganache",
+        "Solidity",
+        "React.js"
+      ],
+      "start": "Jan 2023",
+      "end": "May 2023",
+      "code_url": "https://github.com/rahul-1415/IOTDM",
+      "description": "Establishing a robust and secure framework for the management of IoT devices, underpinned by data immutability and transparency using blockchain technology.",
+      "bullets": [
+        "Implemented a blockchain-based solution for IoT device management.",
+        "Recorded critical transactions including device registration, management, and ownership transfers.",
+        "Developed a user-friendly web application using ReactJS."
+      ]
+    },
+    {
+      "name": "Forest Monitoring using Hyperspectral Imaging",
+      "tech": [
+        "Scikit-Learn",
+        "TensorFlow",
+        "Python",
+        "NumPy",
+        "Pandas"
+      ],
+      "start": "Nov 2022",
+      "end": "May 2023",
+      "code_url": "https://github.com/rahul-1415/Forest-Monitoring",
+      "description": "Utilizes hyperspectral imaging for forest terrain monitoring using the Indian Pines dataset with a hybrid classification method including SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.",
+      "bullets": [
+        "Utilized Indian Pines dataset for hyperspectral imaging.",
+        "Employed hybrid classification methods combining SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.",
+        "Provided comprehensive insights including vegetation cover percentage, building presence, and hazard detection."
+      ]
+    },
+    {
+      "name": "Web Phishing Detection",
+      "tech": [
+        "Python",
+        "Machine Learning",
+        "IBM Cloud"
+      ],
+      "start": "Aug 2022",
+      "end": "Nov 2022",
+      "code_url": "https://github.com/rahul-1415/IBM-Project-4998-1658745015",
+      "description": "A Python-based solution deployed on the IBM Cloud platform for detection of phishing websites using machine learning techniques.",
+      "bullets": [
+        "Trained 10 machine learning models for phishing detection.",
+        "Deployed the highest accuracy model on IBM Cloud.",
+        "Developed a website interface for user interaction with the phishing detection system."
+      ]
+    },
+    {
+      "name": "Path Navigation using Deep Q Learning",
+      "tech": [
+        "Python",
+        "Kivy",
+        "PyTorch",
+        "NumPy"
+      ],
+      "start": "Jan 2022",
+      "end": "Sep 2022",
+      "code_url": "https://github.com/rahul-1415/PathNavigation/tree/main/PathNavigation",
+      "description": "Application using Kivy and PyTorch simulating an autonomous vehicle navigating a designed map with manually placed obstacles.",
+      "bullets": [
+        "Used Deep Q Networks (DQNs) with relu activation functions for navigation.",
+        "Designed a reward system to improve obstacle avoidance capabilities.",
+        "Received approval for publication in ADCOM Volume 133."
+      ]
+    },
+    {
+      "name": "Tournament Manager",
+      "tech": [
+        "Java",
+        "MySQL"
+      ],
+      "start": "Jul 2021",
+      "end": "Nov 2021",
+      "code_url": "https://github.com/rahul-1415/Tournament-Manager/tree/main/Tournament_Manager",
+      "description": "A Java-based application for efficient organization of sports tournaments.",
+      "bullets": [
+        "Designed and configured tournaments for different divisions and sports.",
+        "Streamlined team enrollment and player information updates."
+      ]
+    },
+    {
+      "name": "Harmful Comments Classifier",
+      "tech": [
+        "Python",
+        "NLP",
+        "Deep Learning"
+      ],
+      "start": "Jan 2021",
+      "end": "Apr 2021",
+      "code_url": "https://github.com/rahul-1415/Harmful-Comments-Classifier",
+      "description": "A Python-based NLP project executed in Google Colab for classifying comments based on toxicity.",
+      "bullets": [
+        "Developed a deep learning model using embedding techniques, bi-directional LSTM, and dense models.",
+        "Executed within the Google Colab environment."
+      ]
+    },
+    {
+      "name": "EATERIO",
+      "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "MongoDB"
+      ],
+      "start": "Jan 2020",
+      "end": "May 2020",
+      "code_url": "https://github.com/rahul-1415/EATERIO",
+      "description": "A web application for food ordering and management within organizations.",
+      "bullets": [
+        "Streamlined the food ordering process within organizations.",
+        "Provided a user-friendly interface for placing and managing food orders."
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "type": "Research Publication",
+      "title": "Performance within the Foundation Paradox: The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields",
+      "date": "Feb 2026",
+      "status": "Submitted (In Progress)",
+      "description": "Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss."
+    },
+    {
+      "type": "Journal Publication",
+      "title": "An Automatic Path Navigation for Visually Challenged People using Deep Q Learning",
+      "date": "Jan 2023",
+      "venue": "Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218",
+      "status": "Published",
+      "description": "Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Solutions Architect - Associate",
+      "issuer": "Amazon Web Services (AWS)",
+      "issued": "May 2025",
+      "expires": "May 2028",
+      "credential_id": "ab66555f0c4d4fa69015b02bd7e4bdc5",
+      "url": "https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5"
+    },
+    {
+      "name": "AIG - Actuarial Analyst",
+      "issuer": "Forage",
+      "issued": "Sep 2025",
+      "credential_id": "6D2BARv5wgwb9AqEx",
+      "skills": [
+        "Data Analysis",
+        "Visual Analytics"
+      ],
+      "url": "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/4nAmAbTbHbnGMNSyo/b7MfbG9W4iCNGnd23_4nAmAbTbHbnGMNSyo_68c0c162a8bab8f37499f4fe_1757464209554_completion_certificate.pdf"
+    },
+    {
+      "name": "COEBC - Code of Ethical Business Conduct Training",
+      "issuer": "CITI Program",
+      "issued": "Jun 2024",
+      "credential_id": "60593265",
+      "url": "https://www.citiprogram.org/verify/?wcbcd3d78-36dc-436e-9a18-03b7a65d2667-60593265"
+    },
+    {
+      "name": "RCR - Graduate Student and Postdoctoral Researcher Responsible Conduct of Research",
+      "issuer": "CITI Program",
+      "issued": "Jun 2024",
+      "credential_id": "63090511",
+      "url": "https://www.citiprogram.org/verify/?w58a49120-ed91-4173-a64b-7f0f572872e9-63090511"
+    },
+    {
+      "name": "IRB - Social & Behavioral Research (Group 2)",
+      "issuer": "CITI Program",
+      "issued": "Jan 2024",
+      "expires": "Jan 2028",
+      "credential_id": "60593339",
+      "url": "https://www.citiprogram.org/verify/?w71f8c2ca-2167-4717-9208-d58cdf528614-60593339"
+    },
+    {
+      "name": "Computer Architecture and Computer Organization Masterclass",
+      "issuer": "Udemy",
+      "issued": "Feb 2024",
+      "credential_id": "UC-4a6796d5-5009-4e25-af33-bcd88d61649b",
+      "skills": [
+        "Computer Architecture"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-4a6796d5-5009-4e25-af33-bcd88d61649b/"
+    },
+    {
+      "name": "Applied Data Science Capstone",
+      "issuer": "Coursera",
+      "issued": "Aug 2023",
+      "credential_id": "4LQXS9ZN4373",
+      "skills": [
+        "Exploratory Data Analysis",
+        "Visual Analytics",
+        "Data Science",
+        "Data Analysis"
+      ],
+      "url": "https://www.coursera.org/verify/4LQXS9ZN4373"
+    },
+    {
+      "name": "Foundations of User Experience (UX) Design",
+      "issuer": "Coursera",
+      "issued": "Aug 2023",
+      "credential_id": "LMHXK6GDTHZ9",
+      "skills": [
+        "User Experience (UX)",
+        "Wireframing"
+      ],
+      "url": "https://www.coursera.org/verify/LMHXK6GDTHZ9"
+    },
+    {
+      "name": "DevOps Beginners to Advanced with Projects - 2023",
+      "issuer": "Udemy",
+      "issued": "Aug 2023",
+      "credential_id": "UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9",
+      "skills": [
+        "Scripting",
+        "Docker",
+        "Linux",
+        "Kubernetes",
+        "Amazon Web Services (AWS)"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9/"
+    },
+    {
+      "name": "Angular - The Complete Guide (2023 Edition)",
+      "issuer": "Udemy",
+      "issued": "Jun 2023",
+      "credential_id": "UC-1bc4bd69-2022-4696-a861-135f3688bb57",
+      "skills": [
+        "AngularJS",
+        "Angular"
+      ],
+      "url": "https://www.udemy.com/certificate/UC-1bc4bd69-2022-4696-a861-135f3688bb57/"
+    }
+  ],
+  "skills": {
+    "backend": [
+      "Python",
+      "FastAPI",
+      "Django",
+      "Flask",
+      "Java",
+      "REST APIs",
+      "Microservices",
+      "PostgreSQL",
+      "MySQL"
+    ],
+    "frontend": [
+      "React",
+      "Angular",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "HTML5",
+      "CSS3",
+      "State Management",
+      "Responsive UI"
+    ],
+    "ai_ml": [
+      "GPT-4",
+      "LLaMA",
+      "LangChain",
+      "RAG Frameworks",
+      "Prompt Engineering",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn",
+      "Hugging Face"
+    ],
+    "data_engineering": [
+      "Pandas",
+      "NumPy",
+      "ETL Pipelines",
+      "Data Validation",
+      "Warehousing",
+      "Data Lakes",
+      "Data Governance",
+      "XGBoost",
+      "Analytics"
+    ],
+    "cloud_devops": [
+      "AWS",
+      "Docker",
+      "CI/CD",
+      "ECS",
+      "S3",
+      "CloudWatch",
+      "Google Cloud Run",
+      "Scalability",
+      "Runtime Monitoring"
+    ],
+    "developer_workflow": [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Node.js",
+      "Express",
+      "GraphQL",
+      "API Integration",
+      "Component Architecture",
+      "Lazy Loading",
+      "Webpack",
+      "Async Programming",
+      "MongoDB"
+    ]
+  },
+  "blogs": [
+    {
+      "title": "Opioid Risk Geo Dashboard",
+      "tech": [
+        "React",
+        "TypeScript",
+        "FastAPI"
+      ],
+      "description": "Wrote about building an Arizona overdose-risk visualizer at Census Block Group resolution, covering the geospatial UI, API integration, and product decisions behind the dashboard.",
+      "live_url": "https://opioid-overdose-forecasting.netlify.app/",
+      "medium_url": "https://rahul-b.medium.com/building-an-opioid-overdose-risk-visualizer-for-arizona-at-census-block-group-resolution-a1519a7f3a75",
+      "code_url": "https://github.com/rahul-1415/Opioid-Overdose-Forecasting"
+    },
+    {
+      "title": "Climate Policy RAG App",
+      "tech": [
+        "Streamlit",
+        "LangChain",
+        "ChromaDB"
+      ],
+      "description": "Documented how the climate-policy assistant was built using retrieval, reranking, post-processing, and analytics to improve answer quality and make the app more useful for policy research workflows.",
+      "live_url": "https://cap-rag.streamlit.app/",
+      "medium_url": "https://medium.com/@rahul-b/building-a-climate-policy-rag-assistant-with-reranking-post-processing-and-analytics-3a28d4749884",
+      "code_url": "https://github.com/rahul-1415/CAP-RAG"
+    }
+  ]
+}
