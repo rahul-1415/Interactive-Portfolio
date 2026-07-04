@@ -33,12 +33,38 @@ function FloatingGalley() {
   )
 }
 
-function DockDistrict() {
-  const sunny = useNormalizedGLTF('/models/thousand-sunny.glb', 18)
+function HomeSunny() {
+  // The Thousand Sunny at anchor — the voyage's home port. The Mini Merry
+  // launches from her soldier dock at the start.
+  const sunny = useNormalizedGLTF('/models/thousand-sunny.glb', 19)
   return (
     <group>
-      {/* Flagship launched in the harbor */}
-      <primitive object={sunny} position={[10, -0.4, -6]} rotation-y={-0.9} />
+      <primitive object={sunny} position={[0, -0.5, 0]} rotation-y={-0.35} />
+      {/* Masthead lantern for bloom */}
+      <mesh position={[0, 12.5, 0]}>
+        <sphereGeometry args={[0.55, 12, 12]} />
+        <meshBasicMaterial color={[3.2, 2.6, 1.0]} toneMapped={false} />
+      </mesh>
+    </group>
+  )
+}
+
+function DockDistrict() {
+  return (
+    <group>
+      {/* Hull under construction in the drydock */}
+      <group position={[9, 0, -4]} rotation-y={-0.7}>
+        <mesh position={[0, 1.2, 0]}>
+          <boxGeometry args={[13, 0.8, 1]} />
+          <meshToonMaterial color="#8A4E1E" />
+        </mesh>
+        {[-5, -2.5, 0, 2.5, 5].map((x, i) => (
+          <mesh key={i} position={[x, 2.6, 0]} rotation-x={Math.PI / 2}>
+            <torusGeometry args={[2.6, 0.28, 6, 12, Math.PI]} />
+            <meshToonMaterial color="#AF6528" />
+          </mesh>
+        ))}
+      </group>
       {/* Drydock gantry cranes */}
       {[-6, 0, 6].map((x, i) => (
         <group key={i} position={[x, 0, 4]}>
@@ -162,6 +188,7 @@ function TwinCapeLight() {
 }
 
 export const LANDMARKS: Record<SectionId, () => React.JSX.Element> = {
+  home: HomeSunny,
   experience: FloatingGalley,
   projects: DockDistrict,
   education: KnowledgeTree,

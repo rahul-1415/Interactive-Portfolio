@@ -4,7 +4,9 @@ import { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { PerformanceMonitor } from '@react-three/drei'
 import { useWorldStore } from '@/stores/world'
+import { useSettings } from '@/stores/settings'
 import { Ocean } from './Ocean'
+import { DockMarkers } from './DockMarkers'
 import { Ship } from './Ship'
 import { Islands } from './Islands'
 import { FollowCamera } from './FollowCamera'
@@ -23,30 +25,38 @@ export default function Scene() {
   // 'always' once the voyage begins. This keeps the pre-sail page cheap (big
   // Lighthouse/TTI win) without affecting the live experience.
   const voyageStarted = useWorldStore((s) => s.voyageStarted)
+  const quality = useSettings((s) => s.quality)
+  const effectiveDpr = quality === 'low' ? 1 : quality === 'high' ? (isMobile ? 1.5 : 2) : dpr
+  const lowFx = quality === 'low' || isMobile
 
   return (
     <div className="scene-root">
       <Canvas
-        camera={{ position: [0, 8, -18], fov: 50, near: 0.1, far: 700 }}
-        dpr={dpr}
+        // Matches the straight-rig position for the ship's launch start, so the
+        // camera never has to fly past the Thousand Sunny to reach its mark.
+        camera={{ position: [5, 10, -16], fov: 50, near: 0.1, far: 700 }}
+        dpr={effectiveDpr}
         frameloop={voyageStarted ? 'always' : 'demand'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}
       >
-        <PerformanceMonitor
-          onIncline={() => setDpr(Math.min(isMobile ? 1.5 : 2, dpr + 0.5))}
-          onDecline={() => setDpr(Math.max(1, dpr - 0.5))}
-        />
+        {quality === 'auto' && (
+          <PerformanceMonitor
+            onIncline={() => setDpr(Math.min(isMobile ? 1.5 : 2, dpr + 0.5))}
+            onDecline={() => setDpr(Math.max(1, dpr - 0.5))}
+          />
+        )}
         <fog attach="fog" args={['#cfeaf7', 70, 240]} />
         <SkyDome />
         <ambientLight intensity={0.65} color="#dff3ff" />
         <directionalLight position={[45, 70, -35]} intensity={1.7} color="#fff4d6" />
         <Ocean />
+        <DockMarkers />
         <Suspense fallback={null}>
           <Ship />
           <Islands />
         </Suspense>
         <FollowCamera />
-        <Effects mobile={isMobile} />
+        <Effects mobile={lowFx} />
       </Canvas>
     </div>
   )

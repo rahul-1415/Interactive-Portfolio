@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { portfolio } from '@/content'
-import type { SectionId } from '@/content/islands'
+import { ISLANDS, type SectionId } from '@/content/islands'
+import { useWorldStore } from '@/stores/world'
 
 function bounty(rank: number, total: number): string {
   return `฿${((total - rank) * 100_000_000).toLocaleString('en-US')}`
@@ -239,7 +240,59 @@ export function ContactCape() {
   )
 }
 
+export function HomeDashboard() {
+  const { stats, summary, personal, social_links } = portfolio
+  const tiles: [string, number][] = [
+    ['Years at sea', stats.years_experience],
+    ['Ships launched', stats.projects],
+    ['Papers charted', stats.publications],
+    ['Commendations', stats.certifications],
+  ]
+  return (
+    <div className="home-dash">
+      <p className="home-summary">{summary}</p>
+
+      <div className="home-tiles">
+        {tiles.map(([label, value]) => (
+          <div key={label} className="home-tile">
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <p className="home-course-lead">Set a course — or sail there yourself:</p>
+      <div className="home-courses">
+        {ISLANDS.filter((i) => i.id !== 'home').map((island) => (
+          <button
+            key={island.id}
+            style={{ '--accent': island.accent } as React.CSSProperties}
+            onClick={() => useWorldStore.getState().dock(island.id)}
+          >
+            <strong>{island.name}</strong>
+            <span>{island.tagline}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="signal-flags home-flags">
+        <a href={`mailto:${personal.email}`}>✉ Email</a>
+        <a href={social_links.github} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        <a href={social_links.linkedin} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
+        <a className="vivre-card home-vivre" href="/resume/Rahul-Babu-Resume.pdf" download>
+          ⎙ Résumé
+        </a>
+      </div>
+    </div>
+  )
+}
+
 export const SECTION_RENDERERS: Record<SectionId, () => React.JSX.Element> = {
+  home: HomeDashboard,
   experience: ExperienceMenu,
   projects: ProjectPosters,
   education: EducationTomes,

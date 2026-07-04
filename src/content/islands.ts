@@ -1,5 +1,5 @@
 export type SectionId =
-  'experience' | 'projects' | 'education' | 'publications' | 'certifications' | 'contact'
+  'home' | 'experience' | 'projects' | 'education' | 'publications' | 'certifications' | 'contact'
 
 export interface IslandDef {
   id: SectionId
@@ -23,6 +23,16 @@ export interface IslandDef {
  * opening shot frames the whole voyage. Order follows the recommended route.
  */
 export const ISLANDS: IslandDef[] = [
+  {
+    id: 'home',
+    name: 'The Thousand Sunny',
+    inspiredBy: 'the Soldier Dock System',
+    tagline: 'Home port — the whole voyage at a glance',
+    position: [20, 18],
+    dockRadius: 26,
+    landRadius: 12,
+    accent: '#FFCE00',
+  },
   {
     id: 'experience',
     name: 'The Floating Galley',

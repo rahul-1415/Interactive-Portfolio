@@ -46,7 +46,7 @@ export function Islands() {
         const Landmark = LANDMARKS[island.id]
         return (
           <group key={island.id} position={[island.position[0], 0, island.position[1]]}>
-            {island.id !== 'publications' && (
+            {island.id !== 'publications' && island.id !== 'home' && (
               <IslandBase variant={(index % 2) as 0 | 1} radius={island.landRadius} />
             )}
             <Landmark />

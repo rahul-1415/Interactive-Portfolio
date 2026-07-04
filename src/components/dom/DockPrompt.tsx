@@ -7,12 +7,18 @@ import { useWorldStore } from '@/stores/world'
 export function DockPrompt() {
   const nearIsland = useWorldStore((s) => s.nearIsland)
   const docked = useWorldStore((s) => s.docked)
+  const launching = useWorldStore((s) => s.launching)
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.code !== 'KeyE') return
-      const { nearIsland: near, docked: isDocked, dock } = useWorldStore.getState()
-      if (near && !isDocked) dock(near)
+      const {
+        nearIsland: near,
+        docked: isDocked,
+        launching: isLaunching,
+        dock,
+      } = useWorldStore.getState()
+      if (near && !isDocked && !isLaunching) dock(near)
     }
     window.addEventListener('keydown', onKey)
     if (process.env.NODE_ENV !== 'production') {
@@ -23,7 +29,7 @@ export function DockPrompt() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  if (!nearIsland || docked) return null
+  if (!nearIsland || docked || launching) return null
   const island = ISLANDS.find((i) => i.id === nearIsland)
   if (!island) return null
 

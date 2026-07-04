@@ -7,7 +7,7 @@ import { SECTION_RENDERERS } from './sections'
 export function LogBody() {
   return (
     <>
-      {ISLANDS.map((island) => {
+      {ISLANDS.filter((island) => island.id !== 'home').map((island) => {
         const Section = SECTION_RENDERERS[island.id]
         return (
           <section key={island.id} className="log-section" id={island.id}>

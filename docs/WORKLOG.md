@@ -2,6 +2,32 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (v2.1) — Rahul's feature round: launch sequence, home port, minimap, settings
+
+Owner feedback drove this round:
+
+- **Straight camera is now the default** — made viable by shrinking the player ship to the
+  Mini Merry (5.5u, canon: the Sunny's soldier dock carries the Mini Merry II) so the
+  camera sees clean over her sails. The ¾ "Cinematic" rig remains as a Settings option.
+- **Soldier-dock launch**: clicking Set Sail plays a 3s scripted slide — the Mini Merry
+  emerges from beside the Thousand Sunny's hull into open water (camera on a fixed dolly
+  to its post-launch mark so it never clips the Sunny; helm/docking locked during).
+  Several geometry iterations — the Sunny is huge; the path must stay clear of her bow line.
+- **The Thousand Sunny is the home port** (new `home` registry entry at spawn): dock at
+  her for a dashboard modal — summary, 4 stat tiles, "set a course" cards that open any
+  section's modal directly, socials + resume. Excluded from /log (redundant there).
+- **Minimap**: parchment sea-chart (bottom-right) with accent-colored island dots,
+  gold-pulse on the dockable island, live red ship arrow (120ms tick). Hidden until sail.
+- **Settings — "Ship's Wheel"** (top-right ☸): camera rig, quality (auto/high/low wired
+  to DPR + effects), controls reference, plain-site link. Persisted to localStorage.
+- **3D dock guidance**: accent ring on the water at each island's dock radius, flaring
+  gold + pulsing when in range, plus a light-beam beacon over the dockable island.
+- Dock District got a hull-under-construction (the Sunny moved home); dock prompt hidden
+  and E ignored during launch.
+- Disk hit 100% AGAIN mid-round (Playwright-process escape hatch used again; npm cache +
+  .next cleared). **Rahul: the disk needs a real cleanup.**
+- Gates green: typecheck, lint, 6 unit, build, 6 e2e. Screenshots: docs/screenshots/v21/.
+
 ## 2026-07-04 (Phase 4 close) — Lighthouse, a11y 100, cross-viewport QA
 
 - Idled the render loop behind the Set Sail gate (`frameloop='demand'` until voyageStarted)
