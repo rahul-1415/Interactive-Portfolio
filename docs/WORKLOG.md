@@ -2,6 +2,21 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (evening) — Phase 0 shipped: CI green + v2 branch deploy live
+
+- CI initially failed: lockfile missing linux optional deps (`@emnapi/*`) after the
+  incremental eslint change — regenerated lockfile from scratch, verified `npm ci` clean;
+  CI green in 49s.
+- Netlify branch deploys enabled for `v2` (API: `allowed_branches: [main, v2]`).
+- **Repaired broken Netlify↔GitHub linkage**: the site had no deploy key and the repo had
+  none registered ("Host key verification failed" on clone — also the cause of the two
+  errored `main` deploys today). Minted a new deploy key via Netlify API, registered it on
+  the GitHub repo (read-only), attached it to the site.
+- **v2 preview live: https://v2--rahulbabu.netlify.app** — verified with Playwright against
+  the deployed URL: renders identically to local, zero console errors.
+- Note: `main` (old site) UI build command restored to `yarn run build`; v2's netlify.toml
+  overrides with npm. Production still serves the last good main deploy — untouched.
+
 ## 2026-07-04 (later) — Phase 0 verified green
 
 - Research workflow completed (5 agents, ~195k tokens) → `docs/DESIGN.md` design bible

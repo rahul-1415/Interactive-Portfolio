@@ -24,9 +24,11 @@
 - [x] Placeholder ocean scene (CPU low-poly waves, anime gradient sky dome, fog, camera bob)
 - [x] `npm install` + typecheck + lint + test + build all green locally
 - [x] Design bible synthesized from research → `DESIGN.md` ("The Grand Log")
-- [ ] GitHub Actions CI green
-- [ ] Netlify deploy preview of `v2` live
-- [ ] Milestone commit + push
+- [x] GitHub Actions CI green
+- [x] Netlify deploy preview of `v2` live → **https://v2--rahulbabu.netlify.app**
+- [x] Milestone commit + push
+
+**Phase 0 complete (2026-07-04).**
 
 ### Phase 1 — The Ocean & The Ship
 
