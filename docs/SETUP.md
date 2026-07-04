@@ -14,7 +14,7 @@ npm run dev        # http://localhost:3000
 | --------------------------------- | ------------------------------------ |
 | `npm run dev` / `build` / `start` | Next.js                              |
 | `npm run typecheck`               | `tsc --noEmit` (strict)              |
-| `npm run lint` / `lint:fix`       | ESLint 10 flat config                |
+| `npm run lint` / `lint:fix`       | ESLint 9 flat config                 |
 | `npm run test` / `test:watch`     | Vitest — content invariants + units  |
 | `npm run test:e2e`                | Playwright (boots dev server itself) |
 | `npm run format`                  | Prettier                             |
