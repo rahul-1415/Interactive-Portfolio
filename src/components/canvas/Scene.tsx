@@ -1,7 +1,8 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
+import { PerformanceMonitor } from '@react-three/drei'
 import { Ocean } from './Ocean'
 import { Ship } from './Ship'
 import { Islands } from './Islands'
@@ -9,14 +10,27 @@ import { FollowCamera } from './FollowCamera'
 import { SkyDome } from './SkyDome'
 import { Effects } from './Effects'
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+const isMobile = typeof window !== 'undefined' && window.matchMedia?.('(max-width: 820px)').matches
+
 export default function Scene() {
+  // Adaptive DPR: start modest, let PerformanceMonitor raise/lower with hysteresis.
+  const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
+
   return (
     <div className="scene-root">
       <Canvas
         camera={{ position: [0, 8, -18], fov: 50, near: 0.1, far: 700 }}
-        dpr={[1, 2]}
+        dpr={dpr}
+        frameloop={prefersReducedMotion ? 'demand' : 'always'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}
       >
+        <PerformanceMonitor
+          onIncline={() => setDpr(Math.min(isMobile ? 1.5 : 2, dpr + 0.5))}
+          onDecline={() => setDpr(Math.max(1, dpr - 0.5))}
+        />
         <fog attach="fog" args={['#cfeaf7', 70, 240]} />
         <SkyDome />
         <ambientLight intensity={0.65} color="#dff3ff" />
@@ -27,7 +41,7 @@ export default function Scene() {
           <Islands />
         </Suspense>
         <FollowCamera />
-        <Effects />
+        {!isMobile && <Effects />}
       </Canvas>
     </div>
   )

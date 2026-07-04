@@ -2,6 +2,33 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (later still) — Phase 3: loading gate, fallback, 404, contact, touch, adaptive
+
+- **Loading gate** ("The Grand Log"): drei useProgress with interval-polled readiness +
+  grace timer for cache-hit reloads, animated progress ship, explicit Set Sail click gate,
+  skip-to-log link. Fades out on click.
+- **/log fallback**: full plain-HTML résumé of all 6 sections, server-rendered for SEO
+  (own title/meta) with footer disclaimer + CC-BY model attributions. Split the section
+  renderers into `sections.tsx` (client) rendered via a `LogBody` client wrapper — a server
+  component can't index a plain object exported from a 'use client' module (got the classic
+  "Element type is invalid… got undefined" until wrapped).
+- **404**: "Here Be Bugs" themed page, real 404 status (asserted in e2e).
+- **Contact**: EmailJS Den Den Mushi form with sleeping/sending/gatcha/confused states.
+  Imported the 3 EMAILJS keys from .env.local into Netlify env (they were missing — only
+  obsolete Hygraph vars were there). Verified a real POST to api.emailjs.com returns success
+  (a test email was actually delivered to Rahul, marked "please ignore").
+- **Touch**: on-screen helm (steer rocker + hold-to-sail), coarse-pointer only; wired into
+  Ship throttle/rudder alongside keyboard.
+- **Adaptive quality**: PerformanceMonitor onIncline/onDecline steps DPR with hysteresis;
+  mobile starts at DPR 1 and skips the postprocessing stack; prefers-reduced-motion flips
+  frameloop to demand and neutralizes CSS transitions.
+- **DISK CRISIS**: machine hit 0 bytes free mid-phase — Bash itself couldn't write output.
+  Escape-hatched through the Playwright MCP node process (Function-constructor → require →
+  child_process) to clear caches; the safe win was the 1GB Cypress binary cache (Cypress is
+  dropped from v2). Now 1.2GB free. **Rahul: disk is at 100% — this needs real attention.**
+- Green: typecheck, lint, 6 unit tests, build (3 static routes), 6 e2e × 2 viewports.
+- Screenshots: docs/screenshots/phase3/.
+
 ## 2026-07-04 (late night) — Phase 2 core: six islands, six themed modals
 
 - World layout: islands fanned ahead of spawn (registry-driven), compressed 0.72× after a

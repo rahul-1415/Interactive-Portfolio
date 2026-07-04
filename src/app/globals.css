@@ -618,3 +618,360 @@ canvas {
   border-style: solid;
   box-shadow: 0 6px 16px rgba(26, 26, 26, 0.25);
 }
+
+/* ---------- Loading gate ---------- */
+
+.loading-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 2rem;
+  background: radial-gradient(ellipse at 50% 30%, #6fb9e8 0%, var(--gl-deep) 70%, #123a63 100%);
+  color: var(--gl-parchment);
+  transition: opacity 700ms ease;
+}
+
+.loading-gate-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.loading-title {
+  font-family: var(--font-pirata), serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.95;
+  color: var(--gl-parchment);
+  text-shadow: 3px 3px 0 rgba(10, 30, 54, 0.5);
+}
+
+.loading-sub {
+  font-size: 0.95rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  opacity: 0.9;
+}
+
+.loading-track {
+  position: relative;
+  width: min(420px, 78vw);
+  height: 6px;
+  background: rgba(10, 30, 54, 0.4);
+  border-radius: 4px;
+  margin-bottom: 1.8rem;
+}
+
+.loading-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gl-gold), #fff0b8);
+  border-radius: 4px;
+  transition: width 300ms ease;
+}
+
+.loading-ship {
+  position: absolute;
+  top: -14px;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+  transition: left 300ms ease;
+}
+
+.loading-status {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  opacity: 0.85;
+  min-height: 2.6rem;
+}
+
+.set-sail-btn {
+  font-family: var(--font-pirata), serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: var(--gl-ink);
+  background: linear-gradient(160deg, var(--gl-gold), #f0b800);
+  border: 3px solid var(--gl-ink);
+  border-radius: 0.5rem;
+  padding: 0.7rem 2.6rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 5px 0 rgba(10, 30, 54, 0.4);
+  transition: transform 120ms ease;
+  min-height: 2.6rem;
+}
+
+.set-sail-btn:hover {
+  transform: translateY(-2px);
+}
+
+.set-sail-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(10, 30, 54, 0.4);
+}
+
+.skip-voyage {
+  margin-top: 1.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--gl-cloud);
+  opacity: 0.8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.skip-voyage:hover {
+  opacity: 1;
+}
+
+/* ---------- Touch helm ---------- */
+
+.touch-helm {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.4rem;
+  pointer-events: none;
+}
+
+.touch-steer {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.touch-steer button,
+.touch-throttle {
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: var(--font-pirata), serif;
+  color: var(--gl-parchment);
+  background: rgba(26, 26, 26, 0.55);
+  border: 2px solid rgba(239, 224, 185, 0.5);
+  border-radius: 1rem;
+}
+
+.touch-steer button {
+  width: 64px;
+  height: 64px;
+  font-size: 1.5rem;
+}
+
+.touch-throttle {
+  padding: 1rem 1.8rem;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+}
+
+.touch-steer button:active,
+.touch-throttle:active {
+  background: rgba(215, 0, 0, 0.7);
+}
+
+/* ---------- Ship's Log (plain fallback) ---------- */
+
+.log-page {
+  position: static;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #f6ead0 0%, var(--gl-parchment) 100%);
+  color: var(--gl-sepia);
+  padding: clamp(1.5rem, 5vw, 4rem);
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+body:has(.log-page),
+html:has(.log-page) {
+  overflow: auto;
+}
+
+.log-header {
+  text-align: center;
+  border-bottom: 3px double var(--gl-sepia);
+  padding-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.log-header h1 {
+  font-family: var(--font-pirata), serif;
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  color: var(--gl-ink);
+  line-height: 1;
+}
+
+.log-title-line {
+  font-family: var(--font-rye), serif;
+  letter-spacing: 0.1em;
+  margin: 0.4rem 0 1rem;
+}
+
+.log-summary {
+  max-width: 640px;
+  margin: 0 auto 1.2rem;
+  line-height: 1.6;
+}
+
+.log-back a {
+  color: var(--gl-deep);
+  font-weight: 600;
+}
+
+.log-section {
+  margin-bottom: 3rem;
+}
+
+.log-section > h2 {
+  font-family: var(--font-pirata), serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--gl-ink);
+  border-bottom: 2px dashed rgba(75, 54, 33, 0.5);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.log-section-sub {
+  display: block;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+
+.log-footer {
+  border-top: 2px solid rgba(75, 54, 33, 0.4);
+  padding-top: 1.4rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  text-align: center;
+}
+
+.log-footer a {
+  color: var(--gl-deep);
+}
+
+/* ---------- 404 ---------- */
+
+.not-found {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-align: center;
+  padding: 2rem;
+  background: radial-gradient(ellipse at 50% 35%, #6fb9e8, var(--gl-deep) 75%);
+  color: var(--gl-parchment);
+}
+
+.not-found h1 {
+  font-family: var(--font-pirata), serif;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 1;
+  text-shadow: 3px 3px 0 rgba(10, 30, 54, 0.5);
+}
+
+.not-found-monster {
+  font-size: 4rem;
+}
+
+/* ---------- Den Den Mushi contact form ---------- */
+
+.denden-form {
+  max-width: 460px;
+  margin: 0 auto 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: rgba(255, 255, 255, 0.28);
+  border: 2px solid rgba(75, 54, 33, 0.4);
+  border-radius: 0.5rem;
+  padding: 1.1rem;
+}
+
+.denden-snail {
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+}
+
+.denden-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.denden-form input,
+.denden-form textarea {
+  flex: 1;
+  width: 100%;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  color: var(--gl-sepia);
+  background: var(--gl-cloud);
+  border: 2px solid var(--gl-sepia);
+  border-radius: 0.3rem;
+  padding: 0.55rem 0.7rem;
+  resize: vertical;
+}
+
+.denden-form button {
+  font-family: var(--font-pirata), serif;
+  font-size: 1.1rem;
+  color: var(--gl-parchment);
+  background: var(--gl-deep);
+  border: 2px solid var(--gl-ink);
+  border-radius: 0.4rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.denden-form button:hover {
+  background: var(--gl-red);
+}
+
+.denden-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.denden-status {
+  font-size: 0.85rem;
+}
+
+.denden-ok {
+  color: #2e6b34;
+  font-weight: 600;
+}
+
+.denden-err {
+  color: var(--gl-red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

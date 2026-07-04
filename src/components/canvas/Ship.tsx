@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import { getShipAttitude } from '@/lib/waves'
 import { useShipStore } from '@/stores/ship'
 import { useWorldStore } from '@/stores/world'
+import { useTouchInput } from '@/stores/input'
 import { ISLANDS } from '@/content/islands'
 import { bindKeys, isDown } from '@/lib/input'
 
@@ -52,18 +53,21 @@ export function Ship() {
 
     // Helm is locked while docked; the ship coasts to a stop
     const docked = useWorldStore.getState().docked !== null
+    const touch = useTouchInput.getState()
 
-    // Throttle with inertia
-    const throttleTarget =
-      !docked && isDown('KeyW', 'ArrowUp')
+    // Throttle with inertia — keyboard or on-screen throttle
+    const throttleTarget = docked
+      ? 0
+      : isDown('KeyW', 'ArrowUp')
         ? MAX_SPEED
-        : !docked && isDown('KeyS', 'ArrowDown')
+        : isDown('KeyS', 'ArrowDown')
           ? REVERSE_SPEED
-          : 0
+          : touch.throttle * MAX_SPEED
     const speed = THREE.MathUtils.damp(store.speed, throttleTarget, ACCEL_DAMP, delta)
 
     // Rudder authority scales with speed so the ship can't spin in place
-    const rudder = (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
+    const keyRudder = (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
+    const rudder = docked ? 0 : keyRudder !== 0 ? keyRudder : -touch.steer
     const authority = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0.15, 1)
     state.current.angularVelocity = THREE.MathUtils.damp(
       state.current.angularVelocity,

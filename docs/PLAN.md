@@ -68,14 +68,21 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 - [ ] Contact form via EmailJS (currently mailto + socials) — Phase 3
 - [ ] Supplemental CC0 dressing assets (palms, barrels, gulls) — polish pass
 
-### Phase 3 — Polish & Resilience
+### Phase 3 — Polish & Resilience ⏳ core complete
 
-- [ ] Loading choreography with real progress (drei useProgress) — themed
-- [ ] Adaptive quality: DPR scaling, reduced geometry tier for mobile, demand frameloop when idle
-- [ ] `prefers-reduced-motion` support
-- [ ] Accessible non-3D fallback page with all content (doubles as SEO surface)
-- [ ] Audio (optional, off by default): ocean ambience with a themed toggle
-- [ ] 404 page (themed)
+- [x] Loading gate: "The Grand Log" chart-loader with real drei useProgress, animated
+      progress ship, explicit "Set Sail" click gate, skip-to-log link
+- [x] Accessible non-3D fallback at `/log` — all 6 sections server-rendered from the same
+      data + renderers (SEO surface, own `<title>`/meta, footer attributions/disclaimer)
+- [x] Themed 404 ("Here Be Bugs") returning real 404 status
+- [x] EmailJS Den Den Mushi contact form (sleeping→sending→gatcha states); keys imported
+      to Netlify env; verified a live send returns success
+- [x] Touch: on-screen helm (steer rocker + hold-to-sail throttle), coarse-pointer only
+- [x] Adaptive quality: PerformanceMonitor drives DPR with hysteresis; mobile starts lower
+      and skips postprocessing; `prefers-reduced-motion` → demand frameloop + killed transitions
+- [x] e2e extended: /log content + no-canvas + 404-status assertions (6 tests × 2 viewports)
+- [ ] Audio (optional ocean ambience + mute) — deferred to Phase 4 polish
+- [ ] Wake foam / sail wind shader — deferred polish
 
 ### Phase 4 — Ship It
 

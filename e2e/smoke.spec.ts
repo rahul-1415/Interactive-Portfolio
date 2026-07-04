@@ -19,3 +19,19 @@ test('the experience loads without errors', async ({ page }) => {
   expect(pageErrors).toEqual([])
   expect(consoleErrors).toEqual([])
 })
+
+test('the ship’s log fallback serves all content without WebGL', async ({ page }) => {
+  await page.goto('/log')
+  await expect(page).toHaveTitle(/Ship.s Log/)
+  await expect(page.locator('canvas')).toHaveCount(0)
+  await expect(page.locator('.log-section')).toHaveCount(6)
+  // Content is real, server-rendered (SEO surface)
+  await expect(page.getByText('Friedman Vartolo')).toBeVisible()
+  await expect(page.getByRole('link', { name: /résumé/i })).toBeVisible()
+})
+
+test('unknown routes show the themed 404', async ({ page }) => {
+  const response = await page.goto('/no-such-cove')
+  expect(response?.status()).toBe(404)
+  await expect(page.getByRole('heading', { name: 'Here Be Bugs' })).toBeVisible()
+})
