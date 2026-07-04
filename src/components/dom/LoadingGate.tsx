@@ -41,7 +41,14 @@ export function LoadingGate() {
       <h2 className="loading-title">The Grand Log</h2>
       <p className="loading-sub">Rahul Babu — Software Engineer</p>
 
-      <div className="loading-track" role="progressbar" aria-valuenow={shownProgress}>
+      <div
+        className="loading-track"
+        role="progressbar"
+        aria-label="Charting the voyage"
+        aria-valuenow={shownProgress}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
         <div className="loading-fill" style={{ width: `${shownProgress}%` }} />
         <span className="loading-ship" style={{ left: `${shownProgress}%` }}>
           ⛵
