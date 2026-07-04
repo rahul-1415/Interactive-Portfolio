@@ -49,14 +49,24 @@
 Fleet compressed & staged in `public/models/`: thousand-sunny 729KB, moby-dick 537KB,
 islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 
-### Phase 2 — Islands & Content
+### Phase 2 — Islands & Content ⏳ core complete
 
-- [ ] Island registry: 6 islands (Experience, Projects, Education, Publications,
-      Certifications, Contact) themed per DESIGN.md location mapping
-- [ ] Asset pipeline: compress existing models; source supplemental CC0 assets per DESIGN.md
-- [ ] Proximity detection → HUD prompt → modal opens (wanted-poster / log-book styled)
-- [ ] All modals data-driven from `rahul-babu-data.json`
-- [ ] Resume download (public/resume/Rahul-Babu-Resume.pdf) + contact via EmailJS
+- [x] Island registry (`src/content/islands.ts`): 6 islands themed per DESIGN.md — The
+      Floating Galley (Baratie/experience), Dock District (Water 7/projects, Thousand Sunny
+      moored), The Knowledge Tree (Ohara/education), The Press Balloon (publications),
+      Fort Meridian (Marineford/certifications), Twin Cape Light (contact)
+- [x] Landmark silhouettes from cel-toned primitives + repurposed ship models; emissive
+      beacons for bloom; Bangers name boards on billboards
+- [x] Proximity → dock prompt (⚓ + island name + E key) → modal; Esc/Set Sail undocks;
+      helm locks while docked; soft radial island collision
+- [x] All 6 modals data-driven and One Piece-styled: menu card (experience), WANTED
+      posters w/ bounties (projects), tomes (education), Grand Line Times broadsheet
+      (publications), wax-seal commendations (certifications), signal flags + Vivre Card
+      resume (contact)
+- [x] Typography system live: Pirata One / Rye / Alfa Slab One / Inter via next/font
+- [x] Verified end-to-end: sail → prompt → dock → modal → escape, zero console errors
+- [ ] Contact form via EmailJS (currently mailto + socials) — Phase 3
+- [ ] Supplemental CC0 dressing assets (palms, barrels, gulls) — polish pass
 
 ### Phase 3 — Polish & Resilience
 

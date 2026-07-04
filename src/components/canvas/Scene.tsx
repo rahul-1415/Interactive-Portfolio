@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Ocean } from './Ocean'
 import { Ship } from './Ship'
+import { Islands } from './Islands'
 import { FollowCamera } from './FollowCamera'
 import { SkyDome } from './SkyDome'
 import { Effects } from './Effects'
@@ -23,6 +24,7 @@ export default function Scene() {
         <Ocean />
         <Suspense fallback={null}>
           <Ship />
+          <Islands />
         </Suspense>
         <FollowCamera />
         <Effects />

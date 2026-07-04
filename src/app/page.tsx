@@ -1,4 +1,6 @@
 import { SceneCanvas } from '@/components/canvas/SceneCanvas'
+import { DockPrompt } from '@/components/dom/DockPrompt'
+import { IslandModal } from '@/components/dom/IslandModal'
 import { portfolio } from '@/content'
 
 export default function Home() {
@@ -10,6 +12,8 @@ export default function Home() {
         <p>{portfolio.personal.title}</p>
       </header>
       <p className="hud-hint">W A S D — take the helm</p>
+      <DockPrompt />
+      <IslandModal />
     </main>
   )
 }

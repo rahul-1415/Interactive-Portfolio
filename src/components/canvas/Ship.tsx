@@ -6,11 +6,13 @@ import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { getShipAttitude } from '@/lib/waves'
 import { useShipStore } from '@/stores/ship'
+import { useWorldStore } from '@/stores/world'
+import { ISLANDS } from '@/content/islands'
 import { bindKeys, isDown } from '@/lib/input'
 
 const MODEL_URL = '/models/going-merry.glb'
 const TARGET_LENGTH = 9
-const MAX_SPEED = 14
+const MAX_SPEED = 17
 const REVERSE_SPEED = -4
 const ACCEL_DAMP = 0.8
 const TURN_RATE = 0.9
@@ -48,12 +50,16 @@ export function Ship() {
     const time = clock.getElapsedTime()
     const store = useShipStore.getState()
 
+    // Helm is locked while docked; the ship coasts to a stop
+    const docked = useWorldStore.getState().docked !== null
+
     // Throttle with inertia
-    const throttleTarget = isDown('KeyW', 'ArrowUp')
-      ? MAX_SPEED
-      : isDown('KeyS', 'ArrowDown')
-        ? REVERSE_SPEED
-        : 0
+    const throttleTarget =
+      !docked && isDown('KeyW', 'ArrowUp')
+        ? MAX_SPEED
+        : !docked && isDown('KeyS', 'ArrowDown')
+          ? REVERSE_SPEED
+          : 0
     const speed = THREE.MathUtils.damp(store.speed, throttleTarget, ACCEL_DAMP, delta)
 
     // Rudder authority scales with speed so the ship can't spin in place
@@ -68,8 +74,20 @@ export function Ship() {
     const heading = store.heading + state.current.angularVelocity * delta
 
     // Kinematic advance
-    const px = store.position.x + Math.sin(heading) * speed * delta
-    const pz = store.position.z + Math.cos(heading) * speed * delta
+    let px = store.position.x + Math.sin(heading) * speed * delta
+    let pz = store.position.z + Math.cos(heading) * speed * delta
+
+    // Soft collision: islands push the hull back out along the contact normal
+    for (const island of ISLANDS) {
+      const dx = px - island.position[0]
+      const dz = pz - island.position[1]
+      const dist = Math.hypot(dx, dz)
+      const minDist = island.landRadius + 4
+      if (dist < minDist && dist > 0.001) {
+        px = island.position[0] + (dx / dist) * minDist
+        pz = island.position[1] + (dz / dist) * minDist
+      }
+    }
 
     // Ride the same waves the shader renders
     const attitude = getShipAttitude(px, pz, heading, time)

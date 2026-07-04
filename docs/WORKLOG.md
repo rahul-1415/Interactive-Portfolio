@@ -2,6 +2,25 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-04 (late night) — Phase 2 core: six islands, six themed modals
+
+- World layout: islands fanned ahead of spawn (registry-driven), compressed 0.72× after a
+  sail-time test showed 19s to the farthest island — now ~11s at MAX_SPEED 17.
+- Landmarks: original cel-toned primitive builds (giant tree, press balloon, fortress,
+  banded lighthouse w/ emissive beacon) + Moby Dick as the Floating Galley and Thousand
+  Sunny launched in Dock District harbor. Bangers-font name boards on billboards.
+- Interaction: proximity tracker (store-write on change only) → parchment dock prompt →
+  E to dock → themed modal → Esc/"Set Sail ⛵" to leave; helm locked while docked; radial
+  island collision pushes the hull out along the contact normal.
+- Modals per DESIGN.md motif map, all data-driven from rahul-babu-data.json:
+  Baratie menu card with dotted leaders, WANTED poster grid with Alfa Slab bounties,
+  Ohara tomes, Grand Line Times broadsheet with PUBLISHED/EXTRA! stamps, wax-seal
+  commendations with Verify stamps, signal-flag contact + Vivre Card resume download.
+- Fonts: Pirata One (display), Rye (poster headers), Alfa Slab One (bounties/stats),
+  Inter (body) via next/font/google; full DESIGN.md palette as CSS custom props.
+- Verified: full sail→dock→modal→escape journey via Playwright (real keyboard input),
+  all 6 modals screenshotted (docs/screenshots/phase2/), zero page errors, suite green.
+
 ## 2026-07-04 (night) — Phase 1 core: the Merry sails
 
 - Compressed the fleet with gltf-transform (meshopt + webp@1024):

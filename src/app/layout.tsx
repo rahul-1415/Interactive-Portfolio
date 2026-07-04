@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from 'next'
+import { Alfa_Slab_One, Inter, Pirata_One, Rye } from 'next/font/google'
 import './globals.css'
+
+const pirata = Pirata_One({ weight: '400', subsets: ['latin'], variable: '--font-pirata' })
+const rye = Rye({ weight: '400', subsets: ['latin'], variable: '--font-rye' })
+const alfa = Alfa_Slab_One({ weight: '400', subsets: ['latin'], variable: '--font-alfa' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rahulbabu.netlify.app'),
@@ -27,7 +33,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${pirata.variable} ${rye.variable} ${alfa.variable} ${inter.variable}`}
+    >
       <body>{children}</body>
     </html>
   )
