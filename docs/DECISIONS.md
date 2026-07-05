@@ -46,3 +46,28 @@ Measured on the deployed preview (`v2--rahulbabu.netlify.app`, mobile Lighthouse
 - Commit + push after each working milestone; branch before big visual experiments.
 - Original One Piece theming in all design — never generic AI-generated-looking design.
 - Keep `docs/` current as work proceeds.
+
+## 2026-07-05 — v2.2 decisions
+
+- **Bake skinned GLBs to static geometry offline** (`scripts/bake-skins.mjs`) rather than
+  patching normalizeModel or re-binding skeletons at runtime. Skinned props were pure
+  liability: three.js ignores the mesh node transform for skinned meshes, `clone(true)`
+  doesn't rebind skeletons (the Sunny rendered via the original scene's frozen bones at
+  the world origin), `Box3.setFromObject` measures bind pose, and a static ship paid 84k
+  verts of skinning every frame. Baking preserved the rendered look byte-for-byte.
+  Rule going forward: **no skinned models in the fleet** — bake or strip on import.
+- **Collision = analytic shapes, not mesh colliders.** One oriented capsule for the
+  Sunny (fitted from the baked verts' min-area rect: 52.2×26 @ ~4°) + circles at
+  1.3× landRadius for islands. Radial position-resolve gives sliding for free; no
+  physics engine dependency for a boat that only needs "don't pass through things".
+  The follow camera resolves against the same field (target clamp + final hard resolve).
+- **Default quality is Swift (low)** per owner: speed first. DPR 1, no postprocessing,
+  144-seg ocean. Auto/Grand are opt-in in the Ship's Wheel; saved choices respected.
+- **Game economy tuned to canon**: island +฿300M, barrel +฿90M, full log exactly
+  ฿3,000,000,000 (an Emperor's bounty) → PIRATE KING. Epithet thresholds follow the
+  Supernova → Emperor ladder. Progress in localStorage `grand-log-progress`; the crown
+  banner shows once (persisted `crowned`).
+- **Procedural landmarks over downloaded assets** for the Baratie and Galley-La yard:
+  matches the cel-toned world, keeps payload at zero extra KB, avoids license/attribution
+  overhead, and reads more "original One Piece" than any stock model. moby-dick.glb
+  deleted (it rendered as a dark blob and its two skinned parts were frozen debris).

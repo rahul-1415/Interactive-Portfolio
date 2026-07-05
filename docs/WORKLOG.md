@@ -2,6 +2,55 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-05 (v2.2) — Physics that hold, speed by default, and a game worth playing
+
+Owner feedback round two: "the boat is submerging", "can't-go-into-the-ship physics
+should work, also with the island", "rewarding/game elements", "default to lower
+graphics", "better assets for the galley/dock".
+
+- **The phasing bug had a wild root cause**: `thousand-sunny.glb` is a fully _skinned_
+  model. three.js renders skinned meshes via the skeleton's world transforms and ignores
+  the mesh node — and since `clone(true)` doesn't rebind skeletons, the Sunny rendered
+  through the _original, never-updated_ bones: frozen in asset space near the world
+  origin, ~52u long, completely detached from her island anchor at [20,18]. The
+  collision circle guarded empty water while the visible hull sat mostly unguarded.
+  Everything "worked" in v2.1 by pure coincidence (the origin fell inside the home dock
+  radius). Fix: `scripts/bake-skins.mjs` applies glTF linear-blend skinning to
+  POSITION/NORMAL on the CPU (per-spec: Σ wᵢ·jointWorldᵢ·IBMᵢ), strips skins/joints/
+  animations, re-attaches baked meshes at the scene root. Byte-identical render,
+  exact bounds, and no more per-frame skinning of 84k verts. Moby Dick's two stray
+  skinned parts (frozen invisible debris at origin) stripped with the new `--strip` mode.
+- **Solid world** (`src/lib/collision.ts`): the Sunny gets an oriented capsule fitted to
+  her measured hull (52.2×26 @ ~4°, from the baked verts' min-area rect); islands get
+  circles at 1.3× landRadius (matching their visual beaches). Radial resolve = the ship
+  slides along obstacles naturally; scraping bleeds speed. The **follow camera collides
+  too** (desired target clamped + final position hard-resolved) so backing toward the
+  Sunny can't put the lens inside her galley. Verified by ramming her from four
+  bearings + a turn-away test — the bow-to-lion-figurehead stop is a money shot.
+- **Buoyancy**: waterline –0.6 → –0.35; the Mini Merry now rides troughs instead of
+  swamping (the deep draft on a 5.5u hull was the "submerging" the owner saw).
+- **Speed by default**: new visitors get Swift (low) quality — DPR 1, no post fx,
+  144-seg ocean (~3× fewer wave verts, hidden by the toon bands). Auto now starts at
+  DPR 1 and ramps up only on measured headroom. 61fps measured on the default preset.
+  Saved settings are respected; labels renamed (Swift/Auto/Grand).
+- **The game layer**: 10 treasure barrels adrift between islands (toon barrel + glowing
+  berry coin + gold beacon shaft, riding the same Gerstner field). Sail through to haul
+  +฿90,000,000; docking an island charts it for +฿300,000,000. A wanted-poster bounty
+  board (top-left) tracks bounty, tally, and the epithet ladder (Rookie of the East
+  Blue → Supernova → Worst Generation → Yonko Commander → Emperor of the Sea). The sea
+  chart marks uncollected treasure with red ✕ and gold-rings visited islands. A full
+  log totals exactly ฿3,000,000,000 → **PIRATE KING** sunburst proclamation with a
+  résumé CTA ("The One Piece was the voyage all along"), shown once, persisted in
+  `grand-log-progress`.
+- **Landmarks rebuilt** (original, cel-toned, zero new deps): the Floating Galley is now
+  a proper Baratie — barge, two-tier dining rotunda under red awnings, grinning fish
+  figurehead (the old moby-dick.glb rendered as a shapeless dark rock; deleted, −540KB).
+  Dock District is a working Galley-La yard — stone dry-dock opening toward the sailing
+  approach, keel + parabolic ribs, gantry crane mid-lift, company tower, staged timber.
+- Tests: 11 unit (new: bounty math, epithet ladder, completion rules, treasure placement
+  proven clear of all colliders) + e2e now sets sail and asserts the game layer.
+- Commits: 5ae01d8 physics · 156d2ed perf · 3adc19d game · df4ff37 landmarks.
+
 ## 2026-07-04 (v2.1) — Rahul's feature round: launch sequence, home port, minimap, settings
 
 Owner feedback drove this round:

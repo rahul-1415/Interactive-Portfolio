@@ -96,6 +96,33 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 - [ ] **Merge `v2` → `main` → production at rahulbabu.netlify.app** (awaiting owner OK —
       this replaces the current live personal site)
 
+### v2.1 — Owner feature round ✅ complete (2026-07-04)
+
+- [x] Straight camera default (Mini Merry player ship) + Cinematic option
+- [x] Soldier-dock launch animation from the Thousand Sunny
+- [x] Thousand Sunny home-port dashboard modal
+- [x] Parchment minimap, Ship's Wheel settings, dock rings + beacons
+
+### v2.2 — Physics, speed & the game layer ✅ complete (2026-07-05)
+
+- [x] Root-cause fix for "phasing through the Sunny": her GLB was fully skinned, so
+      three.js rendered her via a frozen skeleton detached from her anchor. Baked all
+      skinned GLBs to static geometry (`scripts/bake-skins.mjs`); Moby Dick's stray
+      skinned bits stripped
+- [x] Solid-world collision (`src/lib/collision.ts`): oriented capsule fitted to the
+      Sunny's measured hull + island circles sized to visual beaches; radial resolve =
+      natural sliding; scraping bleeds speed; follow camera collides too
+- [x] Buoyancy: waterline raised so the Mini Merry rides the swells instead of swamping
+- [x] Speed-first defaults: Swift (low) quality for new visitors, DPR 1 start,
+      ocean tessellation scaled by quality (61fps measured on low)
+- [x] Game layer: 10 treasure barrels (+฿90M), island charting (+฿300M), live bounty
+      board with One Piece epithet ladder, sea-chart ✕ marks & visited rings,
+      ฿3,000,000,000 full-log total → PIRATE KING finale (persisted)
+- [x] Landmarks rebuilt: Baratie-style Floating Galley (fish figurehead, rotunda,
+      awnings) and Galley-La working shipyard (dry-dock, ribs, gantry crane, tower);
+      moby-dick.glb deleted
+- [ ] Wake foam / ambient audio / tap-to-sail — candidate next round
+
 ## Content sources (canonical)
 
 - `rahul-babu-data.json` (repo root) — all portfolio data. Edit here only.
