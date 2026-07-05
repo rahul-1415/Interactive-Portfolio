@@ -16,9 +16,9 @@ import { Effects } from './Effects'
 const isMobile = typeof window !== 'undefined' && window.matchMedia?.('(max-width: 820px)').matches
 
 export default function Scene() {
-  // Adaptive resolution: start modest, let PerformanceMonitor raise/lower the
-  // pixel ratio with built-in hysteresis.
-  const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
+  // Adaptive resolution: start cheap (1.0), let PerformanceMonitor raise the
+  // pixel ratio with built-in hysteresis once it sees headroom (auto mode).
+  const [dpr, setDpr] = useState(1)
 
   // The render loop stays idle behind the "Set Sail" gate — no point burning the
   // main thread animating a scene the loading overlay is covering. It flips to

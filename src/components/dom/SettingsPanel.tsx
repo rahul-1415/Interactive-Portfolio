@@ -47,9 +47,9 @@ export function SettingsPanel() {
             <legend>Quality</legend>
             {(
               [
-                ['auto', 'Auto — adapts to your ship'],
-                ['high', 'High'],
-                ['low', 'Low — calm seas for old rigs'],
+                ['low', 'Swift — fastest, calm seas (default)'],
+                ['auto', 'Auto — adapts to your rig'],
+                ['high', 'Grand — full effects'],
               ] as [Quality, string][]
             ).map(([value, label]) => (
               <label key={value}>

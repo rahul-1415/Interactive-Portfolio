@@ -5,9 +5,9 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { WAVE_AMPLITUDE, wavesGLSL } from '@/lib/waves'
 import { useShipStore } from '@/stores/ship'
+import { useSettings } from '@/stores/settings'
 
 const OCEAN_SIZE = 700
-const SEGMENTS = 256
 
 const vertexShader = /* glsl */ `
 uniform float uTime;
@@ -93,6 +93,9 @@ void main() {
 /** Stylized toon ocean: GPU Gerstner waves + banded ramp + crest foam. */
 export function Ocean() {
   const meshRef = useRef<THREE.Mesh>(null)
+  // Low quality halves the wave tessellation — the toon bands hide it well.
+  const quality = useSettings((s) => s.quality)
+  const segments = quality === 'low' ? 144 : 256
 
   const uniforms = useMemo(
     () => ({
@@ -126,7 +129,7 @@ export function Ocean() {
 
   return (
     <mesh ref={meshRef} rotation-x={-Math.PI / 2} frustumCulled={false}>
-      <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, SEGMENTS, SEGMENTS]} />
+      <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, segments, segments]} />
       <shaderMaterial
         vertexShader={shaders.vertexShader}
         fragmentShader={shaders.fragmentShader}

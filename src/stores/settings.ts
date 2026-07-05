@@ -13,13 +13,13 @@ interface SettingsState {
 const STORAGE_KEY = 'grand-log-settings'
 
 function load(): Pick<SettingsState, 'quality' | 'cameraMode'> {
-  if (typeof window === 'undefined') return { quality: 'auto', cameraMode: 'straight' }
+  if (typeof window === 'undefined') return { quality: 'low', cameraMode: 'straight' }
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
       return {
-        quality: ['auto', 'high', 'low'].includes(parsed.quality) ? parsed.quality : 'auto',
+        quality: ['auto', 'high', 'low'].includes(parsed.quality) ? parsed.quality : 'low',
         cameraMode: ['straight', 'cinematic'].includes(parsed.cameraMode)
           ? parsed.cameraMode
           : 'straight',
@@ -28,7 +28,9 @@ function load(): Pick<SettingsState, 'quality' | 'cameraMode'> {
   } catch {
     // corrupted storage — fall through to defaults
   }
-  return { quality: 'auto', cameraMode: 'straight' }
+  // Speed-first default: 'low' keeps the voyage at full frame rate on any
+  // rig; Auto/High are one click away in the Ship's Wheel.
+  return { quality: 'low', cameraMode: 'straight' }
 }
 
 export const useSettings = create<SettingsState>((set) => ({
