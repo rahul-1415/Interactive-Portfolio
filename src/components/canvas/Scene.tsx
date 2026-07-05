@@ -8,6 +8,7 @@ import { useSettings } from '@/stores/settings'
 import { Ocean } from './Ocean'
 import { DockMarkers } from './DockMarkers'
 import { Treasures } from './Treasures'
+import { Skypiea } from './Skypiea'
 import { Ship } from './Ship'
 import { Islands } from './Islands'
 import { FollowCamera } from './FollowCamera'
@@ -33,9 +34,10 @@ export default function Scene() {
   return (
     <div className="scene-root">
       <Canvas
-        // Starts exactly on the launch dolly mark (clear of the Sunny's stern)
-        // so the camera never travels through her hull on the way there.
-        camera={{ position: [-20, 10, -16], fov: 50, near: 0.1, far: 700 }}
+        // Starts beside the parked Mini Merry in the soldier dock bay — the
+        // verified launch composition. The scripted launch dolly (exempt from
+        // camera collision) glides it out to open water from here.
+        camera={{ position: [5, 10, -16], fov: 50, near: 0.1, far: 700 }}
         dpr={effectiveDpr}
         frameloop={voyageStarted ? 'always' : 'demand'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}
@@ -55,6 +57,9 @@ export default function Scene() {
         <Suspense fallback={null}>
           <Ship />
           <Islands />
+          {/* Skypiea uses drei Text (suspends on font load) — must live
+              inside the boundary or a completed log wedges the whole canvas */}
+          <Skypiea />
         </Suspense>
         <Treasures />
         <FollowCamera />

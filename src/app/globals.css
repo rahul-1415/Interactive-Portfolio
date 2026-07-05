@@ -999,12 +999,11 @@ html:has(.log-page) {
 
 .minimap-compass {
   position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   font-family: var(--font-rye), serif;
   font-size: 0.65rem;
   color: var(--gl-sepia);
+  pointer-events: none;
 }
 
 .minimap-dot {
@@ -1259,6 +1258,11 @@ html:has(.log-page) {
   opacity: 1;
 }
 
+.minimap-dot-far {
+  width: 7px;
+  height: 7px;
+}
+
 .minimap-x {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -1491,4 +1495,47 @@ html:has(.log-page) {
   .pirate-king-burst {
     animation: none;
   }
+}
+
+.course-banner {
+  position: absolute;
+  top: 5.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(26, 26, 26, 0.55);
+  border: 1px solid rgba(239, 224, 185, 0.5);
+  border-radius: 999px;
+  color: var(--gl-parchment);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.course-banner strong {
+  font-family: var(--font-rye), serif;
+  font-size: 0.82rem;
+  color: var(--gl-gold);
+}
+
+.course-banner em {
+  font-style: normal;
+  font-size: 0.68rem;
+  opacity: 0.75;
+}
+
+.wanted-mug {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  margin: 0.35rem 0 0.5rem;
+  border: 2px solid var(--gl-sepia);
+  border-radius: 3px;
+  background: rgba(75, 54, 33, 0.12);
+  filter: sepia(0.32) saturate(0.85) contrast(0.95);
 }

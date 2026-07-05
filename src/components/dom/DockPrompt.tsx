@@ -11,14 +11,20 @@ export function DockPrompt() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.code !== 'KeyE') return
+      if (event.code !== 'Space') return
+      // Don't hijack Space from form fields or focused buttons
+      const target = event.target as HTMLElement | null
+      if (target && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName)) return
       const {
         nearIsland: near,
         docked: isDocked,
         launching: isLaunching,
         dock,
       } = useWorldStore.getState()
-      if (near && !isDocked && !isLaunching) dock(near)
+      if (near && !isDocked && !isLaunching) {
+        event.preventDefault()
+        dock(near)
+      }
     }
     window.addEventListener('keydown', onKey)
     if (process.env.NODE_ENV !== 'production') {
@@ -44,7 +50,7 @@ export function DockPrompt() {
         <strong>{island.name}</strong>
         <em>{island.tagline}</em>
       </span>
-      <kbd>E</kbd>
+      <kbd>Space</kbd>
     </button>
   )
 }

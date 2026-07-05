@@ -45,7 +45,24 @@ export function Islands() {
       {ISLANDS.map((island, index) => {
         const Landmark = LANDMARKS[island.id]
         return (
-          <group key={island.id} position={[island.position[0], 0, island.position[1]]}>
+          <group
+            key={island.id}
+            position={[island.position[0], 0, island.position[1]]}
+            onClick={(event) => {
+              // Tap-to-sail: set an autopilot course for this island. The helm
+              // (keys or touch) takes priority and cancels it.
+              event.stopPropagation()
+              if (!useWorldStore.getState().voyageStarted) return
+              useShipStore.setState({
+                autopilot: {
+                  x: island.position[0],
+                  z: island.position[1],
+                  name: island.name,
+                  arriveRadius: Math.max(10, island.dockRadius - 6),
+                },
+              })
+            }}
+          >
             {island.id !== 'publications' && island.id !== 'home' && (
               <IslandBase variant={(index % 2) as 0 | 1} radius={island.landRadius} />
             )}

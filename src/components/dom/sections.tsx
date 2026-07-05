@@ -10,6 +10,14 @@ function bounty(rank: number, total: number): string {
   return `฿${((total - rank) * 100_000_000).toLocaleString('en-US')}`
 }
 
+/** Poster mugshot filename — must match scripts that capture into public/posters. */
+function posterSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
 export function ExperienceMenu() {
   return (
     <div className="menu-card">
@@ -46,6 +54,18 @@ export function ProjectPosters() {
         <article key={project.name} className="wanted-poster">
           <p className="wanted-header">Wanted</p>
           <p className="wanted-sub">Live or Repo</p>
+          {/* Mugshot: live-site capture or repo card, sepia-toned to match the
+              poster. Missing images hide themselves (text-only poster). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="wanted-mug"
+            src={`/posters/${posterSlug(project.name)}.jpeg`}
+            alt=""
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+          />
           <h3>{project.name}</h3>
           <p className="wanted-desc">{project.description ?? project.bullets[0]}</p>
           <ul className="tech-chips">

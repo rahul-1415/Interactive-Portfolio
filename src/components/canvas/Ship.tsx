@@ -15,7 +15,7 @@ import { bindKeys, isDown } from '@/lib/input'
 const MODEL_URL = '/models/going-merry.glb'
 // Mini Merry: small enough that the straight chase camera sees over her sails.
 const TARGET_LENGTH = 5.5
-const MAX_SPEED = 17
+export const MAX_SPEED = 17
 const REVERSE_SPEED = -4
 const ACCEL_DAMP = 0.8
 const TURN_RATE = 0.9
@@ -95,19 +95,41 @@ export function Ship() {
       const locked = !world.voyageStarted || world.docked !== null
       const touch = useTouchInput.getState()
 
-      const throttleTarget = locked
-        ? 0
-        : isDown('KeyW', 'ArrowUp')
-          ? MAX_SPEED
-          : isDown('KeyS', 'ArrowDown')
-            ? REVERSE_SPEED
-            : touch.throttle * MAX_SPEED
+      const keyThrottle = isDown('KeyW', 'ArrowUp')
+        ? MAX_SPEED
+        : isDown('KeyS', 'ArrowDown')
+          ? REVERSE_SPEED
+          : touch.throttle * MAX_SPEED
+      const keyRudder =
+        (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
+
+      let throttleTarget = locked ? 0 : keyThrottle
+      let rudder = locked ? 0 : keyRudder !== 0 ? keyRudder : -touch.steer
+
+      // Tap-to-sail autopilot: steer toward the course target, easing off on
+      // approach. Any manual input (or docking) hands the helm back.
+      const auto = store.autopilot
+      if (auto) {
+        const manual = keyThrottle !== 0 || keyRudder !== 0 || touch.steer !== 0
+        if (locked || manual) {
+          useShipStore.setState({ autopilot: null })
+        } else {
+          const dxA = auto.x - store.position.x
+          const dzA = auto.z - store.position.z
+          const distA = Math.hypot(dxA, dzA)
+          if (distA < auto.arriveRadius) {
+            useShipStore.setState({ autopilot: null })
+          } else {
+            const err = Math.atan2(dxA, dzA) - store.heading
+            rudder = THREE.MathUtils.clamp(Math.atan2(Math.sin(err), Math.cos(err)) * 1.8, -1, 1)
+            throttleTarget = distA < 22 ? MAX_SPEED * 0.5 : MAX_SPEED
+          }
+        }
+      }
+
       speed = THREE.MathUtils.damp(store.speed, throttleTarget, ACCEL_DAMP, delta)
 
       // Rudder authority scales with speed (0 at rest): no spin-in-place.
-      const keyRudder =
-        (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
-      const rudder = locked ? 0 : keyRudder !== 0 ? keyRudder : -touch.steer
       const authority = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 1)
       state.current.angularVelocity = THREE.MathUtils.damp(
         state.current.angularVelocity,

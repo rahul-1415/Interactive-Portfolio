@@ -1,5 +1,7 @@
 import { SceneCanvas } from '@/components/canvas/SceneCanvas'
+import { AudioController } from '@/components/dom/AudioController'
 import { BountyBoard } from '@/components/dom/BountyBoard'
+import { CourseBanner } from '@/components/dom/CourseBanner'
 import { DockPrompt } from '@/components/dom/DockPrompt'
 import { IslandModal } from '@/components/dom/IslandModal'
 import { LoadingGate } from '@/components/dom/LoadingGate'
@@ -16,9 +18,11 @@ export default function Home() {
         <h1>{portfolio.personal.name}</h1>
         <p>{portfolio.personal.title}</p>
       </header>
-      <p className="hud-hint">W A S D — take the helm · press E to dock</p>
+      <p className="hud-hint">W A S D — take the helm · Space to dock</p>
       <DockPrompt />
       <BountyBoard />
+      <CourseBanner />
+      <AudioController />
       <TouchHelm />
       <Minimap />
       <SettingsPanel />

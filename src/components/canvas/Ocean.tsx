@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { WAVE_AMPLITUDE, wavesGLSL } from '@/lib/waves'
 import { useShipStore } from '@/stores/ship'
 import { useSettings } from '@/stores/settings'
+import { MAX_SPEED } from './Ship'
 
 const OCEAN_SIZE = 700
 
@@ -38,6 +39,9 @@ uniform vec3 uFoam;
 uniform vec3 uFogColor;
 uniform float uFogNear;
 uniform float uFogFar;
+uniform vec2 uShipPos;
+uniform vec2 uShipDir;
+uniform float uShipSpeed;
 varying float vHeight;
 varying vec3 vNormal;
 varying vec3 vWorldPos;
@@ -55,6 +59,28 @@ float vnoise(vec2 p) {
     mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
     u.y
   );
+}
+
+// Churned water the hull leaves behind: a spreading V of stern wash plus a
+// bright spray collar at the stem, all scaled by throttle.
+float shipWake(vec2 world, float t) {
+  vec2 rel = world - uShipPos;
+  float fwd = dot(rel, uShipDir);
+  float side = dot(rel, vec2(uShipDir.y, -uShipDir.x));
+
+  float behind = -fwd - 1.5;
+  float len = 8.0 + 26.0 * uShipSpeed;
+  float fade = step(0.0, behind) * (1.0 - smoothstep(0.0, len, behind));
+  float width = 1.1 + behind * 0.34;
+  float lateral = 1.0 - smoothstep(width * 0.45, width, abs(side));
+  float edges = smoothstep(width * 0.5, width * 0.85, abs(side));
+  float churn = 0.6 + 0.4 * vnoise(vec2(side * 1.6, behind * 0.7 - t * 2.2));
+  float stern = fade * lateral * (0.35 + 0.65 * edges) * churn;
+
+  float bow = (1.0 - smoothstep(0.4, 2.4, abs(fwd - 2.4))) *
+              (1.0 - smoothstep(0.6, 1.7, abs(side)));
+
+  return clamp((stern + bow * 1.2) * uShipSpeed, 0.0, 1.0);
 }
 
 void main() {
@@ -77,7 +103,8 @@ void main() {
   float n = vnoise(vWorldPos.xz * 0.32 + uTime * 0.28) * 0.6
           + vnoise(vWorldPos.xz * 1.15 - uTime * 0.18) * 0.4;
   float foam = smoothstep(0.94, 1.04, t + (n - 0.5) * 0.22);
-  color = mix(color, uFoam, foam);
+  float wake = shipWake(vWorldPos.xz, uTime);
+  color = mix(color, uFoam, clamp(foam + wake, 0.0, 1.0));
 
   // Manual fog matched to the scene fog
   float dist = distance(vWorldPos, cameraPosition);
@@ -93,6 +120,7 @@ void main() {
 /** Stylized toon ocean: GPU Gerstner waves + banded ramp + crest foam. */
 export function Ocean() {
   const meshRef = useRef<THREE.Mesh>(null)
+  const materialRef = useRef<THREE.ShaderMaterial>(null)
   // Low quality halves the wave tessellation — the toon bands hide it well.
   const quality = useSettings((s) => s.quality)
   const segments = quality === 'low' ? 144 : 256
@@ -107,6 +135,9 @@ export function Ocean() {
       uFogColor: { value: new THREE.Color('#cfeaf7') },
       uFogNear: { value: 70 },
       uFogFar: { value: 240 },
+      uShipPos: { value: new THREE.Vector2() },
+      uShipDir: { value: new THREE.Vector2(0, 1) },
+      uShipSpeed: { value: 0 },
     }),
     []
   )
@@ -120,17 +151,31 @@ export function Ocean() {
   )
 
   useFrame(({ clock }) => {
-    uniforms.uTime.value = clock.getElapsedTime()
+    // IMPORTANT: update the uniforms object the material actually renders
+    // with (via ref), NOT the memoized `uniforms` — React 19 StrictMode
+    // double-invokes useMemo and the material can end up holding the twin
+    // object, freezing uTime at 0 (static sea, no wake, buoyancy mismatch).
+    const u = materialRef.current?.uniforms as typeof uniforms | undefined
+    if (!u) return
+    u.uTime.value = clock.getElapsedTime()
     // Endless ocean: the plane trails the ship; waves are world-space so the
     // surface stays continuous.
-    const ship = useShipStore.getState().position
-    meshRef.current?.position.set(ship.x, 0, ship.z)
+    const { position, heading, speed } = useShipStore.getState()
+    meshRef.current?.position.set(position.x, 0, position.z)
+    u.uShipPos.value.set(position.x, position.z)
+    u.uShipDir.value.set(Math.sin(heading), Math.cos(heading))
+    u.uShipSpeed.value = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 1)
+    if (process.env.NODE_ENV !== 'production') {
+      // Dev-only: expose the live (rendered) uniforms for visual QA scripts
+      ;(window as unknown as Record<string, unknown>).__oceanUniforms = u
+    }
   })
 
   return (
     <mesh ref={meshRef} rotation-x={-Math.PI / 2} frustumCulled={false}>
       <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, segments, segments]} />
       <shaderMaterial
+        ref={materialRef}
         vertexShader={shaders.vertexShader}
         fragmentShader={shaders.fragmentShader}
         uniforms={uniforms}

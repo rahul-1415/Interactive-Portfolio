@@ -35,7 +35,9 @@ export function FollowCamera() {
     const rx = Math.cos(heading)
     const rz = -Math.sin(heading)
 
-    if (useWorldStore.getState().launching) {
+    const launching = useWorldStore.getState().launching
+
+    if (launching) {
       // Fixed dolly during the soldier-dock launch: glide straight to the
       // post-launch mark (clear of the Sunny's hull) while tracking the ship.
       _desired.set(LAUNCH_TO.x, rig.height, LAUNCH_TO.z - rig.back)
@@ -45,23 +47,26 @@ export function FollowCamera() {
         rig.height + position.y * 0.4,
         position.z - fz * rig.back + rz * rig.side
       )
+      // Keep the rig itself out of solid geometry (e.g. backing toward the
+      // Sunny would otherwise swing the camera inside her hull). The scripted
+      // launch dolly is exempt: it starts inside the soldier dock bay by
+      // design and glides itself clear.
+      const clamped = resolveCollision(_desired.x, _desired.z, 2)
+      _desired.x = clamped.x
+      _desired.z = clamped.z
     }
-
-    // Keep the rig itself out of solid geometry (e.g. backing toward the
-    // Sunny would otherwise swing the camera inside her hull).
-    const clamped = resolveCollision(_desired.x, _desired.z, 2)
-    _desired.x = clamped.x
-    _desired.z = clamped.z
 
     camera.position.x = THREE.MathUtils.damp(camera.position.x, _desired.x, LAMBDA, delta)
     camera.position.y = THREE.MathUtils.damp(camera.position.y, _desired.y, LAMBDA, delta)
     camera.position.z = THREE.MathUtils.damp(camera.position.z, _desired.z, LAMBDA, delta)
 
-    // The damped path can still cut a corner through an obstacle while the
-    // target swings around it — hard-resolve the final position too.
-    const solid = resolveCollision(camera.position.x, camera.position.z, 1.5)
-    camera.position.x = solid.x
-    camera.position.z = solid.z
+    if (!launching) {
+      // The damped path can still cut a corner through an obstacle while the
+      // target swings around it — hard-resolve the final position too.
+      const solid = resolveCollision(camera.position.x, camera.position.z, 1.5)
+      camera.position.x = solid.x
+      camera.position.z = solid.z
+    }
 
     _look.set(
       position.x + fx * rig.lookAhead,

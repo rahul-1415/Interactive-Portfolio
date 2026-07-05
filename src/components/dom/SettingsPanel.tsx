@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { primeAudio } from '@/lib/audio'
 import { useSettings, type CameraMode, type Quality } from '@/stores/settings'
 
 /** Ship's-wheel settings: camera rig, render quality, controls reference. */
@@ -8,6 +9,7 @@ export function SettingsPanel() {
   const [open, setOpen] = useState(false)
   const quality = useSettings((s) => s.quality)
   const cameraMode = useSettings((s) => s.cameraMode)
+  const sound = useSettings((s) => s.sound)
 
   return (
     <>
@@ -64,9 +66,35 @@ export function SettingsPanel() {
             ))}
           </fieldset>
 
+          <fieldset>
+            <legend>Sound</legend>
+            {(
+              [
+                [true, 'On — sea ambience & reward chimes'],
+                [false, 'Off — silent running (default)'],
+              ] as [boolean, string][]
+            ).map(([value, label]) => (
+              <label key={String(value)}>
+                <input
+                  type="radio"
+                  name="sound"
+                  checked={sound === value}
+                  onChange={() => {
+                    // Prime the AudioContext inside the click gesture
+                    // (browser autoplay policy) before flipping the setting.
+                    if (value) primeAudio()
+                    useSettings.getState().setSound(value)
+                  }}
+                />
+                {label}
+              </label>
+            ))}
+          </fieldset>
+
           <div className="settings-help">
             <p>
-              <kbd>W A S D</kbd> / arrows — sail · <kbd>E</kbd> — dock · <kbd>Esc</kbd> — set sail
+              <kbd>W A S D</kbd> / arrows — sail · <kbd>Space</kbd> — dock · <kbd>Esc</kbd> — set
+              sail
             </p>
             <a href="/log">Prefer plain sailing? Read the ship&apos;s log →</a>
           </div>
