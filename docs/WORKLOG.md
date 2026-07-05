@@ -2,6 +2,58 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-05 (v2.3) — The living sea: wake, sound, autopilot, Skypiea, mugshots
+
+Owner round three: do the suggested improvements, Space to dock, and a proper
+game minimap ("the map seems inverted / should center on the player").
+
+- **The sea was frozen the whole time.** Chasing an invisible wake exposed it:
+  the ocean ShaderMaterial was rendering a _twin_ uniforms object. React 19
+  StrictMode double-invokes `useMemo`, and the material kept the copy our
+  frame loop never wrote to — `uTime` stuck at 0 since the toon ocean landed.
+  Waves never traveled; the CPU buoyancy field animated against a motionless
+  GPU sea (the deeper cause of the "boat submerging" report). Diagnosed by
+  proving `material.uniforms !== closureUniforms` in-page; fixed by updating
+  the material's own uniforms via ref. **House rule: never trust a captured
+  uniforms object — always write through `materialRef.current.uniforms`.**
+- **Wake foam + bow spray**: per-pixel stern wash (spreading V, noise-broken,
+  throttle-scaled) + spray collar at the stem, all in the existing ocean
+  fragment shader off `uShipPos/uShipDir/uShipSpeed`. Zero extra draw calls.
+- **Launch regression fixed**: the physics round moved the initial camera to
+  the post-launch dolly mark — which stares straight through the Sunny's hull
+  (white screen) for the first seconds of every launch, including production.
+  The camera now starts inside the soldier-dock bay (an on-deck opening shot
+  under the Jolly Roger — better than v2.1) and the scripted dolly is exempt
+  from camera collision while `launching`.
+- **Space docks** (E retired): form fields/focused buttons ignored, prompt +
+  hints updated. **Ship-centered rotating sea chart**: chart-up = heading,
+  chart-right = the 3D view's right (the camera looks down +Z, so world X is
+  mirrored on screen — that mirroring is why the old north-up chart read
+  "inverted"). N rides the rim; out-of-range islands clamp to the rim as
+  bearing dots; treasure ✕ shows only in range.
+- **Tap-to-sail autopilot**: click/tap an island → helm steers itself (bearing
+  error → rudder, eases inside 22u, arrives in dock range); any manual input
+  cancels. Course banner chip while engaged.
+- **Sound (opt-in)**: procedural Web Audio — looped brown noise → low-pass →
+  slow swell LFO for the sea, pentatonic triangle chimes for rewards. No audio
+  assets. The Ship's Wheel toggle primes the AudioContext inside the click
+  gesture (autoplay policy).
+- **Skypiea**: a completed log reveals a sea-cloud bank at altitude 30 over
+  (55,112) — Upper Yard greenery, giant beanstalk, golden belfry of Shandora
+  (bloom-hot bell). Two hard-won placement lessons: drei `<Text>` suspends on
+  font load, so Skypiea must live _inside_ the Suspense boundary (outside it a
+  completed log wedged the whole canvas — the "white screen" QA mystery), and
+  altitude must stay under the chase camera's ~25° upper frustum edge or the
+  island is simply never on screen.
+- **Wanted-poster mugshots**: all 16 posters carry a sepia-framed image —
+  Playwright captures of the 3 live deployments (the Streamlit app woke up on
+  cue), GitHub OpenGraph cards for the rest (~25KB each, lazy, self-hiding on
+  error; one card needed a retry after a 429).
+- One-off dev crash noted: `EffectComposer.addPass` null after HMR while a
+  page was live — not reproducible on fresh loads (4/4 clean), prod unaffected.
+- Gates: typecheck, lint, 11 unit, build, 6 e2e. Screenshots: docs/screenshots/v23/.
+- Commit: 68ca5b3.
+
 ## 2026-07-05 (v2.2) — Physics that hold, speed by default, and a game worth playing
 
 Owner feedback round two: "the boat is submerging", "can't-go-into-the-ship physics

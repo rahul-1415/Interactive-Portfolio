@@ -123,6 +123,19 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
       moby-dick.glb deleted
 - [ ] Wake foam / ambient audio / tap-to-sail — candidate next round
 
+### v2.3 — The living sea & quality-of-life round ✅ complete (2026-07-05)
+
+- [x] Root-cause: ocean uniforms twin-object bug (StrictMode) — sea was frozen at t=0;
+      fixed via material-ref updates; waves + buoyancy finally in sync
+- [x] Wake foam + bow spray (fragment shader, throttle-scaled)
+- [x] Launch camera regression fixed — on-deck opening shot, dolly exempt from collision
+- [x] Space replaces E to dock
+- [x] Ship-centered rotating minimap (heading-up, view-matched right, rim bearing dots)
+- [x] Tap-to-sail autopilot + course banner
+- [x] Procedural sea ambience + reward chimes (opt-in, Ship's Wheel)
+- [x] Skypiea — hidden sky island for a completed log
+- [x] Wanted-poster mugshots (live captures + GitHub OG cards, 16/16)
+
 ## Content sources (canonical)
 
 - `rahul-babu-data.json` (repo root) — all portfolio data. Edit here only.
