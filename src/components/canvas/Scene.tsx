@@ -32,9 +32,9 @@ export default function Scene() {
   return (
     <div className="scene-root">
       <Canvas
-        // Matches the straight-rig position for the ship's launch start, so the
-        // camera never has to fly past the Thousand Sunny to reach its mark.
-        camera={{ position: [5, 10, -16], fov: 50, near: 0.1, far: 700 }}
+        // Starts exactly on the launch dolly mark (clear of the Sunny's stern)
+        // so the camera never travels through her hull on the way there.
+        camera={{ position: [-20, 10, -16], fov: 50, near: 0.1, far: 700 }}
         dpr={effectiveDpr}
         frameloop={voyageStarted ? 'always' : 'demand'}
         gl={{ antialias: false, stencil: false, powerPreference: 'high-performance' }}

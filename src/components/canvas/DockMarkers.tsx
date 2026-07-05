@@ -31,7 +31,9 @@ export function DockMarkers() {
     const beacon = beaconRef.current
     if (beacon) {
       const island = ISLANDS.find((i) => i.id === nearIsland)
-      if (island && !docked) {
+      // The Sunny needs no beacon — she is her own landmark, and the beam
+      // would spear through her masts.
+      if (island && island.id !== 'home' && !docked) {
         beacon.visible = true
         beacon.position.set(island.position[0], 13, island.position[1])
         const material = beacon.material as THREE.MeshBasicMaterial
@@ -44,25 +46,28 @@ export function DockMarkers() {
 
   return (
     <>
-      {ISLANDS.map((island, i) => (
-        <mesh
-          key={island.id}
-          ref={(el) => {
-            ringRefs.current[i] = el
-          }}
-          position={[island.position[0], 0.3, island.position[1]]}
-          rotation-x={-Math.PI / 2}
-        >
-          <ringGeometry args={[island.dockRadius - 1, island.dockRadius, 64]} />
-          <meshBasicMaterial
-            color={island.accent}
-            transparent
-            opacity={0.16}
-            side={THREE.DoubleSide}
-            depthWrite={false}
-          />
-        </mesh>
-      ))}
+      {ISLANDS.map((island, i) =>
+        // No ring around home: the hull (52u long) crosses its dock circle.
+        island.id === 'home' ? null : (
+          <mesh
+            key={island.id}
+            ref={(el) => {
+              ringRefs.current[i] = el
+            }}
+            position={[island.position[0], 0.3, island.position[1]]}
+            rotation-x={-Math.PI / 2}
+          >
+            <ringGeometry args={[island.dockRadius - 1, island.dockRadius, 64]} />
+            <meshBasicMaterial
+              color={island.accent}
+              transparent
+              opacity={0.16}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+            />
+          </mesh>
+        )
+      )}
       <mesh ref={beaconRef} visible={false}>
         <cylinderGeometry args={[0.8, 1.8, 26, 12, 1, true]} />
         <meshBasicMaterial

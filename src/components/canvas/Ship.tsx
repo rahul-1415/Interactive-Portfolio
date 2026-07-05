@@ -9,7 +9,7 @@ import { normalizeModel } from '@/lib/normalizeModel'
 import { useShipStore } from '@/stores/ship'
 import { useWorldStore } from '@/stores/world'
 import { useTouchInput } from '@/stores/input'
-import { ISLANDS } from '@/content/islands'
+import { resolveCollision } from '@/lib/collision'
 import { bindKeys, isDown } from '@/lib/input'
 
 const MODEL_URL = '/models/going-merry.glb'
@@ -19,8 +19,10 @@ const MAX_SPEED = 17
 const REVERSE_SPEED = -4
 const ACCEL_DAMP = 0.8
 const TURN_RATE = 0.9
-const WATERLINE = -0.6
+const WATERLINE = -0.35
 const WORLD_RADIUS = 250
+// Hull half-beam plus a fender's worth of margin — collision body radius.
+const HULL_RADIUS = 2.5
 
 // Soldier-dock launch: the Mini Merry slides sideways out of the Thousand
 // Sunny's hull (home island), from tucked-against-the-hull to open water on
@@ -45,6 +47,22 @@ export function Ship() {
 
   useEffect(() => {
     useShipStore.getState().position.set(LAUNCH_FROM.x, 0, LAUNCH_FROM.z)
+    if (process.env.NODE_ENV !== 'production') {
+      // Dev-only: teleport/read the ship (used by visual QA scripts)
+      ;(window as unknown as Record<string, unknown>).__ship = {
+        get pos() {
+          const p = useShipStore.getState().position
+          return [p.x, p.y, p.z]
+        },
+        get heading() {
+          return useShipStore.getState().heading
+        },
+        set(x: number, z: number, heading = 0) {
+          useShipStore.getState().position.set(x, 0, z)
+          useShipStore.setState({ heading, speed: 0 })
+        },
+      }
+    }
     return bindKeys()
   }, [])
 
@@ -102,17 +120,16 @@ export function Ship() {
       px = store.position.x + Math.sin(heading) * speed * delta
       pz = store.position.z + Math.cos(heading) * speed * delta
 
-      // Soft collision: solid islands push the hull out along the contact
-      // normal. Floating landmarks (landRadius 0) have no waterline mass.
-      for (const island of ISLANDS) {
-        if (island.landRadius <= 0) continue
-        const dx = px - island.position[0]
-        const dz = pz - island.position[1]
-        const dist = Math.hypot(dx, dz)
-        const minDist = island.landRadius + 3
-        if (dist < minDist && dist > 0.001) {
-          px = island.position[0] + (dx / dist) * minDist
-          pz = island.position[1] + (dz / dist) * minDist
+      // Solid world: island beaches and the Sunny's hull push the ship out
+      // along the contact normal (radial resolve = natural sliding), and
+      // scraping bleeds off speed. Skipped pre-voyage so the parked Merry can
+      // sit tucked inside the soldier dock.
+      if (world.voyageStarted) {
+        const resolved = resolveCollision(px, pz, HULL_RADIUS)
+        if (resolved.hit) {
+          px = resolved.x
+          pz = resolved.z
+          speed *= 1 - 1.6 * delta
         }
       }
 

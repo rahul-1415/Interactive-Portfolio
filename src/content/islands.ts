@@ -28,9 +28,11 @@ export const ISLANDS: IslandDef[] = [
     name: 'The Thousand Sunny',
     inspiredBy: 'the Soldier Dock System',
     tagline: 'Home port — the whole voyage at a glance',
-    position: [20, 18],
-    dockRadius: 26,
-    landRadius: 12,
+    // Anchored on the baked hull's true center. Collision is the oriented
+    // SUNNY_HULL capsule in src/lib/collision.ts, not a land circle.
+    position: [0, 2],
+    dockRadius: 24,
+    landRadius: 0,
     accent: '#FFCE00',
   },
   {

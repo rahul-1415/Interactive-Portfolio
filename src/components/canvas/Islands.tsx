@@ -50,7 +50,7 @@ export function Islands() {
               <IslandBase variant={(index % 2) as 0 | 1} radius={island.landRadius} />
             )}
             <Landmark />
-            <Billboard position={[0, 30, 0]}>
+            <Billboard position={[0, island.id === 'home' ? 40 : 30, 0]}>
               <Text
                 font="/fonts/bangers-regular.woff"
                 fontSize={3.4}

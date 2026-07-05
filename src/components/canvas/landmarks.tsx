@@ -35,13 +35,17 @@ function FloatingGalley() {
 
 function HomeSunny() {
   // The Thousand Sunny at anchor — the voyage's home port. The Mini Merry
-  // launches from her soldier dock at the start.
-  const sunny = useNormalizedGLTF('/models/thousand-sunny.glb', 19)
+  // launches from her soldier dock at the start. The baked GLB is authored in
+  // world space around the origin (hull center ≈ (0.3, 2.3), matching the
+  // SUNNY_HULL collider), so it renders verbatim: the island group sits at
+  // (0, 2) and this offset cancels it.
+  const { scene } = useGLTF('/models/thousand-sunny.glb')
+  const sunny = useMemo(() => scene.clone(true), [scene])
   return (
-    <group>
-      <primitive object={sunny} position={[0, -0.5, 0]} rotation-y={-0.35} />
+    <group position={[0, 0, -2]}>
+      <primitive object={sunny} />
       {/* Masthead lantern for bloom */}
-      <mesh position={[0, 12.5, 0]}>
+      <mesh position={[0.3, 33.5, 2.3]}>
         <sphereGeometry args={[0.55, 12, 12]} />
         <meshBasicMaterial color={[3.2, 2.6, 1.0]} toneMapped={false} />
       </mesh>

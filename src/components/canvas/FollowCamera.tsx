@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { useShipStore } from '@/stores/ship'
 import { useWorldStore } from '@/stores/world'
 import { useSettings } from '@/stores/settings'
+import { resolveCollision } from '@/lib/collision'
 import { LAUNCH_TO } from './Ship'
 
 /**
@@ -46,9 +47,21 @@ export function FollowCamera() {
       )
     }
 
+    // Keep the rig itself out of solid geometry (e.g. backing toward the
+    // Sunny would otherwise swing the camera inside her hull).
+    const clamped = resolveCollision(_desired.x, _desired.z, 2)
+    _desired.x = clamped.x
+    _desired.z = clamped.z
+
     camera.position.x = THREE.MathUtils.damp(camera.position.x, _desired.x, LAMBDA, delta)
     camera.position.y = THREE.MathUtils.damp(camera.position.y, _desired.y, LAMBDA, delta)
     camera.position.z = THREE.MathUtils.damp(camera.position.z, _desired.z, LAMBDA, delta)
+
+    // The damped path can still cut a corner through an obstacle while the
+    // target swings around it — hard-resolve the final position too.
+    const solid = resolveCollision(camera.position.x, camera.position.z, 1.5)
+    camera.position.x = solid.x
+    camera.position.z = solid.z
 
     _look.set(
       position.x + fx * rig.lookAhead,
