@@ -18,6 +18,15 @@ test('the experience loads without errors', async ({ page }) => {
   await page.waitForTimeout(2_000)
   expect(pageErrors).toEqual([])
   expect(consoleErrors).toEqual([])
+
+  // Set sail: the game layer (bounty board, sea chart with treasure marks)
+  // comes up with the voyage
+  await page.getByRole('button', { name: /set sail/i }).click({ timeout: 30_000 })
+  await expect(page.locator('.bounty-board')).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('.bounty-board')).toContainText('Rookie of the East Blue')
+  await expect(page.locator('.minimap')).toBeVisible()
+  await expect(page.locator('.minimap-x')).toHaveCount(10)
+  expect(pageErrors).toEqual([])
 })
 
 test('the ship’s log fallback serves all content without WebGL', async ({ page }) => {
