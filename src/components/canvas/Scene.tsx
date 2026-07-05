@@ -7,6 +7,7 @@ import { useWorldStore } from '@/stores/world'
 import { useSettings } from '@/stores/settings'
 import { Ocean } from './Ocean'
 import { DockMarkers } from './DockMarkers'
+import { Treasures } from './Treasures'
 import { Ship } from './Ship'
 import { Islands } from './Islands'
 import { FollowCamera } from './FollowCamera'
@@ -55,6 +56,7 @@ export default function Scene() {
           <Ship />
           <Islands />
         </Suspense>
+        <Treasures />
         <FollowCamera />
         <Effects mobile={lowFx} />
       </Canvas>

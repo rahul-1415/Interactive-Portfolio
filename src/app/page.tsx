@@ -1,4 +1,5 @@
 import { SceneCanvas } from '@/components/canvas/SceneCanvas'
+import { BountyBoard } from '@/components/dom/BountyBoard'
 import { DockPrompt } from '@/components/dom/DockPrompt'
 import { IslandModal } from '@/components/dom/IslandModal'
 import { LoadingGate } from '@/components/dom/LoadingGate'
@@ -17,6 +18,7 @@ export default function Home() {
       </header>
       <p className="hud-hint">W A S D — take the helm · press E to dock</p>
       <DockPrompt />
+      <BountyBoard />
       <TouchHelm />
       <Minimap />
       <SettingsPanel />

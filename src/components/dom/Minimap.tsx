@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { ISLANDS } from '@/content/islands'
+import { TREASURE_SPOTS } from '@/content/treasures'
 import { useShipStore } from '@/stores/ship'
 import { useWorldStore } from '@/stores/world'
+import { useProgress } from '@/stores/progress'
 
 // World window the chart covers, chosen to fit all islands with margin.
 const CENTER_X = 10
@@ -24,6 +26,8 @@ export function Minimap() {
   const [ship, setShip] = useState({ left: SIZE / 2, top: SIZE / 2, deg: 0 })
   const nearIsland = useWorldStore((s) => s.nearIsland)
   const voyageStarted = useWorldStore((s) => s.voyageStarted)
+  const visited = useProgress((s) => s.visited)
+  const collected = useProgress((s) => s.treasures)
 
   useEffect(() => {
     const tick = setInterval(() => {
@@ -43,13 +47,28 @@ export function Minimap() {
       </span>
       {ISLANDS.map((island) => {
         const p = toMap(island.position[0], island.position[1])
+        const classes = [
+          'minimap-dot',
+          island.id === nearIsland ? 'minimap-dot-near' : '',
+          visited.includes(island.id) ? 'minimap-dot-visited' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')
         return (
           <span
             key={island.id}
-            className={`minimap-dot${island.id === nearIsland ? ' minimap-dot-near' : ''}`}
+            className={classes}
             style={{ left: p.left, top: p.top, background: island.accent }}
             title={island.name}
           />
+        )
+      })}
+      {TREASURE_SPOTS.filter((t) => !collected.includes(t.id)).map((t) => {
+        const p = toMap(t.position[0], t.position[1])
+        return (
+          <span key={t.id} className="minimap-x" style={{ left: p.left, top: p.top }} aria-hidden>
+            ✕
+          </span>
         )
       })}
       <span

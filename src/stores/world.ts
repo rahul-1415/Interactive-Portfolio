@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { SectionId } from '@/content/islands'
+import { useProgress } from './progress'
 
 interface WorldState {
   /** True once the player clicks "Set Sail" — gates all ship input. */
@@ -29,6 +30,10 @@ export const useWorldStore = create<WorldState>((set) => ({
   startVoyage: () => set({ voyageStarted: true, launching: true }),
   finishLaunch: () => set({ launching: false }),
   setNearIsland: (id) => set({ nearIsland: id }),
-  dock: (id) => set({ docked: id }),
+  dock: (id) => {
+    set({ docked: id })
+    // Every dock — key, click, or dashboard course — charts the island.
+    useProgress.getState().markVisited(id)
+  },
   undock: () => set({ docked: null }),
 }))

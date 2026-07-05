@@ -1243,3 +1243,252 @@ html:has(.log-page) {
   font-size: 0.9rem;
   transform: none;
 }
+
+/* ---------- Game layer: bounty board, treasure, Pirate King ---------- */
+
+.minimap-dot {
+  opacity: 0.5;
+}
+
+.minimap-dot-visited {
+  opacity: 1;
+  border-color: var(--gl-gold);
+}
+
+.minimap-dot-near {
+  opacity: 1;
+}
+
+.minimap-x {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--gl-red);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.bounty-board {
+  position: absolute;
+  top: 8.2rem;
+  left: 2.2rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.55rem 0.9rem 0.6rem;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 65%),
+    var(--gl-parchment);
+  border: 2px solid var(--gl-sepia);
+  border-radius: 8px;
+  box-shadow: 0 5px 14px rgba(6, 20, 38, 0.35);
+  pointer-events: none;
+}
+
+.bounty-board-wanted {
+  font-family: var(--font-rye), serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gl-sepia);
+}
+
+.bounty-board-amount {
+  font-family: var(--font-alfa), serif;
+  font-size: 1.05rem;
+  line-height: 1.1;
+  color: var(--gl-ink);
+}
+
+.bounty-board-title {
+  font-family: var(--font-rye), serif;
+  font-size: 0.72rem;
+  color: var(--gl-vermillion);
+}
+
+.bounty-board-tally {
+  font-size: 0.68rem;
+  color: var(--gl-sepia);
+}
+
+.bounty-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 34%;
+  z-index: 30;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  pointer-events: none;
+  animation: bounty-toast-rise 2.6s ease-out forwards;
+}
+
+.bounty-toast strong {
+  font-family: var(--font-alfa), serif;
+  font-size: 1.7rem;
+  color: var(--gl-gold);
+  text-shadow:
+    0 2px 0 var(--gl-ink),
+    0 0 18px rgba(255, 206, 0, 0.55);
+}
+
+.bounty-toast span {
+  font-family: var(--font-rye), serif;
+  font-size: 0.8rem;
+  color: var(--gl-cloud);
+  text-shadow: 0 1px 2px rgba(26, 26, 26, 0.8);
+}
+
+@keyframes bounty-toast-rise {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(18px) scale(0.9);
+  }
+  12% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1.05);
+  }
+  22% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-26px);
+  }
+}
+
+.pirate-king {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 206, 0, 0.18), transparent 55%),
+    rgba(12, 24, 44, 0.62);
+  animation: pirate-king-in 500ms ease-out;
+}
+
+@keyframes pirate-king-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.pirate-king-card {
+  position: relative;
+  max-width: 430px;
+  padding: 2.1rem 2rem 1.8rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 15%, rgba(255, 255, 255, 0.35), transparent 60%),
+    var(--gl-parchment);
+  border: 3px solid var(--gl-sepia);
+  outline: 6px double rgba(75, 54, 33, 0.55);
+  outline-offset: -12px;
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(6, 20, 38, 0.55);
+  overflow: hidden;
+}
+
+.pirate-king-burst {
+  position: absolute;
+  top: -110px;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translateX(-50%);
+  background: repeating-conic-gradient(rgba(255, 206, 0, 0.28) 0deg 9deg, transparent 9deg 24deg);
+  border-radius: 50%;
+  animation: pirate-king-spin 22s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pirate-king-spin {
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.pirate-king-card h2 {
+  position: relative;
+  font-family: var(--font-pirata), serif;
+  font-size: 3rem;
+  letter-spacing: 0.04em;
+  color: var(--gl-red);
+  text-shadow: 0 2px 0 rgba(255, 206, 0, 0.8);
+}
+
+.pirate-king-card p {
+  position: relative;
+  margin: 0.7rem 0 1.3rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--gl-sepia);
+}
+
+.pirate-king-actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.pirate-king-actions a,
+.pirate-king-actions button {
+  font-family: var(--font-rye), serif;
+  font-size: 0.82rem;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pirate-king-actions a {
+  background: var(--gl-gold);
+  color: var(--gl-ink);
+  border: 2px solid var(--gl-sepia);
+}
+
+.pirate-king-actions button {
+  background: transparent;
+  color: var(--gl-sepia);
+  border: 2px solid var(--gl-sepia);
+}
+
+.pirate-king-actions a:hover,
+.pirate-king-actions button:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 820px) {
+  .bounty-board {
+    top: auto;
+    bottom: 5.6rem;
+    left: 1rem;
+    padding: 0.4rem 0.65rem 0.45rem;
+  }
+
+  .bounty-board-amount {
+    font-size: 0.88rem;
+  }
+
+  .bounty-board-tally {
+    font-size: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pirate-king-burst {
+    animation: none;
+  }
+}
