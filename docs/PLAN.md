@@ -136,6 +136,17 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 - [x] Skypiea — hidden sky island for a completed log
 - [x] Wanted-poster mugshots (live captures + GitHub OG cards, 16/16)
 
+### v2.4 — Purposeful names, burst & the singing sea ✅ complete (2026-07-05)
+
+- [x] Purposeful island labels + per-island board heights; combined titles when docked
+- [x] Click-anywhere (open water) tap-to-sail
+- [x] Coup de Burst (Shift, 55 u/s, inexhaustible) + faster base handling
+- [x] Skypiea always visible; golden bell reserved for the Pirate King
+- [x] Original sea-shanty music + gentler waves; Music/Sound toggles, on by default
+- [x] Résumé preview button (PDF iframe + download) in the HUD
+- [x] Topical CC0/PDM poster art via Openverse (13) + live captures (3)
+- [x] Space to set sail on the gate
+
 ## Content sources (canonical)
 
 - `rahul-babu-data.json` (repo root) — all portfolio data. Edit here only.

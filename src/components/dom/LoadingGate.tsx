@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useProgress } from '@react-three/drei'
+import { primeAudio } from '@/lib/audio'
 import { useWorldStore } from '@/stores/world'
 
 /**
@@ -13,6 +14,27 @@ export function LoadingGate() {
   const [ready, setReady] = useState(false)
   const [gone, setGone] = useState(false)
   const [fading, setFading] = useState(false)
+
+  const setSail = () => {
+    // The click/keypress is a user gesture — prime audio here so the shanty
+    // and sea can start (autoplay policy), per the saved sound settings.
+    primeAudio()
+    useWorldStore.getState().startVoyage()
+    setFading(true)
+    setTimeout(() => setGone(true), 700)
+  }
+
+  useEffect(() => {
+    if (!ready) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.code !== 'Space') return
+      if (useWorldStore.getState().voyageStarted) return
+      event.preventDefault()
+      setSail()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [ready])
 
   useEffect(() => {
     if (ready) return
@@ -56,15 +78,8 @@ export function LoadingGate() {
       </div>
 
       {ready ? (
-        <button
-          className="set-sail-btn"
-          onClick={() => {
-            useWorldStore.getState().startVoyage()
-            setFading(true)
-            setTimeout(() => setGone(true), 700)
-          }}
-        >
-          Set Sail
+        <button className="set-sail-btn" onClick={setSail}>
+          Set Sail <kbd>Space</kbd>
         </button>
       ) : (
         <p className="loading-status">Charting course… {shownProgress}%</p>

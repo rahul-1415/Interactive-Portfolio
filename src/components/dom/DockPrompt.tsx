@@ -16,12 +16,14 @@ export function DockPrompt() {
       const target = event.target as HTMLElement | null
       if (target && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName)) return
       const {
+        voyageStarted,
         nearIsland: near,
         docked: isDocked,
         launching: isLaunching,
         dock,
       } = useWorldStore.getState()
-      if (near && !isDocked && !isLaunching) {
+      // Pre-voyage, Space belongs to the Set Sail gate — never dock from it.
+      if (voyageStarted && near && !isDocked && !isLaunching) {
         event.preventDefault()
         dock(near)
       }
@@ -47,8 +49,10 @@ export function DockPrompt() {
     >
       <span className="dock-prompt-anchor">⚓</span>
       <span>
-        <strong>{island.name}</strong>
-        <em>{island.tagline}</em>
+        <strong>{island.label}</strong>
+        <em>
+          {island.name} · {island.tagline}
+        </em>
       </span>
       <kbd>Space</kbd>
     </button>

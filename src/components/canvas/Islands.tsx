@@ -52,12 +52,15 @@ export function Islands() {
               // Tap-to-sail: set an autopilot course for this island. The helm
               // (keys or touch) takes priority and cancels it.
               event.stopPropagation()
-              if (!useWorldStore.getState().voyageStarted) return
+              // A drag that ends here is a camera-ish gesture, not an order
+              if (event.delta > 6) return
+              const world = useWorldStore.getState()
+              if (!world.voyageStarted || world.launching || world.docked) return
               useShipStore.setState({
                 autopilot: {
                   x: island.position[0],
                   z: island.position[1],
-                  name: island.name,
+                  name: island.label,
                   arriveRadius: Math.max(10, island.dockRadius - 6),
                 },
               })
@@ -67,16 +70,16 @@ export function Islands() {
               <IslandBase variant={(index % 2) as 0 | 1} radius={island.landRadius} />
             )}
             <Landmark />
-            <Billboard position={[0, island.id === 'home' ? 40 : 30, 0]}>
+            <Billboard position={[0, island.labelHeight, 0]}>
               <Text
                 font="/fonts/bangers-regular.woff"
-                fontSize={3.4}
+                fontSize={3.2}
                 color="#1A1A1A"
                 outlineWidth={0.12}
                 outlineColor="#EFE0B9"
                 anchorY="bottom"
               >
-                {island.name}
+                {island.label}
               </Text>
             </Billboard>
           </group>

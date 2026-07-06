@@ -23,11 +23,13 @@ export function IslandModal() {
   const Section = SECTION_RENDERERS[island.id]
 
   return (
-    <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={island.name}>
+    <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={island.label}>
       <div className="modal-panel" style={{ '--accent': island.accent } as React.CSSProperties}>
         <header className="modal-header">
           <div>
-            <h2>{island.name}</h2>
+            <h2>
+              {island.label} — {island.name}
+            </h2>
             <p>
               {island.tagline} · inspired by {island.inspiredBy}
             </p>

@@ -12,7 +12,7 @@ export function LogBody() {
         return (
           <section key={island.id} className="log-section" id={island.id}>
             <h2>
-              {island.name}
+              {island.label} — {island.name}
               <span className="log-section-sub">
                 {island.tagline} · inspired by {island.inspiredBy}
               </span>

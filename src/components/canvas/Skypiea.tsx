@@ -7,10 +7,10 @@ import * as THREE from 'three'
 import { isComplete, useProgress } from '@/stores/progress'
 
 /**
- * Skypiea — the hidden sky island. Only reveals itself once the log is
- * complete (Pirate King): a bank of sea clouds high over the middle sea
- * carrying a slice of Upper Yard and the golden belfry of Shandora,
- * drifting gently. A pure reward — the crown jewel for 100% explorers.
+ * Skypiea — the sky island: a bank of sea clouds over the middle sea carrying
+ * a slice of Upper Yard and the belfry of Shandora, drifting gently. Always
+ * in the sky to wonder at; the golden bell only ignites for a completed log
+ * (Pirate King) — the 100% explorer's beacon.
  */
 
 // Low enough that the chase camera (pitched at the sea, ~25° half-fov) frames
@@ -42,7 +42,7 @@ export function Skypiea() {
     group.rotation.y = Math.sin(t * 0.05) * 0.08
   })
 
-  if (!isComplete(visited.length, treasures.length)) return null
+  const crowned = isComplete(visited.length, treasures.length)
 
   return (
     <group ref={groupRef} position={[POSITION[0], ALTITUDE, POSITION[1]]}>
@@ -75,10 +75,14 @@ export function Skypiea() {
           <boxGeometry args={[5.6, 1, 1]} />
           <meshToonMaterial color="#D9A441" />
         </mesh>
-        {/* The great bell — hot gold for bloom */}
+        {/* The great bell — ignites golden only for the Pirate King */}
         <mesh position={[0, 3.6, 0]}>
           <cylinderGeometry args={[1.15, 1.5, 2.2, 10]} />
-          <meshBasicMaterial color={[2.8, 2.2, 0.7]} toneMapped={false} />
+          {crowned ? (
+            <meshBasicMaterial color={[2.8, 2.2, 0.7]} toneMapped={false} />
+          ) : (
+            <meshToonMaterial color="#B9A05B" />
+          )}
         </mesh>
       </group>
       <Billboard position={[0, 16, 0]}>
@@ -101,7 +105,9 @@ export function Skypiea() {
           anchorY="bottom"
           position={[0, -1.6, 0]}
         >
-          the sea above the sea — for the Pirate King alone
+          {crowned
+            ? 'the golden bell rings for the Pirate King'
+            : 'the sea above the sea — complete the log to ring the bell'}
         </Text>
       </Billboard>
     </group>

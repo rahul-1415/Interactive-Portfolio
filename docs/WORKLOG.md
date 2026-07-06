@@ -2,6 +2,61 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-05 (v2.4) — Names that mean something, cola in the tank, and a singing sea
+
+Owner round four: purposeful island names, click-anywhere sailing, a Coup de
+Burst boost, visible Skypiea, background music + nicer sea sound, a résumé
+button, real topical poster art, and Space to set sail.
+
+- **Islands now say what they are**: name boards read "Experience Island",
+  "Projects Island", etc. (`label` field), and docking shows the pair —
+  "Experience Island — The Floating Galley". Boards dropped from a fixed y=30
+  to per-island `labelHeight` just above each silhouette (17–35), so names sit
+  visibly on the landmarks instead of floating in the sky. /log headers match.
+- **Click anywhere to sail**: the ocean plane itself takes clicks now (flat
+  geometry = cheap raycast; islands stopPropagation so they win) — course set
+  to the clicked point, "open waters" banner, arrive radius 5u.
+- **Coup de Burst**: hold Shift for an inexhaustible cola-powered 55 u/s burst
+  (wake shader stretches with uShipSpeed now allowed past 1). General handling
+  overhauled per owner: MAX_SPEED 17→26, reverse −4→−14, snappier throttle
+  (damp 0.8→1.2), TURN_RATE 0.9→1.5 with full rudder authority from ~40%
+  throttle and a faster steering damp (2.2→3.5). Measured 37 u/s average over
+  the first 2.5s of a burst (still ramping toward 55).
+- **Skypiea is always in the sky now** (owner couldn't find it — reward-gated
+  invisibility read as a bug). The golden bell only ignites for a completed
+  log, and the subtitle tells you so: "complete the log to ring the bell".
+- **The sea sings**: an original 6/8 sea shanty in D major — two detuned
+  squares through a lowpass for the squeezebox, triangle bass on the big
+  beats, 16-bar loop scheduled on the AudioContext clock. The wave bed got
+  gentler (280Hz lowpass, half the gain, slower swell). Both ON by default —
+  they start on the Set Sail gesture (autoplay-safe) — with separate Music /
+  Sound switches in the Ship's Wheel. Old saves missing the music key are
+  schema-upgraded so sound comes on for them too.
+- **Résumé, anytime**: a Vivre Card button under the HUD identity opens an
+  in-page PDF preview (iframe) with a Download action; Esc/backdrop closes.
+  Bounty board nudged down to make room.
+- **Poster art is topical now**: replaced GitHub OpenGraph cards with CC0 /
+  public-domain images from Openverse matched to each project (server rooms,
+  aerial forest, pixel padlocks, mazes…) — 13 fetched, license-clean, no
+  attribution debt; the 3 live projects keep their real screenshots.
+- **Space sets sail** on the loading gate (button shows the hint), then Space
+  docks at sea — two contexts, no conflicts.
+- **Ultracode review (26 agents, ~715k tokens) caught 4 confirmed + 6 real
+  plausible defects before ship**, all fixed: Web Audio fades were hard cuts
+  (linearRamp with no setValueAtTime anchor — ocean + shanty stops now anchor
+  and cancelScheduledValues); the Résumé button kept focus so the next Space
+  re-opened it instead of docking (blur on open); Escape closed the résumé AND
+  undocked the island modal beneath (capture-phase listener +
+  stopImmediatePropagation); Space at the loading gate could dock Home Port
+  pre-voyage and pollute progress (voyageStarted guard in DockPrompt);
+  open-water courses could target unreachable points (now clamped to the
+  charted world and resolved out of colliders); clicks raycasted the 131k-tri
+  wave mesh (moved to a 2-triangle invisible hit plane); drag-releases set
+  accidental courses (event.delta guard on sea + islands); autopilot overshot
+  at the new speeds (proportional approach throttle); island clicks during the
+  launch cinematic set uncancellable courses (guard); background-tab shanty
+  scheduling fast-forwards instead of piling up.
+
 ## 2026-07-05 (v2.3) — The living sea: wake, sound, autopilot, Skypiea, mugshots
 
 Owner round three: do the suggested improvements, Space to dock, and a proper

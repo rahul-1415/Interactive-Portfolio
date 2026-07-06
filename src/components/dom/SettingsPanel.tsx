@@ -9,6 +9,7 @@ export function SettingsPanel() {
   const [open, setOpen] = useState(false)
   const quality = useSettings((s) => s.quality)
   const cameraMode = useSettings((s) => s.cameraMode)
+  const music = useSettings((s) => s.music)
   const sound = useSettings((s) => s.sound)
 
   return (
@@ -67,34 +68,37 @@ export function SettingsPanel() {
           </fieldset>
 
           <fieldset>
-            <legend>Sound</legend>
-            {(
-              [
-                [true, 'On — sea ambience & reward chimes'],
-                [false, 'Off — silent running (default)'],
-              ] as [boolean, string][]
-            ).map(([value, label]) => (
-              <label key={String(value)}>
-                <input
-                  type="radio"
-                  name="sound"
-                  checked={sound === value}
-                  onChange={() => {
-                    // Prime the AudioContext inside the click gesture
-                    // (browser autoplay policy) before flipping the setting.
-                    if (value) primeAudio()
-                    useSettings.getState().setSound(value)
-                  }}
-                />
-                {label}
-              </label>
-            ))}
+            <legend>Audio</legend>
+            <label>
+              <input
+                type="checkbox"
+                checked={music}
+                onChange={(e) => {
+                  // Prime the AudioContext inside the click gesture
+                  // (browser autoplay policy) before flipping the setting.
+                  if (e.target.checked) primeAudio()
+                  useSettings.getState().setMusic(e.target.checked)
+                }}
+              />
+              Music — a crew&apos;s sea shanty
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={sound}
+                onChange={(e) => {
+                  if (e.target.checked) primeAudio()
+                  useSettings.getState().setSound(e.target.checked)
+                }}
+              />
+              Sound — waves & reward chimes
+            </label>
           </fieldset>
 
           <div className="settings-help">
             <p>
-              <kbd>W A S D</kbd> / arrows — sail · <kbd>Space</kbd> — dock · <kbd>Esc</kbd> — set
-              sail
+              <kbd>W A S D</kbd> / arrows — sail · <kbd>Shift</kbd> — Coup de Burst ·{' '}
+              <kbd>Space</kbd> — dock · <kbd>Esc</kbd> — set sail · click sea or island — set course
             </p>
             <a href="/log">Prefer plain sailing? Read the ship&apos;s log →</a>
           </div>

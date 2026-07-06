@@ -1275,7 +1275,7 @@ html:has(.log-page) {
 
 .bounty-board {
   position: absolute;
-  top: 8.2rem;
+  top: 10.6rem;
   left: 2.2rem;
   z-index: 10;
   display: flex;
@@ -1538,4 +1538,132 @@ html:has(.log-page) {
   border-radius: 3px;
   background: rgba(75, 54, 33, 0.12);
   filter: sepia(0.32) saturate(0.85) contrast(0.95);
+}
+
+/* ---------- Résumé preview ---------- */
+
+.resume-btn {
+  pointer-events: auto;
+  margin-top: 0.55rem;
+  padding: 0.32rem 0.75rem;
+  font-family: var(--font-rye), serif;
+  font-size: 0.72rem;
+  color: var(--gl-ink);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35), transparent 65%),
+    var(--gl-parchment);
+  border: 2px solid var(--gl-sepia);
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(6, 20, 38, 0.3);
+  cursor: pointer;
+}
+
+.resume-btn:hover {
+  filter: brightness(1.06);
+}
+
+.resume-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: rgba(12, 24, 44, 0.62);
+}
+
+.resume-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(860px, 96vw);
+  height: min(88vh, 1100px);
+  background: var(--gl-parchment);
+  border: 3px solid var(--gl-sepia);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(6, 20, 38, 0.55);
+}
+
+.resume-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 2px solid rgba(75, 54, 33, 0.4);
+}
+
+.resume-panel-header h3 {
+  font-family: var(--font-pirata), serif;
+  font-size: 1.3rem;
+  color: var(--gl-ink);
+}
+
+.resume-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.resume-panel-actions a {
+  font-family: var(--font-rye), serif;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--gl-gold);
+  color: var(--gl-ink);
+  border: 2px solid var(--gl-sepia);
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.resume-panel-actions button {
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+  color: var(--gl-sepia);
+  background: transparent;
+  border: 2px solid var(--gl-sepia);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.resume-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.set-sail-btn kbd {
+  margin-left: 0.55rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7em;
+  background: rgba(26, 26, 26, 0.18);
+  border: 1px solid rgba(26, 26, 26, 0.4);
+  border-radius: 4px;
+}
+
+@media (max-width: 820px) {
+  .resume-btn {
+    font-size: 0.62rem;
+    padding: 0.28rem 0.6rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .dock-prompt {
+    width: max-content;
+    max-width: 94vw;
+    gap: 0.55rem;
+    padding: 0.5rem 0.8rem;
+    bottom: 7.6rem;
+  }
+
+  .dock-prompt span em {
+    display: none;
+  }
+
+  .dock-prompt span strong {
+    white-space: nowrap;
+  }
 }

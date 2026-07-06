@@ -93,7 +93,7 @@ export function Minimap() {
             key={island.id}
             className={classes}
             style={{ left: p.left, top: p.top, background: island.accent }}
-            title={island.name}
+            title={island.label}
           />
         )
       })}

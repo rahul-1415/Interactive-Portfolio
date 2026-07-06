@@ -3,7 +3,9 @@ export type SectionId =
 
 export interface IslandDef {
   id: SectionId
-  /** In-world name (DESIGN.md §4). */
+  /** Purposeful name shown on the name board and dock prompt ("Experience Island"). */
+  label: string
+  /** In-world themed name (DESIGN.md §4), shown alongside the label when docked. */
   name: string
   /** One Piece location that inspired it. */
   inspiredBy: string
@@ -16,6 +18,8 @@ export interface IslandDef {
   landRadius: number
   /** Zone accent (DESIGN.md tokens). */
   accent: string
+  /** Name-board height — just above the landmark's silhouette. */
+  labelHeight: number
 }
 
 /**
@@ -25,6 +29,7 @@ export interface IslandDef {
 export const ISLANDS: IslandDef[] = [
   {
     id: 'home',
+    label: 'Home Port',
     name: 'The Thousand Sunny',
     inspiredBy: 'the Soldier Dock System',
     tagline: 'Home port — the whole voyage at a glance',
@@ -34,9 +39,11 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 24,
     landRadius: 0,
     accent: '#FFCE00',
+    labelHeight: 35,
   },
   {
     id: 'experience',
+    label: 'Experience Island',
     name: 'The Floating Galley',
     inspiredBy: 'Baratie',
     tagline: 'Four courses of service at sea',
@@ -44,9 +51,11 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 34,
     landRadius: 16,
     accent: '#D9A441',
+    labelHeight: 17,
   },
   {
     id: 'projects',
+    label: 'Projects Island',
     name: 'Dock District',
     inspiredBy: 'Water 7',
     tagline: 'Sixteen hulls in the yards',
@@ -54,9 +63,11 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 36,
     landRadius: 18,
     accent: '#3E9E9E',
+    labelHeight: 17,
   },
   {
     id: 'education',
+    label: 'Education Island',
     name: 'The Knowledge Tree',
     inspiredBy: 'Ohara',
     tagline: 'Every log ever kept',
@@ -64,9 +75,11 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 34,
     landRadius: 18,
     accent: '#5C8A3C',
+    labelHeight: 33,
   },
   {
     id: 'publications',
+    label: 'Publications Island',
     name: 'The Press Balloon',
     inspiredBy: 'World Economy News',
     tagline: 'Hot off the wing',
@@ -75,9 +88,11 @@ export const ISLANDS: IslandDef[] = [
     // Floats in the air — no landmass at the waterline, so no hull collision.
     landRadius: 0,
     accent: '#C63D2F',
+    labelHeight: 33,
   },
   {
     id: 'certifications',
+    label: 'Certifications Island',
     name: 'Fort Meridian',
     inspiredBy: 'Marineford',
     tagline: 'Commissions and commendations',
@@ -85,9 +100,11 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 34,
     landRadius: 18,
     accent: '#5B6B8C',
+    labelHeight: 19,
   },
   {
     id: 'contact',
+    label: 'Contact Island',
     name: 'Twin Cape Light',
     inspiredBy: 'Twin Cape Lighthouse',
     tagline: 'Signal the crew',
@@ -95,5 +112,6 @@ export const ISLANDS: IslandDef[] = [
     dockRadius: 32,
     landRadius: 12,
     accent: '#D70000',
+    labelHeight: 25,
   },
 ]

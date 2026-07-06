@@ -15,10 +15,12 @@ import { bindKeys, isDown } from '@/lib/input'
 const MODEL_URL = '/models/going-merry.glb'
 // Mini Merry: small enough that the straight chase camera sees over her sails.
 const TARGET_LENGTH = 5.5
-export const MAX_SPEED = 17
-const REVERSE_SPEED = -4
-const ACCEL_DAMP = 0.8
-const TURN_RATE = 0.9
+export const MAX_SPEED = 26
+// Coup de Burst: cola-powered, inexhaustible, very fast. Hold Shift.
+const BOOST_SPEED = 55
+const REVERSE_SPEED = -14
+const ACCEL_DAMP = 1.2
+const TURN_RATE = 1.5
 const WATERLINE = -0.35
 const WORLD_RADIUS = 250
 // Hull half-beam plus a fender's worth of margin — collision body radius.
@@ -95,11 +97,15 @@ export function Ship() {
       const locked = !world.voyageStarted || world.docked !== null
       const touch = useTouchInput.getState()
 
-      const keyThrottle = isDown('KeyW', 'ArrowUp')
-        ? MAX_SPEED
-        : isDown('KeyS', 'ArrowDown')
-          ? REVERSE_SPEED
-          : touch.throttle * MAX_SPEED
+      // Shift = Coup de Burst: overrides everything, always forward
+      const boosting = isDown('ShiftLeft', 'ShiftRight')
+      const keyThrottle = boosting
+        ? BOOST_SPEED
+        : isDown('KeyW', 'ArrowUp')
+          ? MAX_SPEED
+          : isDown('KeyS', 'ArrowDown')
+            ? REVERSE_SPEED
+            : touch.throttle * MAX_SPEED
       const keyRudder =
         (isDown('KeyA', 'ArrowLeft') ? 1 : 0) - (isDown('KeyD', 'ArrowRight') ? 1 : 0)
 
@@ -122,19 +128,22 @@ export function Ship() {
           } else {
             const err = Math.atan2(dxA, dzA) - store.heading
             rudder = THREE.MathUtils.clamp(Math.atan2(Math.sin(err), Math.cos(err)) * 1.8, -1, 1)
-            throttleTarget = distA < 22 ? MAX_SPEED * 0.5 : MAX_SPEED
+            // Proportional approach: full sail far out, easing to a crawl at
+            // the mark so the faster hull doesn't overshoot the click point.
+            throttleTarget = THREE.MathUtils.clamp((distA - auto.arriveRadius) * 1.1, 5, MAX_SPEED)
           }
         }
       }
 
       speed = THREE.MathUtils.damp(store.speed, throttleTarget, ACCEL_DAMP, delta)
 
-      // Rudder authority scales with speed (0 at rest): no spin-in-place.
-      const authority = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 1)
+      // Rudder authority ramps quickly (full helm at ~40% throttle) so the
+      // boat feels eager without allowing a spin-in-place.
+      const authority = THREE.MathUtils.clamp(Math.abs(speed) / (MAX_SPEED * 0.4), 0, 1)
       state.current.angularVelocity = THREE.MathUtils.damp(
         state.current.angularVelocity,
         rudder * TURN_RATE * authority * Math.sign(speed || 1),
-        2.2,
+        3.5,
         delta
       )
       heading = store.heading + state.current.angularVelocity * delta

@@ -4,7 +4,9 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { WAVE_AMPLITUDE, wavesGLSL } from '@/lib/waves'
+import { resolveCollision } from '@/lib/collision'
 import { useShipStore } from '@/stores/ship'
+import { useWorldStore } from '@/stores/world'
 import { useSettings } from '@/stores/settings'
 import { MAX_SPEED } from './Ship'
 
@@ -120,6 +122,7 @@ void main() {
 /** Stylized toon ocean: GPU Gerstner waves + banded ramp + crest foam. */
 export function Ocean() {
   const meshRef = useRef<THREE.Mesh>(null)
+  const clickPlaneRef = useRef<THREE.Mesh>(null)
   const materialRef = useRef<THREE.ShaderMaterial>(null)
   // Low quality halves the wave tessellation — the toon bands hide it well.
   const quality = useSettings((s) => s.quality)
@@ -162,9 +165,11 @@ export function Ocean() {
     // surface stays continuous.
     const { position, heading, speed } = useShipStore.getState()
     meshRef.current?.position.set(position.x, 0, position.z)
+    clickPlaneRef.current?.position.set(position.x, 0.02, position.z)
     u.uShipPos.value.set(position.x, position.z)
     u.uShipDir.value.set(Math.sin(heading), Math.cos(heading))
-    u.uShipSpeed.value = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 1)
+    // Allowed past 1 during Coup de Burst — the wake shader stretches with it
+    u.uShipSpeed.value = THREE.MathUtils.clamp(Math.abs(speed) / MAX_SPEED, 0, 2)
     if (process.env.NODE_ENV !== 'production') {
       // Dev-only: expose the live (rendered) uniforms for visual QA scripts
       ;(window as unknown as Record<string, unknown>).__oceanUniforms = u
@@ -172,14 +177,46 @@ export function Ocean() {
   })
 
   return (
-    <mesh ref={meshRef} rotation-x={-Math.PI / 2} frustumCulled={false}>
-      <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, segments, segments]} />
-      <shaderMaterial
-        ref={materialRef}
-        vertexShader={shaders.vertexShader}
-        fragmentShader={shaders.fragmentShader}
-        uniforms={uniforms}
-      />
-    </mesh>
+    <>
+      <mesh ref={meshRef} rotation-x={-Math.PI / 2} frustumCulled={false}>
+        <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, segments, segments]} />
+        <shaderMaterial
+          ref={materialRef}
+          vertexShader={shaders.vertexShader}
+          fragmentShader={shaders.fragmentShader}
+          uniforms={uniforms}
+        />
+      </mesh>
+      {/* Tap-to-sail hit plane: 2 triangles, so click raycasts never touch the
+          tessellated wave mesh. Trails the ship alongside the ocean. */}
+      <mesh
+        ref={clickPlaneRef}
+        rotation-x={-Math.PI / 2}
+        frustumCulled={false}
+        onClick={(event) => {
+          // Island clicks stopPropagation upstream, so they win over the sea.
+          // A drag that ends on water is a gesture, not a course order.
+          if (event.delta > 6) return
+          const world = useWorldStore.getState()
+          if (!world.voyageStarted || world.launching || world.docked) return
+          // Keep the target reachable: inside the charted world and out of
+          // any island/hull collider the ship could never enter.
+          let x = event.point.x
+          let z = event.point.z
+          const fromCenter = Math.hypot(x, z)
+          if (fromCenter > 240) {
+            x = (x / fromCenter) * 240
+            z = (z / fromCenter) * 240
+          }
+          const clear = resolveCollision(x, z, 5)
+          useShipStore.setState({
+            autopilot: { x: clear.x, z: clear.z, name: 'open waters', arriveRadius: 5 },
+          })
+        }}
+      >
+        <planeGeometry args={[OCEAN_SIZE, OCEAN_SIZE, 1, 1]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+    </>
   )
 }
