@@ -35,7 +35,7 @@ test('the ship’s log fallback serves all content without WebGL', async ({ page
   await page.goto('/log')
   await expect(page).toHaveTitle(/Ship.s Log/)
   await expect(page.locator('canvas')).toHaveCount(0)
-  await expect(page.locator('.log-section')).toHaveCount(6)
+  await expect(page.locator('.log-section')).toHaveCount(7)
   // Content is real, server-rendered (SEO surface)
   await expect(page.getByText('Friedman Vartolo')).toBeVisible()
   await expect(page.getByRole('link', { name: /résumé/i })).toBeVisible()

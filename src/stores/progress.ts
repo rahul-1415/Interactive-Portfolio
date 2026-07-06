@@ -4,13 +4,13 @@ import { TREASURE_SPOTS } from '@/content/treasures'
 
 /**
  * Voyage progress — the game layer. Charting an island earns ฿300,000,000,
- * hauling a treasure barrel ฿90,000,000; a full log (7 islands + 10 barrels)
+ * hauling a treasure barrel ฿60,000,000; a full log (8 islands + 10 barrels)
  * totals exactly ฿3,000,000,000 — an Emperor's bounty — and crowns the
  * visitor PIRATE KING. Persisted so the hunt survives reloads.
  */
 
 export const ISLAND_BOUNTY = 300_000_000
-export const TREASURE_BOUNTY = 90_000_000
+export const TREASURE_BOUNTY = 60_000_000
 
 export function bountyOf(visitedCount: number, treasureCount: number): number {
   return visitedCount * ISLAND_BOUNTY + treasureCount * TREASURE_BOUNTY

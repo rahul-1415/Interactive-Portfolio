@@ -8,6 +8,7 @@ import { LoadingGate } from '@/components/dom/LoadingGate'
 import { Minimap } from '@/components/dom/Minimap'
 import { ResumeButton } from '@/components/dom/ResumeButton'
 import { SettingsPanel } from '@/components/dom/SettingsPanel'
+import { SkypieaCard } from '@/components/dom/SkypieaCard'
 import { TouchHelm } from '@/components/dom/TouchHelm'
 import { portfolio } from '@/content'
 
@@ -16,14 +17,17 @@ export default function Home() {
     <main>
       <SceneCanvas />
       <header className="hud-identity">
-        <h1>{portfolio.personal.name}</h1>
+        <div className="hud-identity-row">
+          <h1>{portfolio.personal.name}</h1>
+          <ResumeButton />
+        </div>
         <p>{portfolio.personal.title}</p>
-        <ResumeButton />
       </header>
       <p className="hud-hint">
         W A S D — helm · Shift — burst · Space — dock · click to set course
       </p>
       <DockPrompt />
+      <SkypieaCard />
       <BountyBoard />
       <CourseBanner />
       <AudioController />

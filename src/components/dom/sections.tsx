@@ -311,6 +311,32 @@ export function HomeDashboard() {
   )
 }
 
+const SKILL_RACKS: [keyof typeof portfolio.skills, string][] = [
+  ['backend', 'Backend'],
+  ['frontend', 'Frontend'],
+  ['ai_ml', 'AI & ML'],
+  ['data_engineering', 'Data Engineering'],
+  ['cloud_devops', 'Cloud & DevOps'],
+  ['developer_workflow', 'Developer Workflow'],
+]
+
+export function SkillsArmory() {
+  return (
+    <div className="armory-grid">
+      {SKILL_RACKS.map(([key, title]) => (
+        <article key={key} className="armory-rack">
+          <h3>{title}</h3>
+          <ul className="tech-chips">
+            {portfolio.skills[key].map((skill) => (
+              <li key={skill}>{skill}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  )
+}
+
 export const SECTION_RENDERERS: Record<SectionId, () => React.JSX.Element> = {
   home: HomeDashboard,
   experience: ExperienceMenu,
@@ -319,4 +345,5 @@ export const SECTION_RENDERERS: Record<SectionId, () => React.JSX.Element> = {
   publications: PublicationsPaper,
   certifications: CertificationBoard,
   contact: ContactCape,
+  skills: SkillsArmory,
 }

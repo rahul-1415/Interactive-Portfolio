@@ -1,5 +1,12 @@
 export type SectionId =
-  'home' | 'experience' | 'projects' | 'education' | 'publications' | 'certifications' | 'contact'
+  | 'home'
+  | 'experience'
+  | 'projects'
+  | 'education'
+  | 'publications'
+  | 'certifications'
+  | 'contact'
+  | 'skills'
 
 export interface IslandDef {
   id: SectionId
@@ -43,7 +50,7 @@ export const ISLANDS: IslandDef[] = [
   },
   {
     id: 'experience',
-    label: 'Experience Island',
+    label: 'Experience',
     name: 'The Floating Galley',
     inspiredBy: 'Baratie',
     tagline: 'Four courses of service at sea',
@@ -55,7 +62,7 @@ export const ISLANDS: IslandDef[] = [
   },
   {
     id: 'projects',
-    label: 'Projects Island',
+    label: 'Projects',
     name: 'Dock District',
     inspiredBy: 'Water 7',
     tagline: 'Sixteen hulls in the yards',
@@ -67,7 +74,7 @@ export const ISLANDS: IslandDef[] = [
   },
   {
     id: 'education',
-    label: 'Education Island',
+    label: 'Education',
     name: 'The Knowledge Tree',
     inspiredBy: 'Ohara',
     tagline: 'Every log ever kept',
@@ -79,7 +86,7 @@ export const ISLANDS: IslandDef[] = [
   },
   {
     id: 'publications',
-    label: 'Publications Island',
+    label: 'Publications',
     name: 'The Press Balloon',
     inspiredBy: 'World Economy News',
     tagline: 'Hot off the wing',
@@ -88,11 +95,11 @@ export const ISLANDS: IslandDef[] = [
     // Floats in the air — no landmass at the waterline, so no hull collision.
     landRadius: 0,
     accent: '#C63D2F',
-    labelHeight: 33,
+    labelHeight: 24,
   },
   {
     id: 'certifications',
-    label: 'Certifications Island',
+    label: 'Certifications',
     name: 'Fort Meridian',
     inspiredBy: 'Marineford',
     tagline: 'Commissions and commendations',
@@ -103,8 +110,20 @@ export const ISLANDS: IslandDef[] = [
     labelHeight: 19,
   },
   {
+    id: 'skills',
+    label: 'Skills',
+    name: 'Onigashima',
+    inspiredBy: 'Onigashima',
+    tagline: 'The armory — every blade on the rack',
+    position: [-112, 18],
+    dockRadius: 34,
+    landRadius: 18,
+    accent: '#7B4FC0',
+    labelHeight: 27,
+  },
+  {
     id: 'contact',
-    label: 'Contact Island',
+    label: 'Contact',
     name: 'Twin Cape Light',
     inspiredBy: 'Twin Cape Lighthouse',
     tagline: 'Signal the crew',

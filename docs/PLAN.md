@@ -147,6 +147,16 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
 - [x] Topical CC0/PDM poster art via Openverse (13) + live captures (3)
 - [x] Space to set sail on the gate
 
+### v2.5 — Onigashima, reachable Skypiea & the ship's jukebox ✅ complete (2026-07-05)
+
+- [x] New Skills island: Onigashima (skull landmark, armory modal, /log section, ฿3B kept exact)
+- [x] Island labels drop the "Island" suffix
+- [x] Skypiea lowered (alt 16) + accessible: Space ascent prompt + recap card
+- [x] Space undocks modals (matching the dock key)
+- [x] Three original music tracks + off, selectable in the Ship's Wheel
+- [x] Press Balloon lowered to a moored-airship height
+- [x] Résumé button beside the name
+
 ## Content sources (canonical)
 
 - `rahul-babu-data.json` (repo root) — all portfolio data. Edit here only.

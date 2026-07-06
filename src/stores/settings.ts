@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import type { MusicTrack } from '@/lib/audio'
 
 export type Quality = 'auto' | 'high' | 'low'
 export type CameraMode = 'straight' | 'cinematic'
@@ -6,13 +7,13 @@ export type CameraMode = 'straight' | 'cinematic'
 interface SettingsState {
   quality: Quality
   cameraMode: CameraMode
-  /** Sea-shanty background music. */
-  music: boolean
+  /** Background music track, or 'off'. */
+  music: MusicTrack | 'off'
   /** Waves ambience + reward chimes. */
   sound: boolean
   setQuality: (q: Quality) => void
   setCameraMode: (m: CameraMode) => void
-  setMusic: (on: boolean) => void
+  setMusic: (track: MusicTrack | 'off') => void
   setSound: (on: boolean) => void
 }
 
@@ -25,7 +26,7 @@ const DEFAULTS: Pick<SettingsState, 'quality' | 'cameraMode' | 'music' | 'sound'
   cameraMode: 'straight',
   // Audio is on by default — it starts on the Set Sail gesture, so the
   // autoplay policy is satisfied, and both switches live in the Ship's Wheel.
-  music: true,
+  music: 'shanty' as MusicTrack | 'off',
   sound: true,
 }
 
@@ -40,7 +41,13 @@ function load(): typeof DEFAULTS {
         cameraMode: ['straight', 'cinematic'].includes(parsed.cameraMode)
           ? parsed.cameraMode
           : 'straight',
-        music: parsed.music !== false,
+        // Older saves stored music as a boolean — migrate to a track id.
+        music:
+          parsed.music === false || parsed.music === 'off'
+            ? 'off'
+            : ['shanty', 'adventure', 'lullaby'].includes(parsed.music)
+              ? parsed.music
+              : 'shanty',
         // Pre-music saves stored sound:false as the old default — treat the
         // missing music key as a schema upgrade and re-default sound to on.
         sound: parsed.music === undefined ? true : parsed.sound !== false,

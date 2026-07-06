@@ -11,6 +11,16 @@ export function IslandModal() {
   useEffect(() => {
     if (!docked) return
     const onKey = (event: KeyboardEvent) => {
+      // Space matches the docking key: press it again to set sail. Skip form
+      // fields (the contact form needs its spaces) and focused buttons.
+      if (event.code === 'Space') {
+        if (event.repeat) return
+        const target = event.target as HTMLElement | null
+        if (target && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName)) return
+        event.preventDefault()
+        useWorldStore.getState().undock()
+        return
+      }
       if (event.code === 'Escape') useWorldStore.getState().undock()
     }
     window.addEventListener('keydown', onKey)

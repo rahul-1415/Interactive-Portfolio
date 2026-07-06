@@ -2,6 +2,49 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-05 (v2.5) — Onigashima rises, Skypiea descends, and the crew picks the tune
+
+Owner round five: purposeful names without the suffix, a reachable Skypiea,
+multiple music tracks, Space to leave an island, a lower balloon, the résumé
+beside the name, and Onigashima back on the chart.
+
+- **Onigashima is the Skills island**: a new `skills` SectionId — Kaido's
+  horned skull rising from a purple rock shoulder at (-112, 18), Beast banners,
+  firelit cave gate. The modal is "Skills — Onigashima · The armory": six racks
+  (Backend / Frontend / AI & ML / Data Engineering / Cloud & DevOps / Developer
+  Workflow) from `rahul-babu-data.json` skills. /log gains a seventh section.
+  The economy stays exact: 8 islands × ฿300M + 10 barrels × ฿60M (was 90M)
+  = ฿3,000,000,000 on a full log.
+- **Labels lost the "Island" suffix**: boards read Experience, Projects,
+  Education… (Home Port stays). Docked title: "Skills — Onigashima".
+- **Skypiea descended** from altitude 30 → 16 — a cloud bank you sail right
+  under — and became _accessible_: within 26u a sky-blue prompt offers the
+  ascent (Space) and opens a Skypiea card that recaps the log and, for a
+  completed one, rings the golden bell. Not an island on the chart — its own
+  little system (world.atSkypiea + SkypieaCard).
+- **Space exits too**: docked modals close on Space (form fields and buttons
+  exempt), matching the docking key — dock, read, Space, sail on.
+- **Music is a choice now**: three original synthesized tracks — Jolly Shanty
+  (6/8 squeezebox), Grand Adventure (4/4 sawtooth horns over a driving bass),
+  Calm Seas (3/4 music-box lullaby) — or off, as radios in the Ship's Wheel.
+  (Real One Piece OST stays off the boat: copyright.) Old boolean saves
+  migrate (true→shanty, false→off). One shared scheduler with the
+  fast-forward + anchored-fade fixes from v2.4.
+- **The Press Balloon rides low** now (balloon center y22→14, basket at deck
+  height) so it reads as a moored airship instead of a dot in the sky; its
+  name board followed it down.
+- **Résumé button sits beside the name** (flex row) instead of under it.
+- **Focused review workflow (10 agents) on the Space-listener lattice** found
+  4 confirmed defects, all fixed: prompt stacking in the Skypiea/Publications
+  and Skypiea/Education overlap bands (dock prompt now wins the prompt AND the
+  key); one Space press could dock an island AND close the Skypiea card (the
+  card now owns Space/Escape in capture phase with stopImmediatePropagation);
+  the résumé overlay shielded Escape but not Space, letting docking happen
+  behind the PDF (now swallows both); no handler checked event.repeat, so
+  holding Space strobed dock/undock at key-repeat rate (guarded everywhere).
+  Plus a stale +฿90M comment and Skypiea nudged to altitude 18 so the chase
+  camera grazes, rather than enters, the cloud shells.
+
 ## 2026-07-05 (v2.4) — Names that mean something, cola in the tank, and a singing sea
 
 Owner round four: purposeful island names, click-anywhere sailing, a Coup de

@@ -14,9 +14,10 @@ export function ResumeButton() {
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => {
-      if (event.code !== 'Escape') return
-      // Capture phase + stopImmediatePropagation so this Escape doesn't ALSO
-      // undock the island modal underneath (both listen on window).
+      if (event.code !== 'Escape' && event.code !== 'Space') return
+      // Capture phase + stopImmediatePropagation so this key doesn't ALSO
+      // dock/undock/open anything underneath (all listen on window).
+      event.preventDefault()
       event.stopImmediatePropagation()
       setOpen(false)
     }

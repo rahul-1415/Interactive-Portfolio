@@ -15,7 +15,7 @@ const COLLECT_RADIUS = 5
  * Treasure barrels adrift between the islands: a toon barrel riding the same
  * Gerstner field as the ship, crowned by a glowing berry coin and a faint
  * gold shaft so hunters can spot them from a distance. Sail through one to
- * haul it aboard (+฿90,000,000).
+ * haul it aboard (+฿60,000,000).
  */
 export function Treasures() {
   const groupRefs = useRef<(THREE.Group | null)[]>([])

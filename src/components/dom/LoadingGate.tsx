@@ -27,7 +27,7 @@ export function LoadingGate() {
   useEffect(() => {
     if (!ready) return
     const onKey = (event: KeyboardEvent) => {
-      if (event.code !== 'Space') return
+      if (event.code !== 'Space' || event.repeat) return
       if (useWorldStore.getState().voyageStarted) return
       event.preventDefault()
       setSail()

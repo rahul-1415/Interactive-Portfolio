@@ -266,24 +266,25 @@ function KnowledgeTree() {
 }
 
 function PressBalloon() {
+  // Rides low over the water so the balloon reads clearly from the deck.
   return (
     <group>
-      <mesh position={[0, 22, 0]}>
-        <sphereGeometry args={[8, 16, 14]} />
+      <mesh position={[0, 14, 0]}>
+        <sphereGeometry args={[7, 16, 14]} />
         <meshToonMaterial color="#C63D2F" />
       </mesh>
-      <mesh position={[0, 22, 0]} rotation-x={Math.PI / 2}>
-        <torusGeometry args={[8.02, 0.35, 8, 24]} />
+      <mesh position={[0, 14, 0]} rotation-x={Math.PI / 2}>
+        <torusGeometry args={[7.02, 0.32, 8, 24]} />
         <meshToonMaterial color="#EFE0B9" />
       </mesh>
-      <mesh position={[0, 12.5, 0]}>
-        <boxGeometry args={[4.5, 3, 4.5]} />
+      <mesh position={[0, 4.6, 0]}>
+        <boxGeometry args={[4.2, 2.8, 4.2]} />
         <meshToonMaterial color="#AF6528" />
       </mesh>
       {/* Rigging */}
-      {[-1.8, 1.8].map((x, i) => (
-        <mesh key={i} position={[x, 17.5, 0]}>
-          <cylinderGeometry args={[0.08, 0.08, 8]} />
+      {[-1.7, 1.7].map((x, i) => (
+        <mesh key={i} position={[x, 7.6, 0]}>
+          <cylinderGeometry args={[0.08, 0.08, 6.4]} />
           <meshToonMaterial color="#4B3621" />
         </mesh>
       ))}
@@ -316,6 +317,66 @@ function FortMeridian() {
         <coneGeometry args={[2.2, 4, 8]} />
         <meshToonMaterial color="#5B6B8C" />
       </mesh>
+    </group>
+  )
+}
+
+function Onigashima() {
+  // Kaido's skull island: a horned skull rising from a rocky shoulder, with a
+  // firelit cave mouth for a gate. Purple banners mark the Beast's colors.
+  return (
+    <group rotation-y={0.6}>
+      {/* Rocky shoulder */}
+      <mesh position={[0, 2.5, 0]}>
+        <coneGeometry args={[13, 8, 9]} />
+        <meshToonMaterial color="#5E5566" />
+      </mesh>
+      {/* Skull dome */}
+      <mesh position={[0, 10, 0]} scale={[1, 0.92, 0.95]}>
+        <sphereGeometry args={[8, 14, 12]} />
+        <meshToonMaterial color="#C9BFAF" />
+      </mesh>
+      {/* Jaw */}
+      <mesh position={[0, 4.6, 3.4]}>
+        <boxGeometry args={[9.5, 3.2, 5]} />
+        <meshToonMaterial color="#B7AC9B" />
+      </mesh>
+      {/* Horns */}
+      {[1, -1].map((s) => (
+        <mesh key={s} position={[s * 6.4, 15.4, 0]} rotation-z={s * -0.85}>
+          <coneGeometry args={[1.6, 7.5, 8]} />
+          <meshToonMaterial color="#E8DBB5" />
+        </mesh>
+      ))}
+      {/* Eye sockets */}
+      {[1, -1].map((s) => (
+        <mesh key={s} position={[s * 3, 11, 6.3]} scale={[1, 1.25, 0.6]}>
+          <sphereGeometry args={[1.7, 10, 8]} />
+          <meshToonMaterial color="#1A1A1A" />
+        </mesh>
+      ))}
+      {/* Cave-mouth gate under the jaw, lit from within */}
+      <mesh position={[0, 2.4, 6.2]}>
+        <cylinderGeometry args={[2.6, 3, 4.6, 10, 1, false, 0, Math.PI]} />
+        <meshToonMaterial color="#241C2E" />
+      </mesh>
+      <mesh position={[0, 2.6, 6]}>
+        <sphereGeometry args={[0.7, 10, 8]} />
+        <meshBasicMaterial color={[2.6, 1.4, 0.5]} toneMapped={false} />
+      </mesh>
+      {/* Beast banners */}
+      {[1, -1].map((s) => (
+        <group key={s} position={[s * 10.5, 0, 4]}>
+          <mesh position={[0, 5, 0]}>
+            <cylinderGeometry args={[0.14, 0.18, 10]} />
+            <meshToonMaterial color="#4B3621" />
+          </mesh>
+          <mesh position={[s * 0.9, 8.6, 0]}>
+            <boxGeometry args={[1.8, 2.6, 0.12]} />
+            <meshToonMaterial color="#7B4FC0" />
+          </mesh>
+        </group>
+      ))}
     </group>
   )
 }
@@ -355,6 +416,7 @@ export const LANDMARKS: Record<SectionId, () => React.JSX.Element> = {
   publications: PressBalloon,
   certifications: FortMeridian,
   contact: TwinCapeLight,
+  skills: Onigashima,
 }
 
 useGLTF.preload('/models/thousand-sunny.glb')

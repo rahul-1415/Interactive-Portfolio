@@ -5,6 +5,8 @@ import { useFrame } from '@react-three/fiber'
 import { Billboard, Text } from '@react-three/drei'
 import * as THREE from 'three'
 import { isComplete, useProgress } from '@/stores/progress'
+import { useShipStore } from '@/stores/ship'
+import { useWorldStore } from '@/stores/world'
 
 /**
  * Skypiea — the sky island: a bank of sea clouds over the middle sea carrying
@@ -13,9 +15,9 @@ import { isComplete, useProgress } from '@/stores/progress'
  * (Pirate King) — the 100% explorer's beacon.
  */
 
-// Low enough that the chase camera (pitched at the sea, ~25° half-fov) frames
-// her on the horizon from open water; sailing underneath she towers off-frame.
-const ALTITUDE = 30
+// Low enough to frame from open water AND to sail right underneath — the
+// cloud bank floats a mast-height over the swells.
+const ALTITUDE = 18
 const POSITION: [number, number] = [55, 112]
 
 const CLOUDS: [number, number, number, number][] = [
@@ -34,12 +36,23 @@ export function Skypiea() {
   const visited = useProgress((s) => s.visited)
   const treasures = useProgress((s) => s.treasures)
 
+  const wasNear = useRef(false)
+
   useFrame(({ clock }) => {
     const group = groupRef.current
     if (!group) return
     const t = clock.getElapsedTime()
     group.position.y = ALTITUDE + Math.sin(t * 0.25) * 1.4
     group.rotation.y = Math.sin(t * 0.05) * 0.08
+
+    // Sailing under the cloud bank offers the ascent prompt (Space)
+    const world = useWorldStore.getState()
+    const ship = useShipStore.getState().position
+    const near = world.voyageStarted && Math.hypot(ship.x - POSITION[0], ship.z - POSITION[1]) < 26
+    if (near !== wasNear.current) {
+      wasNear.current = near
+      world.setAtSkypiea(near)
+    }
   })
 
   const crowned = isComplete(visited.length, treasures.length)

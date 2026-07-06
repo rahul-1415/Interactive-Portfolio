@@ -13,11 +13,14 @@ interface WorldState {
   launching: boolean
   /** Island the ship is close enough to dock at (null = open sea). */
   nearIsland: SectionId | null
+  /** Sailing under the Skypiea cloud bank (its own prompt, not an island). */
+  atSkypiea: boolean
   /** Island whose modal is open. Controls lock while docked. */
   docked: SectionId | null
   startVoyage: () => void
   finishLaunch: () => void
   setNearIsland: (id: SectionId | null) => void
+  setAtSkypiea: (near: boolean) => void
   dock: (id: SectionId) => void
   undock: () => void
 }
@@ -26,10 +29,12 @@ export const useWorldStore = create<WorldState>((set) => ({
   voyageStarted: false,
   launching: false,
   nearIsland: null,
+  atSkypiea: false,
   docked: null,
   startVoyage: () => set({ voyageStarted: true, launching: true }),
   finishLaunch: () => set({ launching: false }),
   setNearIsland: (id) => set({ nearIsland: id }),
+  setAtSkypiea: (atSkypiea) => set({ atSkypiea }),
   dock: (id) => {
     set({ docked: id })
     // Every dock — key, click, or dashboard course — charts the island.

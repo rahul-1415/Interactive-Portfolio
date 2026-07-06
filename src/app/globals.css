@@ -1667,3 +1667,110 @@ html:has(.log-page) {
     white-space: nowrap;
   }
 }
+
+/* ---------- Skypiea ---------- */
+
+.skypiea-prompt {
+  border-color: #7fb6d9;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.75), transparent 70%), #eef7fd;
+}
+
+.skypiea-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  padding: 1.4rem;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(246, 251, 255, 0.3), transparent 60%),
+    rgba(30, 58, 92, 0.55);
+}
+
+.skypiea-card {
+  max-width: 430px;
+  padding: 2rem 1.9rem 1.7rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 15%, rgba(255, 255, 255, 0.8), transparent 60%), #f2f9ff;
+  border: 3px solid #7fb6d9;
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(6, 20, 38, 0.5);
+}
+
+.skypiea-eyebrow {
+  font-family: var(--font-rye), serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #4a7ea6;
+}
+
+.skypiea-card h2 {
+  font-family: var(--font-pirata), serif;
+  font-size: 2.6rem;
+  color: var(--gl-ink);
+  margin: 0.15rem 0 0.5rem;
+}
+
+.skypiea-card p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #33546e;
+  margin-bottom: 1.2rem;
+}
+
+.skypiea-card button {
+  font-family: var(--font-rye), serif;
+  font-size: 0.82rem;
+  padding: 0.55rem 1rem;
+  background: var(--gl-gold);
+  color: var(--gl-ink);
+  border: 2px solid var(--gl-sepia);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.skypiea-card button kbd {
+  margin-left: 0.45rem;
+  padding: 0.08rem 0.4rem;
+  font-size: 0.68rem;
+  background: rgba(26, 26, 26, 0.14);
+  border: 1px solid rgba(26, 26, 26, 0.35);
+  border-radius: 4px;
+}
+
+/* ---------- HUD identity row (name + résumé) ---------- */
+
+.hud-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.hud-identity-row .resume-btn {
+  margin-top: 0;
+}
+
+/* ---------- Skills: the Onigashima armory ---------- */
+
+.armory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+
+.armory-rack {
+  padding: 0.9rem 1rem;
+  background: rgba(123, 79, 192, 0.07);
+  border: 2px solid rgba(123, 79, 192, 0.35);
+  border-radius: 8px;
+}
+
+.armory-rack h3 {
+  font-family: var(--font-rye), serif;
+  font-size: 0.95rem;
+  color: var(--gl-ink);
+  margin-bottom: 0.55rem;
+}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { chime, startOcean, startShanty, stopOcean, stopShanty } from '@/lib/audio'
+import { chime, startMusic, startOcean, stopMusic, stopOcean } from '@/lib/audio'
 import { ISLAND_BOUNTY, useProgress } from '@/stores/progress'
 import { useSettings } from '@/stores/settings'
 import { useWorldStore } from '@/stores/world'
@@ -20,9 +20,9 @@ export function AudioController() {
   const seenEvent = useRef(lastEvent)
 
   useEffect(() => {
-    if (music && voyageStarted) startShanty()
-    else stopShanty()
-    return stopShanty
+    if (music !== 'off' && voyageStarted) startMusic(music)
+    else stopMusic()
+    return stopMusic
   }, [music, voyageStarted])
 
   useEffect(() => {

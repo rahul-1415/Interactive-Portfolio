@@ -106,3 +106,15 @@ Measured on the deployed preview (`v2--rahulbabu.netlify.app`, mobile Lighthouse
   no attribution debt on the site. Live projects use their own screenshots.
 - **Purposeful labels + themed names coexist**: `label` (what it is) on boards and
   prompts, `name` (what it's called in-world) alongside when docked and in /log.
+
+## 2026-07-05 — v2.5 decisions
+
+- **Skypiea stays off the island registry.** It's a vertical destination, not a log
+  entry: its own proximity flag + overlay keeps SectionId/renderers/progress clean
+  while still giving it a Space interaction.
+- **Bounty economy re-balanced, not re-themed**: adding the 8th island kept the full
+  log at exactly ฿3,000,000,000 by trimming barrels to ฿60M — the Emperor's-bounty
+  finale is a design constant.
+- **Music tracks are all original compositions** (shanty/march/lullaby) behind one
+  scheduler; the settings value migrated boolean → track id with old saves mapped
+  true→shanty, false→off.

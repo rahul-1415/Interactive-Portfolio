@@ -11,7 +11,7 @@ export function DockPrompt() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.code !== 'Space') return
+      if (event.code !== 'Space' || event.repeat) return
       // Don't hijack Space from form fields or focused buttons
       const target = event.target as HTMLElement | null
       if (target && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(target.tagName)) return

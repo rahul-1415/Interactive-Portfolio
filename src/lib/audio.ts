@@ -10,7 +10,7 @@
 
 let ctx: AudioContext | null = null
 let ocean: { stop: () => void } | null = null
-let shanty: { stop: () => void } | null = null
+let shanty: { stop: () => void } | null = null // current music handle
 
 function context(): AudioContext {
   if (!ctx) ctx = new AudioContext()
@@ -234,9 +234,175 @@ function scheduleShantyPhrase(ac: AudioContext, out: GainNode, t0: number): numb
   return MELODY.reduce((sum, [, e]) => sum + e, 0) * EIGHTH
 }
 
-export function startShanty(): void {
-  if (shanty) return
+// ---------------------------------------------------------------------------
+// Two more originals so the crew can pick the mood.
+// ---------------------------------------------------------------------------
+
+/** Grand Adventure — bold 4/4 march, sawtooth horns over a driving bass. */
+const ADV_EIGHTH = 0.22
+
+const ADV_MELODY: Note[] = [
+  [69, 2],
+  [72, 2],
+  [76, 2],
+  [74, 1],
+  [72, 1],
+  [74, 4],
+  [71, 2],
+  [69, 2],
+  [67, 2],
+  [71, 2],
+  [74, 2],
+  [76, 1],
+  [77, 1],
+  [76, 6],
+  [74, 1],
+  [72, 1],
+  [69, 2],
+  [72, 2],
+  [76, 2],
+  [79, 2],
+  [77, 2],
+  [76, 1],
+  [74, 1],
+  [76, 4],
+  [72, 2],
+  [74, 2],
+  [71, 2],
+  [67, 2],
+  [69, 8],
+]
+
+const ADV_BASS_BARS = [57, 62, 55, 64, 57, 62, 55, 57]
+
+function scheduleAdventurePhrase(ac: AudioContext, out: GainNode, t0: number): number {
+  let t = t0
+  for (const [midi, eighths] of ADV_MELODY) {
+    const dur = eighths * ADV_EIGHTH
+    const osc = ac.createOscillator()
+    osc.type = 'sawtooth'
+    osc.frequency.value = midiHz(midi)
+    const lp = ac.createBiquadFilter()
+    lp.type = 'lowpass'
+    lp.frequency.value = 1700
+    const g = ac.createGain()
+    g.gain.setValueAtTime(0, t)
+    g.gain.linearRampToValueAtTime(0.035, t + 0.02)
+    g.gain.setValueAtTime(0.035, t + dur * 0.7)
+    g.gain.linearRampToValueAtTime(0.0001, t + dur * 0.95)
+    osc.connect(lp)
+    lp.connect(g)
+    g.connect(out)
+    osc.start(t)
+    osc.stop(t + dur)
+    t += dur
+  }
+  const barLen = 8 * ADV_EIGHTH
+  ADV_BASS_BARS.forEach((midi, bar) => {
+    for (const beat of [0, 2, 4, 6]) {
+      const start = t0 + bar * barLen + beat * ADV_EIGHTH
+      const osc = ac.createOscillator()
+      osc.type = 'square'
+      osc.frequency.value = midiHz(beat % 4 === 2 ? midi + 7 : midi)
+      const g = ac.createGain()
+      g.gain.setValueAtTime(0, start)
+      g.gain.linearRampToValueAtTime(0.045, start + 0.015)
+      g.gain.exponentialRampToValueAtTime(0.001, start + ADV_EIGHTH * 1.7)
+      osc.connect(g)
+      g.connect(out)
+      osc.start(start)
+      osc.stop(start + ADV_EIGHTH * 1.9)
+    }
+  })
+  return ADV_MELODY.reduce((sum, [, e]) => sum + e, 0) * ADV_EIGHTH
+}
+
+/** Calm Seas — a slow 3/4 music-box lullaby with a broken-chord underlay. */
+const LUL_EIGHTH = 0.33
+
+const LUL_MELODY: Note[] = [
+  [74, 4],
+  [76, 2],
+  [78, 4],
+  [76, 2],
+  [74, 2],
+  [71, 2],
+  [69, 2],
+  [71, 6],
+  [74, 4],
+  [76, 2],
+  [78, 4],
+  [81, 2],
+  [79, 2],
+  [76, 2],
+  [71, 2],
+  [74, 6],
+]
+
+const LUL_ARPS: number[][] = [
+  [50, 57, 62],
+  [50, 57, 62],
+  [55, 62, 66],
+  [55, 59, 62],
+  [50, 57, 62],
+  [50, 57, 62],
+  [55, 62, 67],
+  [50, 57, 62],
+]
+
+function scheduleLullabyPhrase(ac: AudioContext, out: GainNode, t0: number): number {
+  let t = t0
+  for (const [midi, eighths] of LUL_MELODY) {
+    const dur = eighths * LUL_EIGHTH
+    const osc = ac.createOscillator()
+    osc.type = 'sine'
+    osc.frequency.value = midiHz(midi)
+    const g = ac.createGain()
+    g.gain.setValueAtTime(0, t)
+    g.gain.linearRampToValueAtTime(0.05, t + 0.03)
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur)
+    osc.connect(g)
+    g.connect(out)
+    osc.start(t)
+    osc.stop(t + dur + 0.05)
+    t += dur
+  }
+  const barLen = 6 * LUL_EIGHTH
+  LUL_ARPS.forEach((triad, bar) => {
+    triad.forEach((midi, i) => {
+      const start = t0 + bar * barLen + i * 2 * LUL_EIGHTH
+      const osc = ac.createOscillator()
+      osc.type = 'triangle'
+      osc.frequency.value = midiHz(midi)
+      const g = ac.createGain()
+      g.gain.setValueAtTime(0, start)
+      g.gain.linearRampToValueAtTime(0.028, start + 0.03)
+      g.gain.exponentialRampToValueAtTime(0.001, start + LUL_EIGHTH * 2)
+      osc.connect(g)
+      g.connect(out)
+      osc.start(start)
+      osc.stop(start + LUL_EIGHTH * 2.1)
+    })
+  })
+  return LUL_MELODY.reduce((sum, [, e]) => sum + e, 0) * LUL_EIGHTH
+}
+
+export type MusicTrack = 'shanty' | 'adventure' | 'lullaby'
+
+const TRACKS: Record<MusicTrack, (ac: AudioContext, out: GainNode, t0: number) => number> = {
+  shanty: scheduleShantyPhrase,
+  adventure: scheduleAdventurePhrase,
+  lullaby: scheduleLullabyPhrase,
+}
+
+let currentTrack: MusicTrack | null = null
+
+export function startMusic(track: MusicTrack): void {
+  if (shanty && currentTrack === track) return
+  stopMusic()
+  currentTrack = track
   const ac = context()
+  const schedule = TRACKS[track]
   const master = ac.createGain()
   master.gain.value = 0
   master.gain.linearRampToValueAtTime(1, ac.currentTime + 1.2)
@@ -249,7 +415,7 @@ export function startShanty(): void {
     // Fast-forward if a throttled background-tab timer woke us late — never
     // schedule a phrase in the past (it would sound all at once).
     if (start < ac.currentTime) start = ac.currentTime + 0.1
-    const phraseLen = scheduleShantyPhrase(ac, master, start)
+    const phraseLen = schedule(ac, master, start)
     timer = setTimeout(
       () => loop(start + phraseLen),
       Math.max(250, (start + phraseLen - ac.currentTime - 1) * 1000)
@@ -270,9 +436,10 @@ export function startShanty(): void {
   }
 }
 
-export function stopShanty(): void {
+export function stopMusic(): void {
   shanty?.stop()
   shanty = null
+  currentTrack = null
 }
 
 /** Short pentatonic chime for rewards: brighter run for bigger hauls. */

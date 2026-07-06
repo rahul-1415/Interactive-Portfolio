@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { primeAudio } from '@/lib/audio'
+import type { MusicTrack } from '@/lib/audio'
 import { useSettings, type CameraMode, type Quality } from '@/stores/settings'
 
 /** Ship's-wheel settings: camera rig, render quality, controls reference. */
@@ -69,19 +70,29 @@ export function SettingsPanel() {
 
           <fieldset>
             <legend>Audio</legend>
-            <label>
-              <input
-                type="checkbox"
-                checked={music}
-                onChange={(e) => {
-                  // Prime the AudioContext inside the click gesture
-                  // (browser autoplay policy) before flipping the setting.
-                  if (e.target.checked) primeAudio()
-                  useSettings.getState().setMusic(e.target.checked)
-                }}
-              />
-              Music — a crew&apos;s sea shanty
-            </label>
+            {(
+              [
+                ['shanty', 'Jolly Shanty — the crew\u2019s drinking song'],
+                ['adventure', 'Grand Adventure — horns for the New World'],
+                ['lullaby', 'Calm Seas — a music-box lullaby'],
+                ['off', 'No music — wind and waves only'],
+              ] as [MusicTrack | 'off', string][]
+            ).map(([value, label]) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="music"
+                  checked={music === value}
+                  onChange={() => {
+                    // Prime the AudioContext inside the click gesture
+                    // (browser autoplay policy) before flipping the setting.
+                    if (value !== 'off') primeAudio()
+                    useSettings.getState().setMusic(value)
+                  }}
+                />
+                {label}
+              </label>
+            ))}
             <label>
               <input
                 type="checkbox"

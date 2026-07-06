@@ -32,7 +32,7 @@ describe('voyage progress', () => {
   })
 
   it('formats bounty with the berry sign', () => {
-    expect(formatBounty(TREASURE_BOUNTY)).toBe('฿90,000,000')
+    expect(formatBounty(TREASURE_BOUNTY)).toBe('฿60,000,000')
   })
 
   it('places every treasure in open water, clear of land and hull', () => {
