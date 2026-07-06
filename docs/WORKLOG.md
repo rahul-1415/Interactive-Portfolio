@@ -2,6 +2,19 @@
 
 > Newest entries first. One entry per working session/milestone.
 
+## 2026-07-05 (SHIPPED) — v2 → main: the Grand Log is the production site
+
+- Owner gave the go: fast-forward merged `v2` into `main` (29 commits, no
+  divergence) and pushed. Netlify production built and went **live at
+  rahulbabu.netlify.app**, replacing the old site after 10 verified rounds.
+- Live production verification: Space-to-sail launch, Coup de Burst + wake,
+  bounty HUD (0/8 islands · 0/10 treasures), résumé button, minimap, /log with
+  all 7 sections — zero console errors.
+- **rahulbabu.net** confirmed available (whois) and attached as the site's
+  custom domain via the Netlify API. Remaining owner step: register the domain
+  (Netlify dashboard → Domain management → register, ~$15-25/yr) — DNS + HTTPS
+  then provision automatically.
+
 ## 2026-07-05 (v2.5) — Onigashima rises, Skypiea descends, and the crew picks the tune
 
 Owner round five: purposeful names without the suffix, a reachable Skypiea,

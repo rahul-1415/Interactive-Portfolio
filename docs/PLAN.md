@@ -93,8 +93,9 @@ islands 7KB each, straw-hat 143KB. Old 20MB straw-hat duplicate deleted.
       (see DECISIONS for the realistic WebGL perf budget)
 - [x] Cross-viewport visual QA sweep (desktop / tablet / mobile + /log), zero console errors
 - [x] OG image + Twitter card + meta polish
-- [ ] **Merge `v2` → `main` → production at rahulbabu.netlify.app** (awaiting owner OK —
-      this replaces the current live personal site)
+- [x] **Merged `v2` → `main` → production live (2026-07-05)** — fast-forward to a8ed0b6;
+      verified end-to-end on rahulbabu.netlify.app. Custom domain rahulbabu.net attached
+      to the Netlify site (awaiting domain registration — owner payment step)
 
 ### v2.1 — Owner feature round ✅ complete (2026-07-04)
 
